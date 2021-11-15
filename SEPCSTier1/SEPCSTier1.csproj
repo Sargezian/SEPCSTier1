@@ -10,4 +10,10 @@
       <PackageReference Include="Radzen.Blazor" Version="3.12.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Shared\MainLayout.razor" />
+      <_ContentIncludedByDefault Remove="Shared\NavMenu.razor" />
+      <_ContentIncludedByDefault Remove="Shared\SurveyPrompt.razor" />
+    </ItemGroup>
+
 </Project>
