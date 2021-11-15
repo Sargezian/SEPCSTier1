@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/lennartsargezian/RiderProjects/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj": {}
+    "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj": {}
   },
   "projects": {
-    "/Users/lennartsargezian/RiderProjects/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj": {
+    "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lennartsargezian/RiderProjects/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj",
+        "projectUniqueName": "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj",
         "projectName": "SEPCSTier1",
-        "projectPath": "/Users/lennartsargezian/RiderProjects/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj",
+        "projectPath": "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj",
         "packagesPath": "/Users/lennartsargezian/.nuget/packages/",
-        "outputPath": "/Users/lennartsargezian/RiderProjects/SEPCSTier1/SEPCSTier1/obj/",
+        "outputPath": "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lennartsargezian/.nuget/NuGet/NuGet.Config"

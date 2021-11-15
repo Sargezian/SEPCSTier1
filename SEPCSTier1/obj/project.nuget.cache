@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n1xF6m4w91NDUxhTfDjXCb4r75EyenAqPZM9OJyHZOL0HlOUlRjJXQjodF7X5ymprct5WxgKOAgwUZ8L7EHvSA==",
+  "dgSpecHash": "YT1qNLhNRniIlmJcblezVqrRM2M2/Zd4+4Dq5SywZLBM9SsddTinHZCol4YBbQfvYkZ9+629TXlvXpnaPS3vnw==",
   "success": true,
-  "projectFilePath": "/Users/lennartsargezian/RiderProjects/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj",
+  "projectFilePath": "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj",
   "expectedPackageFiles": [
     "/Users/lennartsargezian/.nuget/packages/graphql.client/4.0.1/graphql.client.4.0.1.nupkg.sha512",
     "/Users/lennartsargezian/.nuget/packages/graphql.client.abstractions/4.0.1/graphql.client.abstractions.4.0.1.nupkg.sha512",
