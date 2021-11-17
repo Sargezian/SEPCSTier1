@@ -1,4 +1,4 @@
 ﻿<StaticWebAssets Version="1.0">
-  <ContentRoot BasePath="_content/Radzen.Blazor" Path="/Users/lennartsargezian/.nuget/packages/radzen.blazor/3.12.1/build/../staticwebassets/" />
-  <ContentRoot BasePath="/" Path="/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/obj/Debug/net5.0/scopedcss/bundle/" />
+  <ContentRoot BasePath="_content/Radzen.Blazor" Path="C:\Users\abdul\.nuget\packages\radzen.blazor\3.12.1\build\..\staticwebassets\" />
+  <ContentRoot BasePath="/" Path="C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\bundle\" />
 </StaticWebAssets>

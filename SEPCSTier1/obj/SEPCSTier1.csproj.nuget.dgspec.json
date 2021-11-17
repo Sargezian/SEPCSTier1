@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj": {}
+    "C:\\Users\\abdul\\RiderProjects\\SEPCSTier1\\SEPCSTier1\\SEPCSTier1.csproj": {}
   },
   "projects": {
-    "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj": {
+    "C:\\Users\\abdul\\RiderProjects\\SEPCSTier1\\SEPCSTier1\\SEPCSTier1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj",
+        "projectUniqueName": "C:\\Users\\abdul\\RiderProjects\\SEPCSTier1\\SEPCSTier1\\SEPCSTier1.csproj",
         "projectName": "SEPCSTier1",
-        "projectPath": "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/SEPCSTier1.csproj",
-        "packagesPath": "/Users/lennartsargezian/.nuget/packages/",
-        "outputPath": "/Users/lennartsargezian/Documents/GitHub/SEPCSTier1/SEPCSTier1/obj/",
+        "projectPath": "C:\\Users\\abdul\\RiderProjects\\SEPCSTier1\\SEPCSTier1\\SEPCSTier1.csproj",
+        "packagesPath": "C:\\Users\\abdul\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abdul\\RiderProjects\\SEPCSTier1\\SEPCSTier1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/lennartsargezian/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\abdul\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {}
         },
         "frameworks": {
           "net5.0": {
@@ -40,11 +41,11 @@
           "dependencies": {
             "GraphQL.Client": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.0.0, )"
             },
             "GraphQL.Client.Serializer.Newtonsoft": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.0.0, )"
             },
             "Radzen.Blazor": {
               "target": "Package",
@@ -69,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

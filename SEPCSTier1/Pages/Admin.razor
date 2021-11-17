@@ -1,6 +1,6 @@
-@page "/counter"
-@using BlazorTailwind.Models
-@using BlazorTailwind.Data
+@page "/Admin"
+@using SEPCSTier1.Models
+@using SEPCSTier1.Data
 @inject IUserData UserData
 @inject NavigationManager NavigationManager 
 
@@ -47,8 +47,8 @@ else
 
 <EditForm Model="@newUserAccount" OnValidSubmit="@AddnewUserAccount">
     <DataAnnotationsValidator/> <ValidationSummary/>
-    <div class="form-group"> Username:<br/> <InputNumber @bind-Value="newUserAccount.username"/> </div>
-    <div class="form-group"> Password:<br/> <InputTextArea rows="4" @bind-Value="newUserAccount.password"/> </div>
+    <div class="form-group"> Username:<br/> <InputText @bind-Value="newUserAccount.username"/> </div>
+    <div class="form-group"> Password:<br/> <InputText  @bind-Value="newUserAccount.password"/> </div>
     <p class="actions">
         <button class="btn btn-outline-dark" type="submit">Create</button>
     </p>
@@ -67,7 +67,7 @@ else
     
     private User newUserAccount = new User();
 
-    private void AddnewUserAccount()
+    private  void AddnewUserAccount()
     {
         UserData.AddUser(newUserAccount);
         NavigationManager.NavigateTo("/Admin");

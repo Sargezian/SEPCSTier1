@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BlazorTailwind.Models;
+using SEPCSTier1.Models;
 
-namespace BlazorTailwind.Data
+namespace SEPCSTier1.Data
 {
     public interface IUserData
     {
