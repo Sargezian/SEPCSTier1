@@ -1,4 +1,4 @@
-﻿namespace BlazorTailwind.Models
+﻿namespace SEPCSTier1.Models
 {
     public class Product
     {

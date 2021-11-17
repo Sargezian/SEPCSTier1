@@ -46,4 +46,73 @@ body[b-6solt7yd44] {
     border: solid 1px #BA68C8
 }
 /* _content/SEPCSTier1/Shared/MainLayout.razor.rz.scp.css */
+     
+.page[b-bamf6weoro] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
 /* _content/SEPCSTier1/Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-chomr41mm5] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-chomr41mm5] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-chomr41mm5] {
+    font-size: 1.1rem;
+}
+
+.oi[b-chomr41mm5] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item[b-chomr41mm5] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-chomr41mm5] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-chomr41mm5] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item[b-chomr41mm5]  a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item[b-chomr41mm5]  a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item[b-chomr41mm5]  a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-chomr41mm5] {
+        display: none;
+    }
+
+    .collapse[b-chomr41mm5] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}

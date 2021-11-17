@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BlazorTailwind.Models
+namespace SEPCSTier1.Models
 {
     public class ResponseUserCollectionType
     {

@@ -1,15 +1,12 @@
-using System;
+
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using BlazorTailwind.Models;
 using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
+using SEPCSTier1.Models;
 
-namespace BlazorTailwind.Data
+namespace SEPCSTier1.Data
 {
     public class UserJSONData : IUserData
     {
@@ -31,20 +28,24 @@ namespace BlazorTailwind.Data
         
         public async void AddUser(User user)
         {
-            using HttpClient client = new HttpClient();
-
-            var userAsJson = JsonSerializer.Serialize(user);
-
-            HttpContent httpContent = new StringContent(userAsJson, Encoding.UTF8, "application/json");
+            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
+                , new NewtonsoftJsonSerializer());
 
 
-            HttpResponseMessage httpResponseMessage = await client.PostAsync("http://localhost:8082/user/", httpContent);
-            
-            if (!httpResponseMessage.IsSuccessStatusCode)
+            var request = new GraphQLRequest
             {
-                throw new Exception("failed to add data");
-            }
+                Query =
+                    "mutation ($username: String!, $password: String!) {addUser(username: $username, password: $password) {username,password}}",
+                Variables = new
+                {
+                    username = user.username,
+                    password = user.password
+                }
+            };
 
+            await client.SendMutationAsync<ResponseUserType>(request);
+            
+                                                                   
         }
     }
 }
