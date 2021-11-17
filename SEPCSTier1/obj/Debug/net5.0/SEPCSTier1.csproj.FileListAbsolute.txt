@@ -206,3 +206,8 @@ C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\SEPCSTier1.p
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\SEPCSTier1.genruntimeconfig.cache
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\Admin.razor.g.cs
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\Admin.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\Login.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\Login.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\Login.razor.rz.scp.css
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\EmptyLayout.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\EmptyLayout.razor.g.cs

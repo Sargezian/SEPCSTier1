@@ -1,20 +1,79 @@
 ﻿@page "/Login"
-<h3>Login</h3>
+@using SEPCSTier1.Data
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
 
 
 
+<AuthorizeView>
+     <NotAuthorized>
+     <style>
+     body {background-image: url(https://images.unsplash.com/photo-1487088678257-3a541e6e3922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1674&q=80);
+     }
+     </style>
+     
+         <div class="login-box">
+             <h2>Login</h2>
+             <form>
+                 <div class="user-box">
+                     <input type="text" name="" required="" @bind-value="username">
+                     <label>Username</label>
+                 </div>
+                 <div class="user-box">
+                     <input type="password" name="" required="" @bind-value="password">
+                     <label>Password</label>
+                 </div>
+                 
+                
+                     <div style="color:red">@errorMessage</div>
+                 
+                 
+                 
+                 <a  @onclick="PerformLogin">
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                     Submit
+                 </a>
+                 
+                 <a style="float: right"  @onclick="PerformLogin">
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                     Sign up
+                 </a>
+             </form>
+         </div>
 
-
-
-
-
-
-
+     </NotAuthorized>
+</AuthorizeView>
+    @layout EmptyLayout
 @code {
+    private string username;
+    private string password;
+    private string errorMessage;
     
     
     
-    
+    public async Task PerformLogin()
+    {
+        errorMessage = "";
+        try
+        {
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
+            username = "";
+            password = "";
+            NavigationManager.NavigateTo("/Admin");
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.Message;
+            
+        }
+        
+    }
     
     
     

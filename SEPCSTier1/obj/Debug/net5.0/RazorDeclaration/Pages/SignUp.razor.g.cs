@@ -11,94 +11,107 @@ namespace SEPCSTier1.Pages
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 1 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 2 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 3 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 4 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 5 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 6 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 7 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 8 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 9 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using SEPCSTier1;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 10 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using SEPCSTier1.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 11 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Radzen;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+#line 12 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
 using Radzen.Blazor;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
-using BlazorTailwind.Models;
+#line 2 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+using Microsoft.AspNetCore.Components;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+using SEPCSTier1.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+using SEPCSTier1.Models;
 
 #line default
 #line hidden
@@ -112,22 +125,33 @@ using BlazorTailwind.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 39 "C:\Users\markh\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+#line 53 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
        
-    private string password;
-    private string Name;
-    private string lastName;
-    private string phone; 
-
-    public async Task newUser()
-    {
-        Console.WriteLine("HEj " + phone + Name );
-    }
     
+    public async Task Opret()
+    {
+        Console.WriteLine("HEj " +  newUserAccount.area + newUserAccount.email + newUserAccount.id + newUserAccount.password + newUserAccount.state + newUserAccount.username + newUserAccount.addressLine + newUserAccount.firstName + newUserAccount.lastName+ newUserAccount.phoneNumber + newUserAccount.postCode);
+    }
+
+
+    public User newUserAccount = new User(); 
+    
+    
+    private IList<User> usersAccountsToShow;
+    private IList<User> allUserAccounts;
+    
+    private  void AddnewUserAccount()
+    {
+        UserData.AddUser(newUserAccount);
+        NavigationManager.NavigateTo("/Admin");
+    }
+
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserData UserData { get; set; }
     }
 }
 #pragma warning restore 1591
