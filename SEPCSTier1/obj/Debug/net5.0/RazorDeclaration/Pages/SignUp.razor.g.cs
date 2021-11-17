@@ -116,6 +116,7 @@ using SEPCSTier1.Models;
 #line default
 #line hidden
 #nullable disable
+    [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(EmptyLayout))]
     [Microsoft.AspNetCore.Components.RouteAttribute("/SignUp")]
     public partial class SignUp : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -125,7 +126,7 @@ using SEPCSTier1.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 53 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+#line 55 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
        
     
     public async Task Opret()
@@ -143,7 +144,7 @@ using SEPCSTier1.Models;
     private  void AddnewUserAccount()
     {
         UserData.AddUser(newUserAccount);
-        NavigationManager.NavigateTo("/Admin");
+        NavigationManager.NavigateTo("/Login");
     }
 
 

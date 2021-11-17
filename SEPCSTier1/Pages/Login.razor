@@ -37,7 +37,7 @@
                      Submit
                  </a>
                  
-                 <a style="float: right"  @onclick="PerformLogin">
+                 <a style="float: right"  @onclick="PerformSignUp">
                      <span></span>
                      <span></span>
                      <span></span>
@@ -73,6 +73,12 @@
             
         }
         
+    }
+
+
+    public async Task PerformSignUp()
+    {
+         NavigationManager.NavigateTo("/SignUp");
     }
     
     
