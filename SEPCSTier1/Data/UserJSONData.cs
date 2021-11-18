@@ -1,9 +1,5 @@
 
-using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Client.Http;
@@ -14,6 +10,23 @@ namespace SEPCSTier1.Data
 {
     public class UserJSONData : IUserData
     {
+        public async void RemoveAccount(int UserId)
+        {
+            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
+                , new NewtonsoftJsonSerializer());
+            
+            var request = new GraphQLRequest
+            {
+                Query = "mutation($id:Int!) {deleteUser(id:$id)}",
+                Variables = new
+                {
+                    id = UserId
+                }
+            };
+
+            await client.SendMutationAsync<ResponseUserType>(request);
+        }
+
         public async Task<IList<User>> GetUsers()
         {
             using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
@@ -29,13 +42,11 @@ namespace SEPCSTier1.Data
             return response.Data.Users;
         }
         
-        
         public async void AddUser(User user)
         {
             using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
                 , new NewtonsoftJsonSerializer());
-
-
+            
             var request = new GraphQLRequest
             {
                 Query =
@@ -49,35 +60,6 @@ namespace SEPCSTier1.Data
 
             await client.SendMutationAsync<ResponseUserType>(request);
             
-                                                                   
-        }
-        
-        
-        public async Task<User> ValidateUser(string username, string password)
-        {
-            using HttpClient httpClient = new HttpClient();
-
-            var httpResponseMessage =
-                await httpClient.GetAsync($"http://localhost:8080/user/validate?username={username}&password={password}");
-            
-            if (httpResponseMessage.StatusCode != HttpStatusCode.Found)
-            {
-                throw new Exception("User not Found");
-            }
-
-
-            var readAsStringAsync = await httpResponseMessage.Content.ReadAsStringAsync();
-           
-
-            User user = JsonSerializer.Deserialize<User>(readAsStringAsync, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-            
-            
-
-            return user;
-
         }
     }
 }

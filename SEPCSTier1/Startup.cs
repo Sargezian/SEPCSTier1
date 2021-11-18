@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +29,7 @@ namespace SEPCSTier1
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<IUserData, UserJSONData>();
-            services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            services.AddScoped<IItemData, ItemJSONData>();
            
         }
 

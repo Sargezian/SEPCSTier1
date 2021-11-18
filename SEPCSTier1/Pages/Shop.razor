@@ -1,0 +1,41 @@
+@page "/Shop"
+@using SEPCSTier1.Models
+@using SEPCSTier1.Data
+@inject IItemData IitemData
+@inject NavigationManager NavigationManager 
+
+
+<h3>Shop</h3>
+
+<table class="table">
+    <tbody>
+              <RadzenDataList WrapItems="true" AllowPaging="true" Data="@Items" TItem="Itemss">
+                  <Template Context="items">
+                      <RadzenCard Style="width:600px; margin-bottom: 20px; height:400px;">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div>Skin Name </div>
+                                  <b>@items.weaponname </b>
+                                  <img src="@items.weaponURL" />
+                                  
+                              </div>
+                          </div>
+                      </RadzenCard>
+                  </Template>
+                </RadzenDataList>
+        </tbody>
+    </table>
+
+
+@code {
+
+    private IList<Itemss> ItemList;
+    private IList<Itemss> Items;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Items = await IitemData.GetItems();
+        ItemList = Items;
+    }
+    
+}
