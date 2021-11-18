@@ -7,6 +7,8 @@
     <ItemGroup>
       <PackageReference Include="GraphQL.Client" Version="4.0.0" />
       <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="4.0.0" />
+      <PackageReference Include="GraphQL.NewtonsoftJson" Version="4.6.1" />
+      <PackageReference Include="GraphQL.Server.Transports.AspNetCore.NewtonsoftJson" Version="5.0.2" />
       <PackageReference Include="Radzen.Blazor" Version="3.12.1" />
     </ItemGroup>
 

@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -46,33 +47,31 @@ namespace SEPCSTier1.Data
             return response.Data.Users;
         }
 
-        public async Task<User> ValidateUser(string username, string password)
+        public async Task<IList<User>> ValidateUser(string userName, string passWord)
         {
             
-            using HttpClient httpClient = new HttpClient();
+            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
+                ,new NewtonsoftJsonSerializer());
 
-            var httpResponseMessage =
-                await httpClient.GetAsync($"http://localhost:8080/user/validate?username={username}&password={password}");
-            
-            if (httpResponseMessage.StatusCode != HttpStatusCode.Found)
+            var request = new GraphQLRequest
             {
-                throw new Exception("User not Found");
+                Query = "query ($username: String!,$password:String!) {users(where: { username: { eq: $username },password:{eq:$password} }) {id,username,password}}",
+                Variables = new
+                {
+                    username = userName,
+                    password = passWord
+                }
+            };
+            
+            
+            var response =  await client.SendQueryAsync<ResponseUserCollectionType>(request);
+
+            if (!response.Data.Users.Any())
+            {
+                throw new Exception("user not found");
             }
-            
-            
-            
-            
-            var readAsStringAsync = await httpResponseMessage.Content.ReadAsStringAsync();
            
-
-            User user = JsonSerializer.Deserialize<User>(readAsStringAsync, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-            
-            
-
-            return user;
+            return response.Data.Users;
             
             
         }

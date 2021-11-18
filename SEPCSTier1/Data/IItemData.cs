@@ -8,6 +8,8 @@ namespace SEPCSTier1.Data
     {
         Task<IList<Itemss>> GetItems();
 
-        Task<Itemss> GetItemByID(long id);
+        Task<IList<Itemss>> GetItemByID(long id);
+
+        
     }
 }

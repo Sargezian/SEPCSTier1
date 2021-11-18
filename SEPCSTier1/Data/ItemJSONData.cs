@@ -30,22 +30,23 @@ namespace SEPCSTier1.Data
         }
 
         //TODO: IKKE RIGTIG QURRY VI SKIPPER TIER 2 HER CHANGE PLS
-        public async Task<Itemss> GetItemByID(long Id)
+        public async Task<IList<Itemss>> GetItemByID(long Id)
         {
-            using HttpClient client = new HttpClient();
+            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
+                ,new NewtonsoftJsonSerializer());
 
-            var responseMessage = await client.GetAsync("http://localhost:8080/items/"+Id);
-
-            var readAsStringAsync = await responseMessage.Content.ReadAsStringAsync();
-
-            
-            Itemss item = JsonSerializer.Deserialize<Itemss>(readAsStringAsync, new JsonSerializerOptions
+            var request = new GraphQLRequest
             {
-                PropertyNameCaseInsensitive = true
-            });
+                Query = "query ($id: Int!) {items(where: { id: { eq: $id } }) {id,weaponname,weaponURL}}",
+                Variables = new
+                {
+                    id = Id
+                }
+            };
             
-            return item;
             
+            var response =  await client.SendQueryAsync<ResponseItemCollectionType>(request);
+            return response.Data.items;
         }
         
     }
