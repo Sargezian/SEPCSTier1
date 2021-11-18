@@ -126,32 +126,32 @@ using SEPCSTier1.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 55 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+#line 53 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
        
     
-    public async Task Opret()
-    {
-        Console.WriteLine("HEj " +  newUserAccount.area + newUserAccount.email + newUserAccount.id + newUserAccount.password + newUserAccount.state + newUserAccount.username + newUserAccount.addressLine + newUserAccount.firstName + newUserAccount.lastName+ newUserAccount.phoneNumber + newUserAccount.postCode);
-    }
-
-
     public User newUserAccount = new User(); 
-    
-    
-    private IList<User> usersAccountsToShow;
-    private IList<User> allUserAccounts;
     
     private  void AddnewUserAccount()
     {
         UserData.AddUser(newUserAccount);
         NavigationManager.NavigateTo("/Login");
     }
+    
+    public Payment newPaymentAccount = new Payment(); 
+    
+    private  void AddPaymentAccount()
+    {
+        PaymentData.AddPayment(newPaymentAccount);
+        NavigationManager.NavigateTo("/Login");
+    }
+    
 
 
 #line default
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IPaymentData PaymentData { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserData UserData { get; set; }
     }
 }

@@ -211,3 +211,7 @@ C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\Login.razor.rz.scp.css
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\EmptyLayout.razor.g.cs
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\EmptyLayout.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\Shop.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\SingleProduct.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\Shop.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\SingleProduct.razor.g.cs

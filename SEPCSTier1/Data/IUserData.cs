@@ -11,6 +11,6 @@ namespace SEPCSTier1.Data
         void RemoveAccount(int UserId);
         
         Task<IList<User>> GetUsers();
-        
+        Task<User> ValidateUser(string username, string password);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +31,8 @@ namespace SEPCSTier1
             services.AddServerSideBlazor();
             services.AddScoped<IUserData, UserJSONData>();
             services.AddScoped<IItemData, ItemJSONData>();
-           
+            services.AddScoped<IPaymentData, PaymentData>();
+            services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
         }
 
         //TESTY

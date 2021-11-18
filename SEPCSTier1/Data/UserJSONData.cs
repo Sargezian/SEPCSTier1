@@ -1,5 +1,9 @@
 
+using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Client.Http;
@@ -41,7 +45,38 @@ namespace SEPCSTier1.Data
             
             return response.Data.Users;
         }
-        
+
+        public async Task<User> ValidateUser(string username, string password)
+        {
+            
+            using HttpClient httpClient = new HttpClient();
+
+            var httpResponseMessage =
+                await httpClient.GetAsync($"http://localhost:8080/user/validate?username={username}&password={password}");
+            
+            if (httpResponseMessage.StatusCode != HttpStatusCode.Found)
+            {
+                throw new Exception("User not Found");
+            }
+            
+            
+            
+            
+            var readAsStringAsync = await httpResponseMessage.Content.ReadAsStringAsync();
+           
+
+            User user = JsonSerializer.Deserialize<User>(readAsStringAsync, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            
+            
+
+            return user;
+            
+            
+        }
+
         public async void AddUser(User user)
         {
             using var client = new GraphQLHttpClient("https://localhost:5001/graphql"

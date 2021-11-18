@@ -1,0 +1,73 @@
+@page "/SignUp"
+@using Microsoft.AspNetCore.Components
+@using SEPCSTier1.Data
+@using SEPCSTier1.Models
+@inject IUserData UserData 
+@inject IPaymentData PaymentData
+@inject NavigationManager NavigationManager 
+<h3>SignUp</h3>
+
+
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Welcome</span><span class="text-black-50">To CSGO Trading</span><span> </span></div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+                    <EditForm Model="@newUserAccount" OnValidSubmit="@AddnewUserAccount">
+                        <DataAnnotationsValidator/> <ValidationSummary/>
+                        <div class="row mt-2">
+                            <h3>Create UserAccount</h3>
+                            <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="enter address line 2" @bind-value="newUserAccount.username"></div>
+                            <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" placeholder="Password" @bind-value="newUserAccount.password"></div>
+                        </div>
+                    </EditForm>
+                    <EditForm Model="@newPaymentAccount" OnValidSubmit="@AddPaymentAccount">
+                        <DataAnnotationsValidator/> <ValidationSummary/>
+                    <div class="row mt-3">
+                        <h3>Create Payment Account</h3>
+                        <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" placeholder="enter Name" @bind-value="newPaymentAccount.name"/> </div>
+                        <div class="col-md-12"><label class="labels">Card Number</label><input type="text" class="form-control" placeholder="enter Card Number" @bind-value="newPaymentAccount.cardNumber"></div>
+                        <div class="col-md-12"><label class="labels">Expiration (mm/yy)</label><input type="text" class="form-control" placeholder="enter Expiration (mm/yy)" @bind-value="newPaymentAccount.expirationDate"></div>
+                        <div class="col-md-12"><label class="labels">Security Code</label><input type="text" class="form-control" placeholder="enter Security Code" @bind-value="newPaymentAccount.securityCode"></div>
+                    </div>
+                     </EditForm>
+                    <div class="row mt-3">
+                    </div>
+                    <p class="actions">
+                        <button class="btn btn-outline-dark" type="submit">Create</button>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ @layout EmptyLayout
+
+@code {
+    
+    public User newUserAccount = new User(); 
+    
+    private  void AddnewUserAccount()
+    {
+        UserData.AddUser(newUserAccount);
+        NavigationManager.NavigateTo("/Login");
+    }
+    
+    public Payment newPaymentAccount = new Payment(); 
+    
+    private  void AddPaymentAccount()
+    {
+        PaymentData.AddPayment(newPaymentAccount);
+        NavigationManager.NavigateTo("/Login");
+    }
+    
+
+}
+
