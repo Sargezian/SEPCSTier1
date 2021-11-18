@@ -12,11 +12,11 @@
     <RadzenDataList WrapItems="true" AllowPaging="true" Data="@Items" TItem="Itemss">
         <Template Context="items">
             <RadzenCard Style="width:600px; margin-bottom: 20px; height:400px;">
-                <div class="row">
+                <div class="row" @onclick="@(() => productGoTo(items.id))">
                     <div class="col-md-6">
                         <div>Skin Name </div>
                         <b>@items.weaponname </b>
-                        <img src="@items.weaponURL" />
+                        <img src="@items.weaponURL" width="300px"/>
                                   
                     </div>
                 </div>
@@ -36,6 +36,11 @@
     {
         Items = await IitemData.GetItems();
         ItemList = Items;
+    }
+
+    private void productGoTo(long id)
+    {
+        NavigationManager.NavigateTo($"Product/{id}");
     }
     
 }
