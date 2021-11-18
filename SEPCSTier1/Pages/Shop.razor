@@ -9,22 +9,22 @@
 
 <table class="table">
     <tbody>
-              <RadzenDataList WrapItems="true" AllowPaging="true" Data="@Items" TItem="Itemss">
-                  <Template Context="items">
-                      <RadzenCard Style="width:600px; margin-bottom: 20px; height:400px;">
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <div>Skin Name </div>
-                                  <b>@items.weaponname </b>
-                                  <img src="@items.weaponURL" />
+    <RadzenDataList WrapItems="true" AllowPaging="true" Data="@Items" TItem="Itemss">
+        <Template Context="items">
+            <RadzenCard Style="width:600px; margin-bottom: 20px; height:400px;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>Skin Name </div>
+                        <b>@items.weaponname </b>
+                        <img src="@items.weaponURL" />
                                   
-                              </div>
-                          </div>
-                      </RadzenCard>
-                  </Template>
-                </RadzenDataList>
-        </tbody>
-    </table>
+                    </div>
+                </div>
+            </RadzenCard>
+        </Template>
+    </RadzenDataList>
+    </tbody>
+</table>
 
 
 @code {

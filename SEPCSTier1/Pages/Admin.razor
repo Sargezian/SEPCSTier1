@@ -75,7 +75,7 @@ else
     private  void AddnewUserAccount()
     {
         UserData.AddUser(newUserAccount);
-        NavigationManager.NavigateTo("/Admin");
+        NavigationManager.NavigateTo("/Admin",true);
     }
     
     private void RemoveUserAccount(int UserId)
