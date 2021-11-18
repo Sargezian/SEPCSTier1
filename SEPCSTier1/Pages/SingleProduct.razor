@@ -1,16 +1,25 @@
-﻿@page "/Product/{Id:int}"
+﻿@page "/Product/{Id:long}"
+@using SEPCSTier1.Models
+@using SEPCSTier1.Data
 
+@inject IItemData ItemData
 
-<p>Single product</p>
+<p>Single product @Id</p>
 
-<div>
+@if (product == null)
+{
+    <em>Product not found!</em>
+}
+else
+{
+<div class="d-flex">
     <div>
         <!-- IMG LEFT -->
     </div>
 
     <div>
         <!-- TEXT RIGHT -->
-        <h1>Product name</h1>
+        <h1>Product name @product.weaponname</h1>
         <p>Description</p>
         
         <div>
@@ -19,3 +28,19 @@
         </div>
     </div>
 </div>
+}
+
+
+@code {
+
+    [Parameter]
+    public long Id { get; set; }
+
+    private Itemss product;
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await ItemData.GetItemByID(Id);
+    }
+
+}

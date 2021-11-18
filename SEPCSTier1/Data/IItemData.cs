@@ -7,5 +7,7 @@ namespace SEPCSTier1.Data
     public interface IItemData
     {
         Task<IList<Itemss>> GetItems();
+
+        Task<Itemss> GetItemByID(long id);
     }
 }
