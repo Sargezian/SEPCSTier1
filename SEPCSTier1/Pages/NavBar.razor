@@ -1,4 +1,7 @@
 @page "/NavBar"
+@using SEPCSTier1.Data
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
 
 <RadzenCard Style="height: 100px">
     <RadzenMenu>
@@ -16,20 +19,42 @@
         <RadzenMenuItem Text="Admin" Icon="accessibility" Path="Admin">
         </RadzenMenuItem>
         
-        
-         <RadzenMenuItem Text="Login" Icon="lock" Path="Login">
-                        </RadzenMenuItem>
-        
-        <RadzenMenuItem Text="" Icon="input" >
-                    <a href="" @*@onclick=""*@>
-                        Log out
-                    </a>
-        </RadzenMenuItem>
+        <AuthorizeView>
+            <NotAuthorized>
+            <RadzenMenuItem Text="Login" Icon="lock" Path="Login">
+            </RadzenMenuItem>
+                 </NotAuthorized>
+            <Authorized>
+                <RadzenMenuItem Text="Sign Out" Icon="lock_open">  <a  @onclick="PerformLogout"> Log out </a>
+                
+                    </RadzenMenuItem>
+            </Authorized>
+        </AuthorizeView>
     </RadzenMenu>
 </RadzenCard>
 
 
 @code {
+    
+    
+    public async Task PerformLogout()
+    {
+        
+        try
+        {
+            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            NavigationManager.NavigateTo("/",true);
+        }
+        catch (Exception e)
+        {
+            
+        }
+    }
+    
+    
+    
+    
+    
     
     
     

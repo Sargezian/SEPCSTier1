@@ -29,7 +29,7 @@ namespace SEPCSTier1.Data
             
         }
 
-        //TODO: IKKE RIGTIG QURRY VI SKIPPER TIER 2 HER CHANGE PLS
+        
         public async Task<IList<Itemss>> GetItemByID(long Id)
         {
             using var client = new GraphQLHttpClient("https://localhost:5001/graphql"

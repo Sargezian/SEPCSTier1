@@ -96,6 +96,13 @@ using Radzen.Blazor;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\NavBar.razor"
+using SEPCSTier1.Data;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/NavBar")]
     public partial class NavBar : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -104,6 +111,38 @@ using Radzen.Blazor;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 37 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\NavBar.razor"
+       
+    
+    
+    public async Task PerformLogout()
+    {
+        
+        try
+        {
+            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            NavigationManager.NavigateTo("/",true);
+        }
+        catch (Exception e)
+        {
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     }
 }
 #pragma warning restore 1591

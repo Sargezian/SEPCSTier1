@@ -47,6 +47,14 @@
               "target": "Package",
               "version": "[4.0.0, )"
             },
+            "GraphQL.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[4.6.1, )"
+            },
+            "GraphQL.Server.Transports.AspNetCore.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
             "Radzen.Blazor": {
               "target": "Package",
               "version": "[3.12.1, )"

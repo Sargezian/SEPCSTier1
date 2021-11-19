@@ -126,25 +126,28 @@ using SEPCSTier1.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 53 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+#line 66 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
        
+
+    public User newUserAccount = new User();
     
-    public User newUserAccount = new User(); 
+    public Payment newPaymentAccount = new Payment();
     
-    private  void AddnewUserAccount()
+    
+    protected override async Task OnInitializedAsync()
     {
+        newPaymentAccount.User = newUserAccount;
+    }
+
+    
+
+    private void AddPaymentAccount()
+    {
+        PaymentData.AddPayment(newPaymentAccount);
         UserData.AddUser(newUserAccount);
         NavigationManager.NavigateTo("/Login");
     }
-    
-    public Payment newPaymentAccount = new Payment(); 
-    
-    private  void AddPaymentAccount()
-    {
-        PaymentData.AddPayment(newPaymentAccount);
-        NavigationManager.NavigateTo("/Login");
-    }
-    
+
 
 
 #line default

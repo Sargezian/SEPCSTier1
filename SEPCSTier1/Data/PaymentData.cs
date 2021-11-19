@@ -1,4 +1,8 @@
-﻿using GraphQL;
+﻿using System;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using SEPCSTier1.Models;
@@ -11,21 +15,21 @@ namespace SEPCSTier1.Data
         {
             using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
                 , new NewtonsoftJsonSerializer());
-
+            
             var request = new GraphQLRequest
             {
-                Query =
-                    "mutation ($name: String!, $cardNumber: String!, $expirationDate: String!, $securityCode: String!) {addPayment(name: $name, cardNumber: $cardNumber,expirationDate: $expirationDate,securityCode: $securityCode) {name,cardNumber,expirationDate,securityCode}}",
+                Query = "mutation ($name: String!,$cardnumber: String!,$expirationdate: String!,$securitycode: String!) {addPayment(name: $name,cardnumber: $cardnumber,expirationdate: $expirationdate,securitycode: $securitycode) {name,cardnumber,expirationdate,securitycode}}",
                 Variables = new
                 {
                     name = payment.name,
-                    cardNumber = payment.cardNumber,
-                    expirationDate = payment.expirationDate,
-                    securityCode = payment.securityCode
+                    cardnumber = payment.cardnumber,
+                    expirationdate = payment.expirationdate,
+                    securitycode = payment.securitycode,
+                    
                 }
             };
 
-            await client.SendMutationAsync<ResponseUserType>(request);
+            await client.SendMutationAsync<ResponsePaymentType>(request);
         }
         
         

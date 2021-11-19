@@ -4,8 +4,10 @@
     {
         public int id { get; set; }
         public string name { get; set; }
-        public string cardNumber { get; set; }
-        public string expirationDate { get; set; }
-        public string securityCode { get; set; }
+        public string cardnumber { get; set; }
+        public string expirationdate { get; set; }
+        public string securitycode { get; set; }
+
+        public User User { get; set; }
     }
 }
