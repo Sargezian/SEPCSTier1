@@ -20,7 +20,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <EditForm Model="@newPaymentAccount"  OnValidSubmit="@AddPaymentAccount">
+                <EditForm Model="@newUserAccount"  OnValidSubmit="@AddUserAccount">
                    <DataAnnotationsValidator/> <ValidationSummary/>
                     <div class="row mt-2">
                         <h3>Create UserAccount</h3>
@@ -31,23 +31,7 @@
                             <label class="labels">Password</label><input type="password" class="form-control" placeholder="Password" @bind-value="newUserAccount.password">
                         </div>
                     </div>
-                    
-                        <div class="row mt-3">
-                            <h3>Create Payment Account</h3>
-                            <div class="col-md-12">
-                                <label class="labels">Name</label><input type="text" class="form-control" placeholder="enter Name" @bind-value="newPaymentAccount.name"/>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Card Number</label><input type="text" class="form-control" placeholder="enter Card Number" @bind-value="newPaymentAccount.cardnumber">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Expiration (mm/yy)</label><input type="text" class="form-control" placeholder="enter Expiration (mm/yy)" @bind-value="newPaymentAccount.expirationdate">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Security Code</label><input type="text" class="form-control" placeholder="enter Security Code" @bind-value="newPaymentAccount.securitycode">
-                            </div>
-                        </div>
-
+                   
                         <div class="row mt-3">
                         </div>
                         <p class="actions">
@@ -67,19 +51,9 @@
 
     public User newUserAccount = new User();
     
-    public Payment newPaymentAccount = new Payment();
     
-    
-    protected override async Task OnInitializedAsync()
+    private void AddUserAccount()
     {
-        newPaymentAccount.User = newUserAccount;
-    }
-
-    
-
-    private void AddPaymentAccount()
-    {
-        PaymentData.AddPayment(newPaymentAccount);
         UserData.AddUser(newUserAccount);
         NavigationManager.NavigateTo("/Login");
     }
