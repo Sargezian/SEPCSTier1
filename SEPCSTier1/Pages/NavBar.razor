@@ -5,12 +5,19 @@
 
 <RadzenCard Style="height: 100px">
     <RadzenMenu>
+        <RadzenMenuItem Text="Home" Icon="home" Path="AdultList" >
+        </RadzenMenuItem>
+
+       
+            <RadzenMenuItem Text="Shop" Icon="accessibility" Path="Shop">                     
+            </RadzenMenuItem>      
         
-        <RadzenMenuItem Text="Shop" Icon="accessibility" Path="Shop">                     
-            </RadzenMenuItem>                
+        <RadzenMenuItem Text="Sell item" Icon="accessibility" Path="AddItem">                     
+                    </RadzenMenuItem> 
+        
                       
         
-        <RadzenMenuItem Text="MyItems" Icon="assessment" Path="MyItems">
+        <RadzenMenuItem Text="Chat" Icon="assessment" Path="Diagram">
         </RadzenMenuItem>
         
         <RadzenMenuItem Text="Admin" Icon="accessibility" Path="Admin">
@@ -35,27 +42,20 @@
 
 
 @code {
-    
-    
+
     public async Task PerformLogout()
     {
-        
+
         try
         {
             ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
-            NavigationManager.NavigateTo("/",true);
+            NavigationManager.NavigateTo("/", true);
         }
         catch (Exception e)
         {
-            
+
         }
+
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
