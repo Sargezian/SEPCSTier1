@@ -13,7 +13,7 @@ namespace SEPCSTier1.Data
     {
         public async void AddPayment(Payment payment)
         {
-            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
+            /*using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
                 , new NewtonsoftJsonSerializer());
             
             var request = new GraphQLRequest
@@ -30,9 +30,26 @@ namespace SEPCSTier1.Data
             };
 
             await client.SendMutationAsync<ResponsePaymentType>(request);
+        }*/
+
+            using HttpClient client = new HttpClient();
+
+            var paymentAsJson = JsonSerializer.Serialize(payment, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            HttpContent httpContent = new StringContent(paymentAsJson, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage httpResponseMessage =
+                await client.PostAsync("http://localhost:8080/payment", httpContent);
+
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception("failed to add data");
+            }
         }
-        
-        
-        }
+
+    }
     
 }
