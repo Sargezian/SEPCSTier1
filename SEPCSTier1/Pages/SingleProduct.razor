@@ -3,8 +3,7 @@
 @using SEPCSTier1.Data
 
 @inject IItemData ItemData
-
-<p>Single product @Id</p>
+@inject ICart cart
 
 @if (product == null)
 {
@@ -12,39 +11,51 @@
 }
 else
 {
-    foreach (var Product in product)
-    {
-        <div class="d-flex">
-            <div>
-                <!-- IMG LEFT -->
-                <img src="@Product.weaponURL">
+    <div class="d-flex">
+        <div>
+            <!-- IMG LEFT -->
+            <img src="@product.weaponURL">
+        </div>
+
+        <div class="bg-light rounded-lg pl-5 pt-4 w-50">
+            <!-- TEXT RIGHT -->
+            <h1 class="fw-bold">@product.weaponname</h1>
+            <h3 class="fw-bolder">3120,00 DKK</h3>
+
+            <div class="d-flex">
+                <p>Icon</p>
+                <p class="fw-normal">Username</p>
             </div>
 
-            <div>
-                <!-- TEXT RIGHT -->
-                <h1>Product name @Product.weaponname</h1>
-                <p>Description</p>
+            <p class="fw-normal">Description</p>
 
-                <div>
-                    <button>Køb</button>
-                    <button>Forslå pris</button>
-                </div>
+            <div>
+                <button type="button" @onclick="addToCart" class="btn btn-primary">Læg i kurv</button>
+                <button type="button" class="btn btn-dark">Forslå pris</button>
             </div>
         </div>
-    }
+    </div>
 }
 
 
 @code {
 
+
     [Parameter]
     public long Id { get; set; }
 
-    private IList<Itemss> product;
+    private Itemss product;
 
     protected override async Task OnInitializedAsync()
     {
-        product = await ItemData.GetItemByID(Id);
+        IList<Itemss> list = await ItemData.GetItemByID(Id);
+        product = list[0];
+    }
+
+    public void addToCart()
+    {
+        Console.WriteLine("Product added to cart");
+        cart.addProduct(product);
     }
 
 }

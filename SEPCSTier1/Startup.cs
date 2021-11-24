@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SEPCSTier1.Data;
+using SEPCSTier1.Models;
 
 namespace SEPCSTier1
 {
@@ -32,6 +33,7 @@ namespace SEPCSTier1
             services.AddScoped<IUserData, UserJSONData>();
             services.AddScoped<IItemData, ItemJSONData>();
             services.AddScoped<IPaymentData, PaymentData>();
+            services.AddSingleton<ICart, Cart>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
         }
 
