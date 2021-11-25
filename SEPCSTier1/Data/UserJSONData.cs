@@ -1,99 +1,67 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
-using GraphQL;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.Newtonsoft;
+using SEPCSTier1.Graphql;
 using SEPCSTier1.Models;
+using StrawberryShake;
 
 namespace SEPCSTier1.Data
 {
     public class UserJSONData : IUserData
     {
-        public async void RemoveAccount(int UserId)
-        {
-            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
-                , new NewtonsoftJsonSerializer());
-            
-            var request = new GraphQLRequest
-            {
-                Query = "mutation($id:Int!) {deleteUser(id:$id)}",
-                Variables = new
-                {
-                    id = UserId
-                }
-            };
+        private GraphqlClient graphqlClient;
+        private List<User> userList = new List<User>();
 
-            await client.SendMutationAsync<ResponseUserType>(request);
+
+        public UserJSONData(GraphqlClient graphqlClient)
+        {
+            this.graphqlClient = graphqlClient;
+        }
+
+
+        public async void RemoveAccount(long UserId)
+        {
+            await graphqlClient.DeleteUser.ExecuteAsync(UserId);
         }
 
         public async Task<IList<User>> GetUsers()
         {
-            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
-                , new NewtonsoftJsonSerializer());
+            var result = await graphqlClient.GetUsers.ExecuteAsync();
 
-            var request = new GraphQLRequest
+            userList = result.Data.Users.Select(users => new User
             {
-                Query = "query{users{id,username,password}}"
-                
-            };
-            var response = await client.SendQueryAsync<ResponseUserCollectionType>(request);
-            
-            return response.Data.Users;
+                id = users.Id,
+                username = users.Username,
+                password = users.Password
+            }).ToList();
+
+            return userList;
         }
 
-        public async Task<IList<User>> ValidateUser(string userName, string passWord)
+        public async Task<User> ValidateUser(string userName, string passWord)
         {
-            
-            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
-                ,new NewtonsoftJsonSerializer());
-
-            var request = new GraphQLRequest
-            {
-                Query = "query ($username: String!,$password:String!) {users(where: { username: { eq: $username },password:{eq:$password} }) {id,username,password}}",
-                Variables = new
-                {
-                    username = userName,
-                    password = passWord
-                }
-            };
-            
-            
-            var response =  await client.SendQueryAsync<ResponseUserCollectionType>(request);
-
-            if (!response.Data.Users.Any())
-            {
-                throw new Exception("user not found");
-            }
            
-            return response.Data.Users;
-            
-            
+                var result = await graphqlClient.ValidateUser.ExecuteAsync(userName, passWord);
+
+                if (result.IsErrorResult())
+                {
+                    throw new Exception("User not found");
+                }
+
+                User user = new User
+                {
+                    username = result.Data.ValidateUser.Username,
+                    password = result.Data.ValidateUser.Password
+                };
+                
+                return user;
+                
         }
 
         public async void AddUser(User user)
         {
-            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
-                , new NewtonsoftJsonSerializer());
-            
-            var request = new GraphQLRequest
-            {
-                Query =
-                    "mutation ($username: String!, $password: String!) {addUser(username: $username, password: $password) {username,password}}",
-                Variables = new
-                {
-                    username = user.username,
-                    password = user.password
-                }
-            };
-
-            await client.SendMutationAsync<ResponseUserType>(request);
-            
+            await graphqlClient.AddUser.ExecuteAsync(user.username, user.password);
         }
     }
 }

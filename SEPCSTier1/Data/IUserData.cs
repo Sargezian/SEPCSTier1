@@ -8,9 +8,9 @@ namespace SEPCSTier1.Data
     {
         void AddUser(User user);
         
-        void RemoveAccount(int UserId);
+        void RemoveAccount(long UserId);
         
         Task<IList<User>> GetUsers();
-        Task<IList<User>> ValidateUser(string userName, string passWord);
+        Task<User> ValidateUser(string userName, string passWord);
     }
 }

@@ -33,8 +33,11 @@ namespace SEPCSTier1
             services.AddScoped<IUserData, UserJSONData>();
             services.AddScoped<IItemData, ItemJSONData>();
             services.AddScoped<IPaymentData, PaymentData>();
-            services.AddSingleton<ICart, Cart>();
+            services.AddScoped<ICart, Cart>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            services
+                .AddGraphqlClient()
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:5001/graphql/"));
         }
 
         //TESTY

@@ -16,6 +16,10 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)strawberryshake.codegeneration.csharp.analyzers\12.3.2\build\StrawberryShake.CodeGeneration.CSharp.Analyzers.props" Condition="Exists('$(NuGetPackageRoot)strawberryshake.codegeneration.csharp.analyzers\12.3.2\build\StrawberryShake.CodeGeneration.CSharp.Analyzers.props')" />
     <Import Project="$(NuGetPackageRoot)radzen.blazor\3.12.1\buildTransitive\Radzen.Blazor.props" Condition="Exists('$(NuGetPackageRoot)radzen.blazor\3.12.1\buildTransitive\Radzen.Blazor.props')" />
   </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\abdul\.nuget\packages\newtonsoft.json\9.0.1</PkgNewtonsoft_Json>
+  </PropertyGroup>
 </Project>

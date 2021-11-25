@@ -1,0 +1,1 @@
+query GetItems{items{id,weaponname,weaponURL}}

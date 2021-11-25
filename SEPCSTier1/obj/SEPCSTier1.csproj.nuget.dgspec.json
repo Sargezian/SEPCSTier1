@@ -39,25 +39,25 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "GraphQL.Client": {
+            "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[4.0.0, )"
+              "version": "[5.0.0, )"
             },
-            "GraphQL.Client.Serializer.Newtonsoft": {
+            "Microsoft.Extensions.Http": {
               "target": "Package",
-              "version": "[4.0.0, )"
-            },
-            "GraphQL.NewtonsoftJson": {
-              "target": "Package",
-              "version": "[4.6.1, )"
-            },
-            "GraphQL.Server.Transports.AspNetCore.NewtonsoftJson": {
-              "target": "Package",
-              "version": "[5.0.2, )"
+              "version": "[5.0.0, )"
             },
             "Radzen.Blazor": {
               "target": "Package",
               "version": "[3.12.1, )"
+            },
+            "StrawberryShake.CodeGeneration.CSharp.Analyzers": {
+              "target": "Package",
+              "version": "[12.3.2, )"
+            },
+            "StrawberryShake.Transport.Http": {
+              "target": "Package",
+              "version": "[12.4.0-preview.6, )"
             }
           },
           "imports": [

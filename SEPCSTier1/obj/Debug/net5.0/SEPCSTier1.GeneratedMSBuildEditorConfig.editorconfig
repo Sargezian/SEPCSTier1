@@ -1,4 +1,10 @@
 is_global = true
+build_property.StrawberryShake_DefaultNamespace = SEPCSTier1
+build_property.StrawberryShake_LogFile = 
+build_property.StrawberryShake_BuildDirectory = C:\Users\abdul\.nuget\packages\strawberryshake.codegeneration.csharp.analyzers\12.3.2\build\..\analyzers\dotnet\cs
+build_property.StrawberryShake_PersistedQueryDirectory = 
+build_property.StrawberryShake_State = obj\\berry
+build_property.StrawberryShake_EmitGeneratedCode = 
 build_property.TargetFramework = net5.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
@@ -8,3 +14,43 @@ build_property.IncludeAllContentForSelfExtract =
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = SEPCSTier1
 build_property.ProjectDir = C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/AddPayment.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/AddUser.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetItems.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetUsers.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/ItemById.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/RemoveUser.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/schema.extensions.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/schema.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/ValidateUser.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/.graphqlrc.json]
+build_metadata.AdditionalFiles.GraphQL = 
+build_metadata.AdditionalFiles.GraphQLConfig = true

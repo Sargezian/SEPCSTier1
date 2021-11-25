@@ -48,8 +48,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        IList<Itemss> list = await ItemData.GetItemByID(Id);
-        product = list[0];
+        product = await ItemData.GetItemByID(Id);
+        
     }
 
     public void addToCart()

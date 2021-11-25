@@ -78,7 +78,7 @@ else
         NavigationManager.NavigateTo("/Admin",true);
     }
     
-    private void RemoveUserAccount(int UserId)
+    private void RemoveUserAccount(long UserId)
     {
         User accountToRemove = allUserAccounts.First(t => t.id == UserId);
         UserData.RemoveAccount(UserId);

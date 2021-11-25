@@ -1,0 +1,1 @@
+mutation deleteUser($id:Long!) {deleteUser(id:$id)}

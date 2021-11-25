@@ -1,52 +1,57 @@
-using System;
+
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text.Json;
+using System.Linq;
 using System.Threading.Tasks;
-using GraphQL;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.Newtonsoft;
+
+using SEPCSTier1.Graphql;
 using SEPCSTier1.Models;
 
 namespace SEPCSTier1.Data
 {
     public class ItemJSONData : IItemData
     {
+        
+        private GraphqlClient graphqlClient;
+        private List<Itemss> Itemslist = new List<Itemss>();
+
+
+        public ItemJSONData(GraphqlClient graphqlClient)
+        {
+            this.graphqlClient = graphqlClient;
+        }
+
+
         public async Task<IList<Itemss>> GetItems()
         {
-            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
-                , new NewtonsoftJsonSerializer());
+            var result = await graphqlClient.GetItems.ExecuteAsync();
 
-            var request = new GraphQLRequest
+            Itemslist = result.Data.Items.Select(items => new Itemss
             {
-                Query = "query{items{id,weaponname,weaponURL}}"
-                
-            };
-            var response = await client.SendQueryAsync<ResponseItemCollectionType>(request);
+                id = items.Id,
+                weaponname = items.Weaponname,
+                weaponURL = items.WeaponURL
+
+            }).ToList();
             
-            return response.Data.items;
-            
-            
+            return Itemslist;
         }
 
         
-        public async Task<IList<Itemss>> GetItemByID(long Id)
+        public async Task<Itemss> GetItemByID(long Id)
         {
-            using var client = new GraphQLHttpClient("https://localhost:5001/graphql"
-                ,new NewtonsoftJsonSerializer());
+           var result = await graphqlClient.ItemById.ExecuteAsync(Id);
+           
 
-            var request = new GraphQLRequest
-            {
-                Query = "query ($id: Int!) {items(where: { id: { eq: $id } }) {id,weaponname,weaponURL}}",
-                Variables = new
-                {
-                    id = Id
-                }
-            };
-            
-            
-            var response =  await client.SendQueryAsync<ResponseItemCollectionType>(request);
-            return response.Data.items;
+           Itemss itemss = new Itemss
+           {
+               id = result.Data.ItemById.Id,
+               weaponname = result.Data.ItemById.Weaponname,
+               weaponURL = result.Data.ItemById.WeaponURL
+               
+           };
+           
+            return itemss;
+
         }
         
     }

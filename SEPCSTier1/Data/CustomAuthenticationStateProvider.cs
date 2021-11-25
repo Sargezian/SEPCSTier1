@@ -50,14 +50,14 @@ namespace SEPCSTier1.Data
             ClaimsIdentity identity = new ClaimsIdentity();
             try
             {
-                IList<User> user = await userService.ValidateUser(username, password);
-                foreach (var User in user)
-                {
-                    identity = SetupClaimsForUser(User);
-                    string serialisedData = JsonSerializer.Serialize(User);
+                User user = await userService.ValidateUser(username, password);
+
+               
+                    identity = SetupClaimsForUser(user);
+                    string serialisedData = JsonSerializer.Serialize(user);
                     await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
-                    cachedUser = User;
-                }
+                    cachedUser = user;
+                
             }
             catch (Exception e)
             {

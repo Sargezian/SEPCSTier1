@@ -1,0 +1,7 @@
+query ItemById($id: Long!){
+    itemById(id:$id){
+        id,
+        weaponname,
+        weaponURL
+    }
+}

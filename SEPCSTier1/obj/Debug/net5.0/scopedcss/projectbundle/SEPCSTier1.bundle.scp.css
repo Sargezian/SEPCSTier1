@@ -1,5 +1,29 @@
 @import '';
 
+/* _content/SEPCSTier1/Pages/Footer.razor.rz.scp.css */
+h1[b-8jc3jr7icr],h2[b-8jc3jr7icr],p[b-8jc3jr7icr] {
+    text-align: center;
+}
+
+.fa[b-8jc3jr7icr] {
+    box-sizing: inherit;
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+#centerImage[b-8jc3jr7icr]{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+
+
 /* _content/SEPCSTier1/Pages/Login.razor.rz.scp.css */
 html[b-7ebgorw8db] {
     height: 100%;
@@ -215,13 +239,49 @@ body[b-6solt7yd44] {
     cursor: pointer;
     border: solid 1px #BA68C8
 }
+/* _content/SEPCSTier1/Pages/UserHomePage.razor.rz.scp.css */
+.card[b-mk7y9zvirj] {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.title[b-mk7y9zvirj] {
+    color: grey;
+    font-size: 18px;
+}
+
+button[b-mk7y9zvirj] {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+a[b-mk7y9zvirj] {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+button:hover[b-mk7y9zvirj], a:hover[b-mk7y9zvirj] {
+    opacity: 0.7;
+}
 /* _content/SEPCSTier1/Shared/MainLayout.razor.rz.scp.css */
      
-.page[b-bamf6weoro] {
+.page[b-5sbyiyc75m] {
     position: relative;
     display: flex;
     flex-direction: column;
 }
+
 
 /* _content/SEPCSTier1/Shared/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-chomr41mm5] {
