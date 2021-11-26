@@ -117,7 +117,6 @@ using SEPCSTier1.Data;
 
     public async Task PerformLogout()
     {
-
         try
         {
             ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
@@ -125,9 +124,7 @@ using SEPCSTier1.Data;
         }
         catch (Exception e)
         {
-
         }
-
     }
 
 

@@ -5,36 +5,36 @@
 
 <RadzenCard Style="height: 100px">
     <RadzenMenu>
-        <RadzenMenuItem Text="Home" Icon="home" Path="AdultList" >
+        <RadzenMenuItem Text="Home" Icon="home" Path="AdultList">
         </RadzenMenuItem>
 
-       
-            <RadzenMenuItem Text="Shop" Icon="accessibility" Path="Shop">                     
-            </RadzenMenuItem>      
-        
-        <RadzenMenuItem Text="Sell item" Icon="accessibility" Path="AddItem">                     
-                    </RadzenMenuItem> 
-        
-                      
-        
+
+        <RadzenMenuItem Text="Shop" Icon="accessibility" Path="Shop">
+        </RadzenMenuItem>
+
+        <RadzenMenuItem Text="Sell item" Icon="accessibility" Path="AddItem">
+        </RadzenMenuItem>
+
+
         <RadzenMenuItem Text="Chat" Icon="assessment" Path="Diagram">
         </RadzenMenuItem>
-        
+
         <RadzenMenuItem Text="Admin" Icon="accessibility" Path="Admin">
         </RadzenMenuItem>
-        
-          <RadzenMenuItem Text="Wallet" Icon="accessibility" Path="Wallet">
-                </RadzenMenuItem>
-        
+
+        <RadzenMenuItem Text="Wallet" Icon="accessibility" Path="Wallet">
+        </RadzenMenuItem>
+
         <AuthorizeView>
             <NotAuthorized>
-            <RadzenMenuItem Text="Login" Icon="lock" Path="Login">
-            </RadzenMenuItem>
-                 </NotAuthorized>
+                <RadzenMenuItem Text="Login" Icon="lock" Path="Login">
+                </RadzenMenuItem>
+            </NotAuthorized>
             <Authorized>
-                <RadzenMenuItem Text="Sign Out" Icon="lock_open">  <a  @onclick="PerformLogout"> Log out </a>
-                
-                    </RadzenMenuItem>
+                <RadzenMenuItem Text="Sign Out" Icon="lock_open">
+                    <a @onclick="PerformLogout"> Log out </a>
+
+                </RadzenMenuItem>
             </Authorized>
         </AuthorizeView>
     </RadzenMenu>
@@ -45,17 +45,14 @@
 
     public async Task PerformLogout()
     {
-
         try
         {
             ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
-            NavigationManager.NavigateTo("/", true);
+            NavigationManager.NavigateTo("/shop", true);
         }
         catch (Exception e)
         {
-
         }
-
     }
 
 }

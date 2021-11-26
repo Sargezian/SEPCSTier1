@@ -9,7 +9,7 @@ using SEPCSTier1.Models;
 
 namespace SEPCSTier1.Data
 {
-    public class CustomAuthenticationStateProvider : AuthenticationStateProvider
+     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
         private readonly IJSRuntime jsRuntime;
         private readonly IUserData userService;
@@ -30,7 +30,7 @@ namespace SEPCSTier1.Data
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
                     User tmp = JsonSerializer.Deserialize<User>(userAsJson);
-                    await ValidateLogin(tmp.username, tmp.password);
+                     ValidateLogin(tmp.username, tmp.password);
                 }
             }
             else
@@ -50,18 +50,15 @@ namespace SEPCSTier1.Data
             ClaimsIdentity identity = new ClaimsIdentity();
             try
             {
-                User user = await userService.ValidateUser(username, password);
-
-               
-                    identity = SetupClaimsForUser(user);
-                    string serialisedData = JsonSerializer.Serialize(user);
-                    await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
-                    cachedUser = user;
-                
+                User user =  await userService.ValidateUser(username, password);
+                identity = SetupClaimsForUser(user);
+                string serialisedData = JsonSerializer.Serialize(user);
+                await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
+                cachedUser = user;
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw e;
             }
 
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
@@ -83,4 +80,6 @@ namespace SEPCSTier1.Data
             return identity;
         }
     }
+   
+    
 }
