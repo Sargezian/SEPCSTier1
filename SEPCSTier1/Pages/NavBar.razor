@@ -1,8 +1,11 @@
 @page "/NavBar"
 @using SEPCSTier1.Data
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
 
+@*
 <RadzenCard Style="height: 100px">
     <RadzenMenu>
         <RadzenMenuItem Text="Home" Icon="home" Path="AdultList">
@@ -16,7 +19,7 @@
         </RadzenMenuItem>
 
 
-        <RadzenMenuItem Text="Chat" Icon="assessment" Path="Diagram">
+        <RadzenMenuItem Text="Chat" Icon="assessment" Path="Chat">
         </RadzenMenuItem>
 
         <RadzenMenuItem Text="Admin" Icon="accessibility" Path="Admin">
@@ -39,15 +42,79 @@
         </AuthorizeView>
     </RadzenMenu>
 </RadzenCard>
+*@
+
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="Shop">CSGO Trading</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-link" href="Shop">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="AddItem">AddItem</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Chat">Chat</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="Admin">Admin</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="Wallet">Wallet</a>
+            </li>
+
+            <AuthorizeView>
+                <NotAuthorized>
+                    <li class="nav-item">
+                        <a class="nav-link " href="Login">Login</a>
+                    </li>
+                </NotAuthorized>
+                <Authorized>
+
+                    <li class="nav-item">
+                        <a class="nav-link " @onclick="PerformLogout"> logout @name</a>
+                    </li>
+
+
+                </Authorized>
+
+            </AuthorizeView>
+
+        </ul>
+
+        <i class="fa" style="color:white;font-size:35px" >&#xf07a;</i>
+        <span class='badge badge-warning' id='lblCartCount'> 6 </span>
+    </div>
+</nav>
 
 
 @code {
+
+    public string name { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        var protectedBrowserStorageResult = await ProtectedSessionStore.GetAsync<string>("username");
+
+        name = protectedBrowserStorageResult.Value;
+    }
+
 
     public async Task PerformLogout()
     {
         try
         {
             ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+
             NavigationManager.NavigateTo("/shop", true);
         }
         catch (Exception e)

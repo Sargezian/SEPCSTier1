@@ -1,7 +1,10 @@
 ﻿@page "/Login"
 @using SEPCSTier1.Data
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
+
 
 
 
@@ -48,7 +51,9 @@
 
     @layout EmptyLayout
 @code {
-    private string username;
+
+
+    public string username { get; set; }
     private string password;
     private string errorMessage;
     
@@ -60,9 +65,11 @@
         try
         {
             await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
+           await ProtectedSessionStore.SetAsync("username", username);
             username = "";
             password = "";
             NavigationManager.NavigateTo("/Admin");
+         
         }
         catch (Exception e)
         {
@@ -71,6 +78,8 @@
         }
         
     }
+    
+    
 
 
     public async Task PerformSignUp()

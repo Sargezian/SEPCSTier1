@@ -222,3 +222,7 @@ C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\Footer.razor.rz.scp.css
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\UserHomePage.razor.rz.scp.css
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\bin\Debug\net5.0\StrawberryShake.Tools.Configuration.dll
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\NavBar.razor.rz.scp.css
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\Chat.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\Chat.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\Chat.razor.rz.scp.css
