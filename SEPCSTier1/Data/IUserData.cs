@@ -12,5 +12,7 @@ namespace SEPCSTier1.Data
         
         Task<IList<User>> GetUsers();
         Task<User> ValidateUser(string userName, string passWord);
+        
+        Task<User> GetUserByID(long id);
     }
 }

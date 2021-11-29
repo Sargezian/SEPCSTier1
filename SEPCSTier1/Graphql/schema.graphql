@@ -8,7 +8,9 @@ type Query {
   users(where: UserFilterInput order: [UserSortInput!]): [User]
   items(where: ItemsFilterInput order: [ItemsSortInput!]): [Items]
   itemById(id: Long!): Items
+  userById(id: Long!): User
   validateUser(username: String password: String): User
+  offers(where: SaleOfferFilterInput order: [SaleOfferSortInput!]): [SaleOffer]
 }
 
 type Mutation {
@@ -47,6 +49,20 @@ input ItemsSortInput {
   id: SortEnumType
   weaponname: SortEnumType
   weaponURL: SortEnumType
+}
+
+input SaleOfferFilterInput {
+  and: [SaleOfferFilterInput!]
+  or: [SaleOfferFilterInput!]
+  id: ComparableInt32OperationFilterInput
+  item_id: StringOperationFilterInput
+  wallet_id: StringOperationFilterInput
+}
+
+input SaleOfferSortInput {
+  id: SortEnumType
+  item_id: SortEnumType
+  wallet_id: SortEnumType
 }
 
 input ComparableInt64OperationFilterInput {
@@ -112,6 +128,12 @@ type User {
   id: Long!
   username: String
   password: String
+}
+
+type SaleOffer {
+  id: Int!
+  item_id: String
+  wallet_id: String
 }
 
 type Payment {

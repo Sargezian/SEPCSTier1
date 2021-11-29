@@ -63,5 +63,20 @@ namespace SEPCSTier1.Data
         {
             await graphqlClient.AddUser.ExecuteAsync(user.username, user.password);
         }
+        
+        public async Task<User> GetUserByID(long Id)
+        {
+            var result = await graphqlClient.UserById.ExecuteAsync(Id);
+           
+
+            User user = new User
+            {
+                id = result.Data.UserById.Id,
+                username = result.Data.UserById.Username
+                
+            };
+           
+            return user;
+        }
     }
 }
