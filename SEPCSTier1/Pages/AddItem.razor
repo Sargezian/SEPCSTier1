@@ -1,4 +1,8 @@
 ﻿@page "/AddItem"
+@using SEPCSTier1.Models
+@using SEPCSTier1.Data
+@using System.Security.Cryptography
+@inject IItemData IitemData
 <div class="w-100 d-flex justify-content-center">
     <div class="w-50 border border-light-1 p-3 m-5">
         <form>
@@ -63,11 +67,18 @@
 
             </div>-->
 
-            <!--Name-->
             <div class="form-group">
-                <label for="ItemNameInput">Item Name</label>
-                <input type="email" class="form-control" id="ItemNameInput" placeholder="Enter Item Name">
-            </div>
+                <label for="weaponType">Weapon Type</label>
+                <br>
+
+                @if (ItemList != null)
+                {
+                    <RadzenDropDown @bind-Value="pickedItem" Placeholder="Select Weapon" AllowClear="true" TValue="string" Style="width:300px"
+                                    Data=@(ItemList.Select(c => c.weaponname).Distinct())
+                                    Change=@(args => OnChange(args, "DropDown"))/>
+                }
+            </div>  
+            
 
             <!--Item Condition-->
             <div class="form-group">
@@ -81,48 +92,91 @@
                     <option>Battle Scared</option>
                 </select>
             </div>
-            
-            <!--Picture of item-->
-            <div class="form-group">
-                <label for="ItemNameInput">Picture of Item</label>
-                <input type="email" class="form-control" id="ItemNameInput" placeholder="Enter URL address">
-            </div>
 
             <!--Price-->
             <div class="form-group">
                 <label for="ItemPriceInput">Price</label>
-                <input type="number" class="form-control" id="ItemPriceInput" placeholder="Set Price">
+                <input @bind-value="intValue" type="number" class="form-control" id="ItemPriceInput" placeholder="Set Price">
             </div>
 
-
-            <!--<div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect2">Example multiple select</label>
-                <select multiple class="form-control" id="exampleFormControlSelect2">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>-->
+            
+            
+            <button type="button" class="btn btn-primary btn-lg " @onclick="Submit">Submit</button>
+            <p class="text-danger" >@PickerErrorMessage</p>
+            <p class="text-danger" >@PriceErrorMessage</p>
         </form>
     </div>
 </div>
 
 @code {
+    private int intValue;
+    private string PickerErrorMessage = "";
+    private string PriceErrorMessage = "";
+    private string pickedItem;
+    private IList<Itemss> ItemList;
+    private IList<Itemss> Items;
 
+    protected override async Task OnInitializedAsync()
+    {
+        Items = await IitemData.GetItems();
+        ItemList = Items;
+    }
+
+    void OnChange(object value, string name)
+    {
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>) value) : value;
+    }
+
+    void Submit()
+    {
+        Console.WriteLine(pickedItem);
+        PickerErrorMessage = "";
+        PriceErrorMessage = "";
+        //Feedbacket fra selectoren giver en string tilbage, så vi sammenligner her navnet derfra, men listen af itemsene vi får fra Databasen
+        try
+        {
+            Itemss item = findEqualItem(pickedItem);
+            checkValidPrice();
+
+            //READY TO PUSH FROM HERE
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            if (e.Message.Equals("Please select an Item to sell (Parameter 'itemName')"))
+            {
+                
+                PickerErrorMessage = "Pick an Item to sell";
+            } 
+            if (e.Message.Equals("Please Pick a Price (Parameter 'intValue')"))
+            {
+                
+                PriceErrorMessage = "Please Pick a Price";;
+            }
+            
+        }
+        
+    }
+
+    Itemss findEqualItem(string itemName)
+    {
+        foreach (var itm in ItemList)
+        {
+            if (itm.weaponname.Equals(itemName))
+            {
+                return itm;
+            }
+        }
+        throw new ArgumentNullException(paramName: nameof(itemName), message: "Please select an Item to sell");
+    }
+
+    void checkValidPrice()
+    {
+        if (intValue.Equals(0))
+        {
+            throw new ArgumentNullException(paramName: nameof(intValue), message: "Please Pick a Price");
+        }
+    }
+
+    
 }
