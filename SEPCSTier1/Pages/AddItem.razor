@@ -1,7 +1,8 @@
 ﻿@page "/AddItem"
 <div class="w-100 d-flex justify-content-center">
-    <div class="w-75 border border-light-1 p-3 m-5" >
+    <div class="w-50 border border-light-1 p-3 m-5">
         <form>
+            <!--
             <div class="form-group">
                 <label for="weaponType">Weapon Type</label>
                 <select class="selectpicker">
@@ -60,14 +61,41 @@
                     <option>SSG 08</option>
                 </select>
 
+            </div>-->
+
+            <!--Name-->
+            <div class="form-group">
+                <label for="ItemNameInput">Item Name</label>
+                <input type="email" class="form-control" id="ItemNameInput" placeholder="Enter Item Name">
+            </div>
+
+            <!--Item Condition-->
+            <div class="form-group">
+                <label for="weaponCondition">Weapon Condition</label>
+                <br>
+                <select class="selectpicker">
+                    <option>Factory New</option>
+                    <option>Minimal Wear</option>
+                    <option>Field Tested</option>
+                    <option>Well Worn</option>
+                    <option>Battle Scared</option>
+                </select>
             </div>
             
-            
+            <!--Picture of item-->
             <div class="form-group">
-                <label for="exampleFormControlInput1">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                <label for="ItemNameInput">Picture of Item</label>
+                <input type="email" class="form-control" id="ItemNameInput" placeholder="Enter URL address">
             </div>
+
+            <!--Price-->
             <div class="form-group">
+                <label for="ItemPriceInput">Price</label>
+                <input type="number" class="form-control" id="ItemPriceInput" placeholder="Set Price">
+            </div>
+
+
+            <!--<div class="form-group">
                 <label for="exampleFormControlSelect1">Example select</label>
                 <select class="form-control" id="exampleFormControlSelect1">
                     <option>1</option>
@@ -90,7 +118,7 @@
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Example textarea</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
+            </div>-->
         </form>
     </div>
 </div>
