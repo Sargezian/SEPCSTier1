@@ -1,0 +1,8 @@
+query OfferById($id:Long!){
+    offerById(id:$id){
+        id,
+        item_id,
+        sale_price,
+        wallet_id
+    }
+}

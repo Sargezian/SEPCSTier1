@@ -66,7 +66,7 @@ namespace SEPCSTier1.Data
         
         public async Task<User> GetUserByID(long Id)
         {
-            var result = await graphqlClient.UserById.ExecuteAsync(Id);
+            /*var result = await graphqlClient.UserById.ExecuteAsync(Id);
            
 
             User user = new User
@@ -75,8 +75,8 @@ namespace SEPCSTier1.Data
                 username = result.Data.UserById.Username
                 
             };
-           
-            return user;
+           */
+            return null;
         }
     }
 }

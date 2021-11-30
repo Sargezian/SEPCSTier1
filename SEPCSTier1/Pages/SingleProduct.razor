@@ -1,8 +1,9 @@
-﻿@page "/Product/{Id:long}"
+﻿@page "/Product/{offer_id:long}/{item_id:long}"
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
 
 @inject IItemData ItemData
+@inject IOfferData IofferData
 @inject ICart cart
 
 @if (product == null)
@@ -20,7 +21,7 @@ else
         <div class="bg-light rounded-lg pl-5 pt-4 w-50">
             <!-- TEXT RIGHT -->
             <h1 class="fw-bold">@product.weaponname</h1>
-            <h3 class="fw-bolder">3120,00 DKK</h3>
+            <h3 class="fw-bolder">@product.sale_price</h3>
 
             <div class="d-flex">
                 <p>Icon</p>
@@ -59,20 +60,37 @@ else
 
 
     [Parameter]
-    public long Id { get; set; }
+    public long item_id { get; set; }
+    [Parameter]
+    public long offer_id { get; set; }
 
-    private Itemss product;
+    private Itemss item;
+    private SaleOffer offer;
+    private Product product;
 
     protected override async Task OnInitializedAsync()
     {
-        product = await ItemData.GetItemByID(Id);
-        
+        item = await ItemData.GetItemByID(item_id);
+        offer = await IofferData.GetOfferById(offer_id);
+
+        if (offer != null && item != null)
+        {
+            product = new Product()
+            {
+                sale_price = offer.sale_price,
+                wallet_id = offer.wallet_id,
+                saleOffer_id = offer.id,
+                item_id = offer.item_id,
+                weaponname = item.weaponname,
+                weaponURL = item.weaponURL
+            };
+        }
     }
 
     public void addToCart()
     {
-        Console.WriteLine("Product added to cart");
-        cart.addProduct(product);
+        Console.WriteLine("Product added to cart " +product.weaponname +" Price: "+product.sale_price);
+        //cart.addProduct(product);
     }
 
 }

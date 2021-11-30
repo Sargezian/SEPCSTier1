@@ -1,0 +1,8 @@
+﻿query getSaleOffer{
+    offers{
+        id,
+        item_id,
+        sale_price,
+        wallet_id
+    }
+}

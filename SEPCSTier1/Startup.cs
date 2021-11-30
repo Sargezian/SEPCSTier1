@@ -32,6 +32,7 @@ namespace SEPCSTier1
             services.AddServerSideBlazor();
             services.AddScoped<IUserData, UserJSONData>();
             services.AddScoped<IItemData, ItemJSONData>();
+            services.AddScoped<IOfferData, OfferData>();
             services.AddScoped<IPaymentData, PaymentData>();
             services.AddScoped<ICart, Cart>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();

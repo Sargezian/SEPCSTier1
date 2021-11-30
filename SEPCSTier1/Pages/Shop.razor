@@ -2,15 +2,16 @@
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
 @inject IItemData IitemData
+@inject IOfferData IofferData
 @inject NavigationManager NavigationManager 
 
 
 <table class="table">
     <tbody>
-    <RadzenDataList WrapItems="true" AllowPaging="true" Data="@Items" TItem="Itemss">
+    <RadzenDataList WrapItems="true" AllowPaging="true" Data="@activeOffers" TItem="Product">
         <Template Context="items">
             <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
-                <div class="row" @onclick="@(() => productGoTo(items.id))">
+                <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
                     <div class="col-md-12">
                         <div class="d-flex justify-content-between">
                             <p>Skin Name</p>
@@ -18,7 +19,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p><b>@items.weaponname</b></p>
-                            <p><b>2300 DKK</b></p>
+                            <p><b>@items.sale_price</b></p>
                         </div>
                         
                         <img src="@items.weaponURL" width="300px"/>
@@ -31,21 +32,50 @@
     </tbody>
 </table>
 
+<button @onclick="CheckList">
+    Test
+</button>
 
 @code {
 
     private IList<Itemss> ItemList;
+    private IList<SaleOffer> saleOffers;
+    private IList<Product> activeOffers;
     private IList<Itemss> Items;
 
     protected override async Task OnInitializedAsync()
     {
+        activeOffers = new List<Product>();
         Items = await IitemData.GetItems();
+        saleOffers = await IofferData.GetOffers();
         ItemList = Items;
+
+        foreach (var VARIABLE in saleOffers)
+        {
+            activeOffers.Add(new Product()
+            {
+                saleOffer_id = VARIABLE.id,
+                item_id = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).id,
+                sale_price = VARIABLE.sale_price,
+                wallet_id = VARIABLE.wallet_id,
+                weaponname = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponname,
+                weaponURL = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponURL
+            });
+        }
     }
 
-    private void productGoTo(long id)
+    private void CheckList()
     {
-        NavigationManager.NavigateTo($"Product/{id}");
+        Console.WriteLine(saleOffers.Count);
+        Console.WriteLine(saleOffers[0].id + saleOffers[0].sale_price);
+        
+        Console.WriteLine(activeOffers.Count);
+        Console.WriteLine(activeOffers[0].id + activeOffers[0].item_id + activeOffers[0].saleOffer_id + activeOffers[0].weaponname + activeOffers[0].sale_price);
+    }
+
+    private void productGoTo(long item_id, long offer_id)
+    {
+        NavigationManager.NavigateTo($"Product/{offer_id}/{item_id}");
     }
     
 }

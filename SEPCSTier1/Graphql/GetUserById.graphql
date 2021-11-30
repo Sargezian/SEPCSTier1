@@ -1,6 +1,6 @@
-query UserById($id: Long!){
-    userById(id:$id){
-        id,
-        username
-    }
-}
+#query UserById($id: Long!){
+#    userById(id:$id){
+#        id,
+#        username
+#    }
+#}
