@@ -32,9 +32,6 @@
     </tbody>
 </table>
 
-<button @onclick="CheckList">
-    Test
-</button>
 
 @code {
 
@@ -63,15 +60,7 @@
             });
         }
     }
-
-    private void CheckList()
-    {
-        Console.WriteLine(saleOffers.Count);
-        Console.WriteLine(saleOffers[0].id + saleOffers[0].sale_price);
-        
-        Console.WriteLine(activeOffers.Count);
-        Console.WriteLine(activeOffers[0].id + activeOffers[0].item_id + activeOffers[0].saleOffer_id + activeOffers[0].weaponname + activeOffers[0].sale_price);
-    }
+    
 
     private void productGoTo(long item_id, long offer_id)
     {

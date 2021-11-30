@@ -56,7 +56,9 @@
             <li class="nav-item ">
                 <a class="nav-link" href="Shop">Home <span class="sr-only">(current)</span></a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="AddItem">AddItem</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="Chat">Chat</a>
             </li>
@@ -70,21 +72,15 @@
             </li>
 
             <AuthorizeView>
-
-
                 <NotAuthorized>
                     <li class="nav-item">
                         <a class="nav-link " href="Login">Login</a>
                     </li>
                 </NotAuthorized>
-
-
                 <Authorized>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="AddItem">AddItem</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " @onclick="PerformLogout"> logout @name</a>
+                        <a class="nav-link " @onclick="PerformLogout"> Logout  @name</a>
                     </li>
 
 
@@ -93,9 +89,13 @@
             </AuthorizeView>
 
         </ul>
-
-        <i class="fa" style="color:white;font-size:35px">&#xf07a;</i>
-        <span class='badge badge-warning' id='lblCartCount'> 6 </span>
+       
+        <div @onclick="@(() => NavigateToCart())">
+            
+        <i class="fa" style="color:white;font-size:35px"  >&#xf07a;</i>
+           <span class='badge badge-warning' id='lblCartCount'> 6 </span>
+        </div>
+          
     </div>
 </nav>
 
@@ -124,6 +124,13 @@
         catch (Exception e)
         {
         }
+    }
+
+
+    public async Task NavigateToCart()
+    {
+        NavigationManager.NavigateTo("/Cart",true);
+        
     }
 
 }

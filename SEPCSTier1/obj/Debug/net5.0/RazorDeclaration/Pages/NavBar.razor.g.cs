@@ -119,7 +119,7 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 99 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\NavBar.razor"
+#line 103 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\NavBar.razor"
        
 
     public string name { get; set; }
@@ -144,6 +144,13 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
         catch (Exception e)
         {
         }
+    }
+
+
+    public async Task NavigateToCart()
+    {
+        NavigationManager.NavigateTo("/Cart",true);
+        
     }
 
 

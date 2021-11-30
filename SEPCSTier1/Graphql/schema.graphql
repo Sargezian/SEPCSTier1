@@ -7,7 +7,10 @@
 type Query {
   users(where: UserFilterInput order: [UserSortInput!]): [User]
   items(where: ItemsFilterInput order: [ItemsSortInput!]): [Items]
+  chat(where: ChatFilterInput order: [ChatSortInput!]): [Chat]
+  chatById(id: Long!): Chat
   itemById(id: Long!): Items
+  userById(id: Long!): User
   validateUser(username: String password: String): User
   offers(where: SaleOfferFilterInput order: [SaleOfferSortInput!]): [SaleOffer]
   offerById(id: Long!): SaleOffer
@@ -51,10 +54,24 @@ input ItemsSortInput {
   weaponURL: SortEnumType
 }
 
+input ChatFilterInput {
+  and: [ChatFilterInput!]
+  or: [ChatFilterInput!]
+  id: ComparableInt64OperationFilterInput
+  chatList: StringOperationFilterInput
+  user_id: ComparableInt64OperationFilterInput
+}
+
+input ChatSortInput {
+  id: SortEnumType
+  chatList: SortEnumType
+  user_id: SortEnumType
+}
+
 input SaleOfferFilterInput {
   and: [SaleOfferFilterInput!]
   or: [SaleOfferFilterInput!]
-  id: ComparableInt32OperationFilterInput
+  id: ComparableInt64OperationFilterInput
   item_id: ComparableInt64OperationFilterInput
   sale_price: ComparableInt32OperationFilterInput
   wallet_id: ComparableInt64OperationFilterInput
@@ -117,8 +134,11 @@ input ComparableInt32OperationFilterInput {
   nlte: Int
 }
 
-"The `Long` scalar type represents non-fractional signed whole 64-bit numeric values. Long can represent values between -(2^63) and 2^63 - 1."
-scalar Long
+type Chat {
+  id: Long!
+  chatList: String
+  user_id: Long!
+}
 
 type Items {
   id: Int!
@@ -132,8 +152,11 @@ type User {
   password: String
 }
 
+"The `Long` scalar type represents non-fractional signed whole 64-bit numeric values. Long can represent values between -(2^63) and 2^63 - 1."
+scalar Long
+
 type SaleOffer {
-  id: Int!
+  id: Long!
   item_id: Long!
   sale_price: Int!
   wallet_id: Long!
