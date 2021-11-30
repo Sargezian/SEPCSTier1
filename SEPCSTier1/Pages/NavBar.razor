@@ -56,9 +56,7 @@
             <li class="nav-item ">
                 <a class="nav-link" href="Shop">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="AddItem">AddItem</a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="Chat">Chat</a>
             </li>
@@ -72,13 +70,19 @@
             </li>
 
             <AuthorizeView>
+
+
                 <NotAuthorized>
                     <li class="nav-item">
                         <a class="nav-link " href="Login">Login</a>
                     </li>
                 </NotAuthorized>
-                <Authorized>
 
+
+                <Authorized>
+                    <li class="nav-item">
+                        <a class="nav-link" href="AddItem">AddItem</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link " @onclick="PerformLogout"> logout @name</a>
                     </li>
@@ -90,7 +94,7 @@
 
         </ul>
 
-        <i class="fa" style="color:white;font-size:35px" >&#xf07a;</i>
+        <i class="fa" style="color:white;font-size:35px">&#xf07a;</i>
         <span class='badge badge-warning' id='lblCartCount'> 6 </span>
     </div>
 </nav>
