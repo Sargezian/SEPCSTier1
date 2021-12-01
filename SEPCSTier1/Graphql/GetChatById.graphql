@@ -1,0 +1,7 @@
+query ChatById($id: Long!){
+    chatById(id:$id){
+        id,
+        chatlist,
+        user_id
+    }
+}

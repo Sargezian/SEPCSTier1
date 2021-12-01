@@ -33,6 +33,7 @@ namespace SEPCSTier1
             services.AddScoped<IUserData, UserJSONData>();
             services.AddScoped<IItemData, ItemJSONData>();
             services.AddScoped<IOfferData, OfferData>();
+            services.AddScoped<IChatData, ChatData>();
             services.AddScoped<IPaymentData, PaymentData>();
             services.AddScoped<ICart, Cart>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
