@@ -1,0 +1,53 @@
+﻿@page "/Tickets"
+@inject IChatData ChatData
+@using SEPCSTier1.Data
+<h3>Tickets</h3>
+
+
+<h1>Add User Accounts</h1>
+
+
+<EditForm Model="@newChat" OnValidSubmit="@AddnewChat">
+    <DataAnnotationsValidator/> <ValidationSummary/>
+    <div class="form-group"> Besked:<br/>
+        <InputNumber @bind-Value="newChat.user_id"/> </div>
+     <div class="form-group"> Chat id:<br/>
+                <InputNumber @bind-Value="newChat.id"/> </div>
+    <p class="actions">
+        <button @onclick="AddnewChat" class="btn btn-outline-dark" type="submit">Create</button>
+    </p>
+</EditForm>
+
+
+
+
+@code {
+     
+    private IList<Models.Chat> chatToShow;
+    private IList<Models.Chat> allchatList;
+    public Models.Chat addNewChat = new Models.Chat();
+    public long user_id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        chatToShow = allchatList;
+    }
+    
+    private Models.Chat newChat = new Models.Chat();
+
+    private  void AddnewChat()
+    {
+        ChatData.AddChat(addNewChat);
+        Console.WriteLine(
+            "Det her er et besked: -->" + newChat.user_id + " Det her er et user id:-->" + newChat.user_id + "Det her er et Chat id: -->" + newChat.id );
+    }
+
+    private async Task getbyid(long id)
+    {
+        Models.Chat ChatById = chatToShow.FirstOrDefault(t => t.user_id == id);
+        chatToShow.Add(ChatById);
+        
+    }
+
+    
+}

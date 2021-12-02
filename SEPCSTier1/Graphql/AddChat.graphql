@@ -1,15 +1,14 @@
 mutation AddChat(
-    $id: Long!
+    
     $chatlist: String!
     $user_id: Long!
 
 ) {
     addChat(
-        id: $id
+     
         chatlist: $chatlist
         user_id: $user_id
     ) {
-        id
         chatlist
         user_id
     }

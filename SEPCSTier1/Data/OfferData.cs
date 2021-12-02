@@ -49,5 +49,11 @@ namespace SEPCSTier1.Data
             
             return itemss;
         }
+
+        public async void AddSaleOffer(SaleOffer saleOffer)
+        {
+            await graphqlClient.AddSaleOffer.ExecuteAsync(saleOffer.id, saleOffer.item_id,saleOffer.sale_price,saleOffer.wallet_id);
+           
+        }
     }
 }

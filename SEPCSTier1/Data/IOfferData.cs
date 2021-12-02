@@ -8,5 +8,11 @@ namespace SEPCSTier1.Data
     {
         Task<IList<SaleOffer>> GetOffers();
         Task<SaleOffer> GetOfferById(long id);
+        
+        void AddSaleOffer(SaleOffer saleOffer);
+        
+        
+        
+        
     }
 }

@@ -1,14 +1,15 @@
 ﻿@page "/AddItem"
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
+@inject IOfferData OfferData
 @using System.Security.Cryptography
 @inject IItemData IitemData
-<AuthorizeView>
+@inject NavigationManager NavigationManager
+ <!--<AuthorizeView>
     <div class="w-100 d-flex justify-content-center">
         <div class="w-50 border border-light-1 p-3 m-5">
             <form>
-                <!--
-                <div class="form-group">
+            <div class="form-group">
                     <label for="weaponType">Weapon Type</label>
                     <select class="selectpicker">
                         <option>Bayonet</option>
@@ -67,57 +68,115 @@
                     </select>
 
                 </div>-->
+@*
+<AuthorizeView> 
+<div class="form-group">             
+    <label for="weaponType">Weapon Type</label> 
+                     <br>
+                     @if (ItemList != null) 
+                    { 
+                        <RadzenDropDown @bind-Value="AddNewSaleOffer.id" Placeholder="Select Weapon" AllowClear="true" TValue="string" Style="width:300px" 
+                                         Data=@(ItemList.Select(c => c.weaponname).Distinct()) 
+                                         Change=@(args => OnChange(args, "DropDown"))/> 
+                     } 
+                 </div> 
 
-                <div class="form-group">
-                    <label for="weaponType">Weapon Type</label>
-                    <br>
 
-                    @if (ItemList != null)
-                    {
-                        <RadzenDropDown @bind-Value="pickedItem" Placeholder="Select Weapon" AllowClear="true" TValue="string" Style="width:300px"
-                                        Data=@(ItemList.Select(c => c.weaponname).Distinct())
-                                        Change=@(args => OnChange(args, "DropDown"))/>
-                    }
-                </div>  
+                 <!--Item Condition--> 
+                 <div class="form-group"> 
+                     <label for="weaponCondition">Weapon Condition</label> 
+                     <br> 
+                     <select class="selectpicker"> 
+                         <option>Factory New</option> 
+                         <option>Minimal Wear</option> 
+                         <option>Field Tested</option> 
+                         <option>Well Worn</option> 
+                         <option>Battle Scared</option> 
+                     </select> 
+                 </div> 
+
+                 <!--Price--> 
+                 <div class="form-group"> 
+                     <label for="ItemPriceInput">Price</label> 
+                     <input @bind-value="AddNewSaleOffer.sale_price" type="number" class="form-control" id="ItemPriceInput" placeholder="Set Price"> 
+                 </div>
+                 <div class="form-group"> 
+                     <label for="ItemPriceInput">Wallet</label> 
+                     <input @bind-value="AddNewSaleOffer.wallet_id" type="number" class="form-control" id="ItemPriceInput" placeholder="Set Price"> 
+                 </div>
+<div>
+<form>
+<button type="button" class="btn btn-primary btn-lg " @onclick="Submit">Submit</button> 
+                 <p class="text-danger" >@PickerErrorMessage</p> 
+                 <p class="text-danger" >@PriceErrorMessage</p> 
+             </form> 
+         </div>
+</AuthorizeView> 
+*@
+
+<div class="container rounded bg-white mt-5 mb-5">
+              <div class="row">
+                  <div class="col-md-3 border-right">
+                      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                          <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Welcome</span><span class="text-black-50">To CSGO Trading</span><span> </span>
+                      </div>
+                  </div>
+                  <div class="col-md-5 border-right">
+                      <div class="p-3 py-5">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                              <h4 class="text-right">Profile Settings</h4>
+                          </div>
+                          <EditForm Model="@AddNewSaleOffer"  OnValidSubmit="@AddSaleOffers">
+                             <DataAnnotationsValidator/> <ValidationSummary/>
+                              <div class="row mt-2">
+                                  <h3>Create New Sale Offer</h3>
+
+                                  <div class="col-md-12">
+                                      <label class="labels">ItemID</label><input type="number" class="form-control" placeholder="Password" @bind-value="AddNewSaleOffer.item_id">
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label class="labels">Price</label><input type="number" class="form-control" placeholder="Password" @bind-value="AddNewSaleOffer.sale_price">
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label class="labels">WalletID</label><input type="number" class="form-control" placeholder="Password" @bind-value="AddNewSaleOffer.wallet_id">
+                                  </div>
+                                  
+                              </div>
+                             
+                                  <div class="row mt-3">
+                                  </div>
+                                  <p class="actions">
+                                      <button class="btn btn-outline-dark" @onclick="AddSaleOffers" type="submit">Create</button>
+                                  </p>
+                              
+                          </EditForm>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+          
+          @layout EmptyLayout  
+            
+            
+            
             
 
-                <!--Item Condition-->
-                <div class="form-group">
-                    <label for="weaponCondition">Weapon Condition</label>
-                    <br>
-                    <select class="selectpicker">
-                        <option>Factory New</option>
-                        <option>Minimal Wear</option>
-                        <option>Field Tested</option>
-                        <option>Well Worn</option>
-                        <option>Battle Scared</option>
-                    </select>
-                </div>
-
-                <!--Price-->
-                <div class="form-group">
-                    <label for="ItemPriceInput">Price</label>
-                    <input @bind-value="intValue" type="number" class="form-control" id="ItemPriceInput" placeholder="Set Price">
-                </div>
-
-            
-            
-                <button type="button" class="btn btn-primary btn-lg " @onclick="Submit">Submit</button>
-                <p class="text-danger" >@PickerErrorMessage</p>
-                <p class="text-danger" >@PriceErrorMessage</p>
-            </form>
-        </div>
-    </div>
-</AuthorizeView>
-
-@code {
+            @code {
+                
     private int intValue;
     private string PickerErrorMessage = "";
     private string PriceErrorMessage = "";
     private string pickedItem;
     private IList<Itemss> ItemList;
     private IList<Itemss> Items;
-
+    public SaleOffer AddNewSaleOffer = new SaleOffer();
+                
+                
+                
+                
+                
+                
     protected override async Task OnInitializedAsync()
     {
         Items = await IitemData.GetItems();
@@ -159,6 +218,9 @@
         }
         
     }
+                
+                
+                
 
     Itemss findEqualItem(string itemName)
     {
@@ -179,6 +241,16 @@
             throw new ArgumentNullException(paramName: nameof(intValue), message: "Please Pick a Price");
         }
     }
+                private void AddSaleOffers()
+                {
+                    //sale id er altid nul, ved sku ikke hvorfor, tror det derfor den ikke blive uploaded til database
+                   OfferData.AddSaleOffer(AddNewSaleOffer);
+                    NavigationManager.NavigateTo("/Shop");
+                    Console.WriteLine("hej");
+                    Console.WriteLine("Det her er sale id --->" + AddNewSaleOffer.id + "Det her er item id --->" + AddNewSaleOffer.item_id + "Det her er saleprice --->"+ AddNewSaleOffer.sale_price + "Det her er wallet id --->"+ AddNewSaleOffer.wallet_id);
+                    
+                    
+                }
 
     
 }

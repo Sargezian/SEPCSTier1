@@ -1,1 +1,19 @@
-mutation AddSaleOffer($name: String!,$cardnumber: String!,$expirationdate: String!,$securitycode: String!) {addPayment(name: $name,cardnumber: $cardnumber,expirationdate: $expirationdate,securitycode: $securitycode) {name,cardnumber,expirationdate,securitycode}}
+mutation AddSaleOffer(
+    $id: Long!
+    $item_id: Long!
+    $sale_price: Int!
+    $wallet_id: Long!
+
+) {
+    addSaleOffer(
+        id: $id
+        item_id: $item_id
+        sale_price: $sale_price
+        wallet_id: $wallet_id
+    ) {
+        id
+        item_id
+        sale_price
+        wallet_id
+    }
+}
