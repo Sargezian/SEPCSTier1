@@ -1,10 +1,16 @@
 ﻿@page "/Product/{offer_id:long}/{item_id:long}"
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using System.Threading
 
 @inject IItemData ItemData
 @inject IOfferData IofferData
 @inject ICart cart
+@inject IShoppingCartData ShoppingCartData
+@inject ProtectedSessionStorage ProtectedSessionStore
+@inject NavigationManager NavigationManager
+@inject IToastService toastService
 
 @if (product == null)
 {
@@ -31,28 +37,31 @@ else
             <p class="fw-normal">Description</p>
 
             <div>
-                <button type="button" @onclick="addToCart" class="btn btn-primary">Læg i kurv</button>
+                <button type="button" @onclick="@(() => { toastService.ShowInfo("dsds");  addToCart();})" class="btn btn-primary">Læg i kurv</button>
                 <button type="button" class="btn btn-dark">Forslå pris</button>
             </div>
         </div>
     </div>
     
     <div class="row my-5">
-            <div class="col-lg-6 col-xl-4 offset-lg-3 offset-xl-4">
-                <RadzenCard class="m-3">
-                    <h3 class="h5">Contact</h3>
-                    <div class="d-flex flex-row">
-                        <RadzenImage Path="@product.weaponURL" Class="rounded-circle float-left mr-3" Style="width: 100px; height: 100px;" />
-                        <div>
-                            <div>Seller</div>
-                            <b>Bente bendt</b>
-                            <div class="mt-3">Reps</div>
-                            <b>2 plus reps</b>
-                        </div>
+        <div class="col-lg-6 col-xl-4 offset-lg-3 offset-xl-4">
+            <RadzenCard class="m-3">
+                <h3 class="h5">Contact</h3>
+                <div class="d-flex flex-row">
+                    <RadzenImage Path="@product.weaponURL" Class="rounded-circle float-left mr-3" Style="width: 100px; height: 100px;" />
+                    <div>
+                        <div>Seller</div>
+                        <b>Bente bendt</b>
+                        <div class="mt-3">Reps</div>
+                        <b>2 plus reps</b>
                     </div>
-                </RadzenCard>
-            </div>
+                </div>
+            </RadzenCard>
         </div>
+    </div>
+    
+    
+    
 }
 
 
@@ -63,6 +72,8 @@ else
     public long item_id { get; set; }
     [Parameter]
     public long offer_id { get; set; }
+    
+    public long id { get; set; }
 
     private Itemss item;
     private SaleOffer offer;
@@ -85,12 +96,34 @@ else
                 weaponURL = item.weaponURL
             };
         }
+        var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
+        id = protectedBrowserStorageResultId.Value;
+        
     }
 
-    public void addToCart()
+    public void showNoti()
     {
-        Console.WriteLine("Product added to cart " +product.weaponname +" Price: "+product.sale_price);
-        //cart.addProduct(product);
+        
+    }
+
+    public async void addToCart()
+    {
+
+        var ShoppingCart = new ShoppingCarts()
+        {
+            saleOfferId = offer_id,
+            userId = id
+        };
+
+        
+        
+        ShoppingCartData.AddShoppingCart(ShoppingCart);
+        
+      
+        
+        NavigationManager.NavigateTo("/Cart",true);
+        
+        
     }
 
 }

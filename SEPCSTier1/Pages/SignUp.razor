@@ -1,10 +1,14 @@
 @page "/SignUp"
 @using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.SignalR
 @using SEPCSTier1.Data
 @using SEPCSTier1.Models
 @inject IUserData UserData
 @inject IPaymentData PaymentData
 @inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
+@inject AuthenticationStateProvider AuthenticationStateProvider
 <h3>SignUp</h3>
 
 
@@ -50,12 +54,24 @@
 @code {
 
     public User newUserAccount = new User();
-    
-    
-    private void AddUserAccount()
+
+    protected async override Task OnInitializedAsync()
     {
-        UserData.AddUser(newUserAccount);
-        NavigationManager.NavigateTo("/Login");
+        
+       
+    }
+
+    private async void AddUserAccount()
+    {
+        var addUser = await UserData.AddUser(newUserAccount);
+        
+        var id = await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).GetId(addUser.username,addUser.password);
+        
+        await ProtectedSessionStore.SetAsync("SID", id);
+        
+
+        Console.WriteLine("userid: " + id);
+        NavigationManager.NavigateTo("/Payment");
     }
 
 

@@ -4,6 +4,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject ProtectedSessionStorage ProtectedSessionStore
+@inject IShoppingCartData ShoppingCartData
 
 @*
 <RadzenCard Style="height: 100px">
@@ -62,25 +63,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="Chat">Chat</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="Admin">Admin</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="Wallet">Wallet</a>
-            </li>
-
             <AuthorizeView>
+               
+                
                 <NotAuthorized>
                     <li class="nav-item">
                         <a class="nav-link " href="Login">Login</a>
                     </li>
                 </NotAuthorized>
+                
                 <Authorized>
+                    
+                     <li class="nav-item">
+                                        <a class="nav-link" href="Admin">Admin</a>
+                                    </li>
+                    
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="Wallet">Wallet</a>
+                                    </li>
+                    
 
                     <li class="nav-item">
-                        <a class="nav-link " @onclick="PerformLogout"> Logout  @name</a>
+                        <a class="nav-link " @onclick="PerformLogout"> Logout @name</a>
                     </li>
 
 
@@ -88,14 +92,21 @@
 
             </AuthorizeView>
 
+          
+            
+            
         </ul>
+        
+       
        
         <div @onclick="@(() => NavigateToCart())">
             
-        <i class="fa" style="color:white;font-size:35px"  >&#xf07a;</i>
-           <span class='badge badge-warning' id='lblCartCount'> 6 </span>
+            <i class="fa" style="color:white;font-size:35px"  >&#xf07a;</i>
+            <span class='badge badge-warning' id='lblCartCount'> @count </span>
         </div>
-          
+        
+        
+        
     </div>
 </nav>
 
@@ -104,12 +115,20 @@
 
     public string name { get; set; }
 
+    public long id { get; set; }
+
+    public long count { get; set; }
+
+    
 
     protected async override Task OnInitializedAsync()
     {
         var protectedBrowserStorageResult = await ProtectedSessionStore.GetAsync<string>("username");
-
+        var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
+        id = protectedBrowserStorageResultId.Value;
+        var cartCountById = await ShoppingCartData.GetCartCountById(id);
         name = protectedBrowserStorageResult.Value;
+        count = cartCountById;
     }
 
 
@@ -118,7 +137,7 @@
         try
         {
             ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
-
+            await ProtectedSessionStore.DeleteAsync("id");
             NavigationManager.NavigateTo("/shop", true);
         }
         catch (Exception e)

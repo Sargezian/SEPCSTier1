@@ -1,8 +1,10 @@
 @page "/Admin"
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject IUserData UserData
 @inject NavigationManager NavigationManager
+
 
 <h1>User Accounts</h1>
 
@@ -68,6 +70,11 @@ else
     {
         allUserAccounts = await UserData.GetUsers();
         usersAccountsToShow = allUserAccounts;
+
+      
+        
+        
+        
     }
     
     private User newUserAccount = new User();

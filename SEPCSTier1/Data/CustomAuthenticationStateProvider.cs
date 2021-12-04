@@ -42,6 +42,13 @@ namespace SEPCSTier1.Data
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
 
+        public async Task<long> GetId(string username, string password)
+        {
+            var user = await userService.ValidateUser(username, password);
+
+            return user.id;
+        }
+
         public async Task ValidateLogin(string username, string password)
         {
             Console.WriteLine("Validating log in");

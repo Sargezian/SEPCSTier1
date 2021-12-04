@@ -1,0 +1,7 @@
+﻿mutation AddWallet($price: Int!, $payment_id: Long!) {
+    addWallet(price: $price, payment_id: $payment_id) {
+        id
+        price
+        payment_id
+    }
+}

@@ -51,6 +51,7 @@ namespace SEPCSTier1.Data
 
                 User user = new User
                 {
+                    id = result.Data.ValidateUser.Id,
                     username = result.Data.ValidateUser.Username,
                     password = result.Data.ValidateUser.Password
                 };
@@ -59,9 +60,11 @@ namespace SEPCSTier1.Data
                 
         }
 
-        public async void AddUser(User user)
+        public async Task<User> AddUser(User user)
         {
-            await graphqlClient.AddUser.ExecuteAsync(user.username, user.password);
+           var result = await graphqlClient.AddUser.ExecuteAsync(user.username, user.password);
+
+           return user;
         }
         
         public async Task<User> GetUserByID(long Id)

@@ -1,0 +1,3 @@
+﻿query GetCartById($id:Long!){
+    cartCountById(id:$id)
+}

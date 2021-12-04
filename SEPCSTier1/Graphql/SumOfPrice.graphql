@@ -1,0 +1,3 @@
+﻿query GetSumOfPrice($id:Long!) {
+    sumOfPriceById(id:$id)
+}

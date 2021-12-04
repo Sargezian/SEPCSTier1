@@ -96,6 +96,20 @@ using Radzen.Blazor;
 #line hidden
 #nullable disable
 #nullable restore
+#line 13 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+using Blazored.Toast;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 14 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\_Imports.razor"
+using Blazored.Toast.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 2 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
 using Microsoft.AspNetCore.Components;
 
@@ -104,13 +118,27 @@ using Microsoft.AspNetCore.Components;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
-using SEPCSTier1.Data;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+using Microsoft.AspNetCore.SignalR;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+using SEPCSTier1.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
 using SEPCSTier1.Models;
 
 #line default
@@ -126,16 +154,28 @@ using SEPCSTier1.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 50 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+#line 54 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
        
 
     public User newUserAccount = new User();
-    
-    
-    private void AddUserAccount()
+
+    protected async override Task OnInitializedAsync()
     {
-        UserData.AddUser(newUserAccount);
-        NavigationManager.NavigateTo("/Login");
+        
+       
+    }
+
+    private async void AddUserAccount()
+    {
+        var addUser = await UserData.AddUser(newUserAccount);
+        
+        var id = await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).GetId(addUser.username,addUser.password);
+        
+        await ProtectedSessionStore.SetAsync("SID", id);
+        
+
+        Console.WriteLine("userid: " + id);
+        NavigationManager.NavigateTo("/Payment");
     }
 
 
@@ -143,6 +183,8 @@ using SEPCSTier1.Models;
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ProtectedSessionStorage ProtectedSessionStore { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IPaymentData PaymentData { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserData UserData { get; set; }

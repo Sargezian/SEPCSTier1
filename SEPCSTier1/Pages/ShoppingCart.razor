@@ -1,7 +1,11 @@
 @page "/Cart"
 @using SEPCSTier1.Models
+@using SEPCSTier1.Data
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
-@inject ICart cart
+@inject IShoppingCartData ShoppingCartData
+@inject IToastService toastService
+@inject ProtectedSessionStorage ProtectedSessionStore
 
 <h3>ShoppingCart</h3>
 
@@ -15,38 +19,44 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Description</th>
-                    <th>Quantity</th>
+                    <th>SaleOfferId</th>
+                    <th>ItemID</th>
+                    <th>SkinName</th>
                     <th>Price</th>
-                    <th>Remove</th>
                 </tr>
                 </thead>
 
 
                 <tbody class="text-gray-700">
 
-                @foreach (Itemss i in items)
+                @foreach (var shoppingCart in shoppingCarts)
                 {
                     <tr>
-                        <td class="w-1/3 text-left py-3 px-4">@i.weaponname</td>
-                        <td class="w-1/3 text-left py-3 px-4">Quantity</td>
-                        <td class="w-1/3 text-left py-3 px-4">0</td>
-                        <td><button @onclick="() => removeProduct(i)"> X </button></td>
+                        <td class="w-1/3 text-left py-3 px-4">@shoppingCart.sale_offer_id</td>
+                        <td class="w-1/3 text-left py-3 px-4">@shoppingCart.item_id</td>
+                        <td class="w-1/3 text-left py-3 px-4">@shoppingCart.weaponname</td>
+                        <td class="w-1/3 text-left py-3 px-4">@shoppingCart.sale_price</td>
+                        
+
                     </tr>
+                   
                 }
 
                 <thead>
                 <tr>
                     <th>Total Price</th>
                     <th></th>
-                    <th>100.00 €</th>
+                    <th>@totalPrice €</th>
+                    
+                    
                 </tr>
-                </thead>
-
+                </thead> 
+ 
                 </tbody>
             </table>
-
-
+            
+              <button type="button" class="btn btn-lg btn-primary" @onclick="@(() => {  toastService.ShowSuccess("test"); })">Buy</button>
+             
         </div>
     </div>
 </div>
@@ -54,22 +64,20 @@
 
 @code {
 
-    private IList<Itemss> items;
+    private IList<ShowShoppingCart> shoppingCarts = new List<ShowShoppingCart>() ;
+    public long id { get; set; }
+    public long totalPrice { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        items = cart.getCart();
+       var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
+        id = protectedBrowserStorageResultId.Value;
+        shoppingCarts = await ShoppingCartData.GetShoppingCartById(id);
+        totalPrice = await ShoppingCartData.GetTotalPrice(id);
 
-        foreach (var VARIABLE in items)
-        {
-            Console.WriteLine(VARIABLE);
-        }
+
     }
 
-    public void removeProduct(Itemss i)
-    {
-        Console.WriteLine(i.weaponname);
-        cart.removeProduct(i);
-    }
+    
 
 }

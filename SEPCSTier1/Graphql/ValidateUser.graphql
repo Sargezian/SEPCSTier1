@@ -1,5 +1,6 @@
 query ValidateUser($username: String!, $password: String!) {
     validateUser(username: $username, password: $password) {
+        id
         username
         password
     }

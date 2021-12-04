@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "SEPCSTier1/1.0.0": {
         "dependencies": {
+          "Blazored.Toast": "3.2.2",
           "Microsoft.Extensions.DependencyInjection": "5.0.0",
           "Microsoft.Extensions.Http": "5.0.0",
           "Radzen.Blazor": "3.12.1",
@@ -327,6 +328,22 @@
         },
         "compile": {
           "SEPCSTier1.dll": {}
+        }
+      },
+      "Blazored.Toast/3.2.2": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "5.0.0",
+          "Microsoft.AspNetCore.Components.Web": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Blazored.Toast.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Blazored.Toast.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authorization/5.0.0": {
@@ -2515,6 +2532,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Blazored.Toast/3.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6RiWHpgIgJJFWZHnmSZb/6IBP6LS6F5brLDGTBls/B4bTf0SzPsRoTUu2g6y7sY59/PFC1XeKbwXHys9PCe6lw==",
+      "path": "blazored.toast/3.2.2",
+      "hashPath": "blazored.toast.3.2.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authorization/5.0.0": {
       "type": "package",

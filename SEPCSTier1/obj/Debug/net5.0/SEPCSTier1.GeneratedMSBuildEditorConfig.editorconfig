@@ -15,7 +15,19 @@ build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = SEPCSTier1
 build_property.ProjectDir = C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\
 
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/AddChat.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
 [C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/AddPayment.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/AddSaleOffer.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/AddShoppingCart.graphql]
 build_metadata.AdditionalFiles.GraphQL = true
 build_metadata.AdditionalFiles.GraphQLConfig = 
 
@@ -23,7 +35,47 @@ build_metadata.AdditionalFiles.GraphQLConfig =
 build_metadata.AdditionalFiles.GraphQL = true
 build_metadata.AdditionalFiles.GraphQLConfig = 
 
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/AddWallet.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetCartById.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetChat.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetChatById.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
 [C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetItems.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetPaymentByUserId.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetSaleOffer.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetSaleOfferById.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetShoppingCart.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetTotalPriceById.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/GetUserById.graphql]
 build_metadata.AdditionalFiles.GraphQL = true
 build_metadata.AdditionalFiles.GraphQLConfig = 
 
@@ -44,6 +96,10 @@ build_metadata.AdditionalFiles.GraphQL = true
 build_metadata.AdditionalFiles.GraphQLConfig = 
 
 [C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/schema.graphql]
+build_metadata.AdditionalFiles.GraphQL = true
+build_metadata.AdditionalFiles.GraphQLConfig = 
+
+[C:/Users/abdul/RiderProjects/SEPCSTier1/SEPCSTier1/Graphql/SumOfPrice.graphql]
 build_metadata.AdditionalFiles.GraphQL = true
 build_metadata.AdditionalFiles.GraphQLConfig = 
 

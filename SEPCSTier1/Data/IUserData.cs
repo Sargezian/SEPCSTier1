@@ -6,7 +6,7 @@ namespace SEPCSTier1.Data
 {
     public interface IUserData
     {
-        void AddUser(User user);
+        Task<User> AddUser(User user);
         
         void RemoveAccount(long UserId);
         

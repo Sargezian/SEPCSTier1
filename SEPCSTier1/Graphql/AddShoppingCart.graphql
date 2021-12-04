@@ -1,0 +1,5 @@
+﻿mutation AddShoppingCart($saleofferid:Long!,$userid:Long!){
+    addShoppingCart(saleOfferId:$saleofferid,userId:$userid){
+        saleOfferId,userId
+    }
+}

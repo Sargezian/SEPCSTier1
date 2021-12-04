@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -33,10 +34,12 @@ namespace SEPCSTier1
             services.AddScoped<IUserData, UserJSONData>();
             services.AddScoped<IItemData, ItemJSONData>();
             services.AddScoped<IOfferData, OfferData>();
-            services.AddScoped<IChatData, ChatData>();
             services.AddScoped<IPaymentData, PaymentData>();
             services.AddScoped<ICart, Cart>();
+            services.AddScoped<IShoppingCartData, ShoppingCartData>();
+            services.AddScoped<IWalletData, WalletData>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            services.AddBlazoredToast();
             services
                 .AddGraphqlClient()
                 .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:5001/graphql/"));

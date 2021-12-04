@@ -1,0 +1,10 @@
+﻿query GetShoppingCart($id:Long!){
+    shoppingCartById(id:$id){
+        sale_offer_id,
+        item_id,
+        weaponname,
+        sale_price
+
+
+    }
+}

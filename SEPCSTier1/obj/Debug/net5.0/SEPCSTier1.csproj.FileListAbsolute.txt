@@ -223,6 +223,8 @@ C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pa
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\UserHomePage.razor.rz.scp.css
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\bin\Debug\net5.0\StrawberryShake.Tools.Configuration.dll
 C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\NavBar.razor.rz.scp.css
-C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\Chat.razor.g.cs
-C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\Chat.razor.g.cs
-C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\scopedcss\Pages\Chat.razor.rz.scp.css
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\bin\Debug\net5.0\Blazored.Toast.dll
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\Payments.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\Payments.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\RazorDeclaration\Pages\InsertWallet.razor.g.cs
+C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\obj\Debug\net5.0\Razor\Pages\InsertWallet.razor.g.cs

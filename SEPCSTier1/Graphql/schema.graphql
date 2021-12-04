@@ -14,12 +14,20 @@ type Query {
   validateUser(username: String password: String): User
   offers(where: SaleOfferFilterInput order: [SaleOfferSortInput!]): [SaleOffer]
   offerById(id: Long!): SaleOffer
+  cartCountById(id: Long!): Long!
+  shoppingCartById(id: Long!): [ShowShoppingCart]
+  totalPriceById(id: Long!): Long!
+  paymentByUserId(id: Long!): Payment
+  sumOfPriceById(id: Long!): Long!
 }
 
 type Mutation {
   addUser(username: String password: String): User
+  addShoppingCart(saleOfferId: Long! userId: Long!): ShopppingCart
   deleteUser(id: Long!): Long!
-  addPayment(name: String cardnumber: String expirationdate: String securitycode: String): Payment
+  addPayment(name: String cardnumber: String expirationdate: String securitycode: String user_id: Long!): Payment
+  addWallet(price: Int! payment_id: Long!): Wallet
+  updatePrice(price: Int! id: Long!): Wallet
 }
 
 type Subscription {
@@ -162,10 +170,29 @@ type SaleOffer {
   wallet_id: Long!
 }
 
+type ShowShoppingCart {
+  sale_offer_id: Long!
+  item_id: Long!
+  weaponname: String
+  sale_price: Long!
+}
+
 type Payment {
   id: Int!
   name: String
   cardnumber: String
   expirationdate: String
   securitycode: String
+  user_id: Long!
+}
+
+type ShopppingCart {
+  saleOfferId: Long!
+  userId: Long!
+}
+
+type Wallet {
+  id: Long!
+  price: Int!
+  payment_id: Long!
 }

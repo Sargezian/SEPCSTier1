@@ -4,7 +4,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject ProtectedSessionStorage ProtectedSessionStore
-
+@inject IUserData UserData
 
 
 
@@ -53,7 +53,7 @@
 @code {
 
 
-    public string username { get; set; }
+    public string username;
     private string password;
     private string errorMessage;
     
@@ -65,10 +65,15 @@
         try
         {
             await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
-           await ProtectedSessionStore.SetAsync("username", username);
+            var id = await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).GetId(username,password);
+
+            await ProtectedSessionStore.SetAsync("id", id);
+            await ProtectedSessionStore.SetAsync("username", username);
+            
+           
             username = "";
             password = "";
-            NavigationManager.NavigateTo("/Admin");
+            NavigationManager.NavigateTo("/Shop");
          
         }
         catch (Exception e)

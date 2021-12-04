@@ -1,0 +1,11 @@
+﻿query GetPaymentByUserId($id: Long!) {
+    paymentByUserId(id: $id) {
+        id
+        name
+        cardnumber
+        expirationdate
+        securitycode,
+        user_id
+
+    }
+}
