@@ -4,9 +4,10 @@
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject IUserData UserData
 @inject NavigationManager NavigationManager
-
+@attribute [Authorize(Policy = "SecurityLevel4")]
 
 <h1>User Accounts</h1>
+         
 
 @if (usersAccountsToShow == null)
 {
@@ -79,7 +80,7 @@ else
     
     private User newUserAccount = new User();
 
-    private  void AddnewUserAccount()
+    private void AddnewUserAccount()
     {
         UserData.AddUser(newUserAccount);
         NavigationManager.NavigateTo("/Admin",true);

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.Toast;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -43,8 +45,27 @@ namespace SEPCSTier1
             services
                 .AddGraphqlClient()
                 .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:5001/graphql/"));
-        }
 
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("SecurityLevel4", a => a.RequireAuthenticatedUser().RequireClaim("level", "4"));
+
+                options.AddPolicy("SecurityLevel2", a => a.RequireAuthenticatedUser().RequireAssertion(context =>
+                {
+                    Claim levelClaim = context.User.FindFirst(claim => claim.Type.Equals("Level"));
+                    if (levelClaim == null) return false;
+                    return int.Parse(levelClaim.Value) >= 2;
+
+                }));
+            });
+        }
+        
+        private void SecurityLevel4(AuthorizationPolicyBuilder a)
+        {
+            a.RequireAuthenticatedUser().RequireClaim("SecurityLevel4", "4");
+        }
+        
         //TESTY
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

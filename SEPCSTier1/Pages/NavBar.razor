@@ -52,7 +52,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
+   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
                 <a class="nav-link" href="Shop">Home <span class="sr-only">(current)</span></a>
@@ -63,40 +65,39 @@
             <li class="nav-item">
                 <a class="nav-link" href="Chat">Chat</a>
             </li>
-            <AuthorizeView>
+           
                
-                
+                   <AuthorizeView>
                 <NotAuthorized>
                     <li class="nav-item">
                         <a class="nav-link " href="Login">Login</a>
                     </li>
                 </NotAuthorized>
-                
-                <Authorized>
-                    
-                     <li class="nav-item">
-                                        <a class="nav-link" href="Admin">Admin</a>
-                                    </li>
-                    
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="Wallet">Wallet</a>
-                                    </li>
-                    
+               </AuthorizeView> 
+            
 
+                    <AuthorizeView Policy="SecurityLevel4">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="Admin">Admin</a>
+                        </li>
+                    </AuthorizeView> 
+            
+            
+            <li class="nav-item">
+                        <a class="nav-link" href="Wallet">Wallet</a>
+                    </li>
+
+            <AuthorizeView>
+            <Authorized>
                     <li class="nav-item">
                         <a class="nav-link " @onclick="PerformLogout"> Logout @name</a>
                     </li>
-
-
-                </Authorized>
-
-            </AuthorizeView>
-
-          
-            
-            
+  </Authorized>
+                     </AuthorizeView> 
         </ul>
         
+      
        
        
         <div @onclick="@(() => NavigateToCart())">

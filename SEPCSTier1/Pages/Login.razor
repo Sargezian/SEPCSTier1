@@ -7,49 +7,51 @@
 @inject IUserData UserData
 
 
-
      <style>
      body {background-image: url(https://images.unsplash.com/photo-1487088678257-3a541e6e3922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1674&q=80);
      }
      </style>
      
-         <div class="login-box">
-             <h2>Login</h2>
-             <form>
-                 <div class="user-box">
-                     <input type="text" name="" required="" @bind-value="username">
-                     <label>Username</label>
-                 </div>
-                 <div class="user-box">
-                     <input type="password" name="" required="" @bind-value="password">
-                     <label>Password</label>
-                 </div>
-                 
-                
-                     <div style="color:red">@errorMessage</div>
-                 
-                 
-                 
-                 <a  @onclick="PerformLogin">
-                     <span></span>
-                     <span></span>
-                     <span></span>
-                     <span></span>
-                     Submit
-                 </a>
-                 
-                 <a style="float: right"  @onclick="PerformSignUp">
-                     <span></span>
-                     <span></span>
-                     <span></span>
-                     <span></span>
-                     Sign up
-                 </a>
-             </form>
-         </div>
 
 
-    @layout EmptyLayout
+                        <div class="login-box">
+                            <h2>Login</h2>
+                            <form>
+                                      <AuthorizeView>
+                                                                <NotAuthorized>
+                                <div class="user-box">
+                                    <input type="text" name="" required="" @bind-value="username">
+                                    <label>Username</label>
+                                </div>
+                                <div class="user-box">
+                                    <input type="password" name="" required="" @bind-value="password">
+                                    <label>Password</label>
+                                </div>
+
+
+                                <div style="color:red">@errorMessage</div>
+            
+                                <a @onclick="PerformLogin">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    Submit
+                                </a>
+              </NotAuthorized>
+                                                </AuthorizeView>
+            
+                                <a style="float: right" @onclick="PerformSignUp">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    Sign up
+                                </a>
+                            </form>
+                        </div>
+                        
+                        @layout EmptyLayout
 @code {
 
 
@@ -70,7 +72,7 @@
             await ProtectedSessionStore.SetAsync("id", id);
             await ProtectedSessionStore.SetAsync("username", username);
             
-           
+            
             username = "";
             password = "";
             NavigationManager.NavigateTo("/Shop");
