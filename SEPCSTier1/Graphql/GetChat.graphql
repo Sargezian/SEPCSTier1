@@ -1,7 +1,5 @@
 query GetChat {
     chat {
-        id
-        chatlist
         user_id
     }
 }

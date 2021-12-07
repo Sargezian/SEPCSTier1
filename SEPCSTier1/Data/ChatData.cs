@@ -23,8 +23,7 @@ namespace SEPCSTier1.Data
 
             chatList = result.Data.Chat.Select(chat => new Chat
             {
-                id = chat.Id,
-                Chatlist = chat.Chatlist,
+               // id = chat.Id,
                 user_id = chat.User_id
             }).ToList();
 
@@ -34,22 +33,13 @@ namespace SEPCSTier1.Data
 
         public async Task<Chat> GetChatByID(long Id)
         {
-            var result = await graphqlClient.ChatById.ExecuteAsync(Id);
-    
-            Chat chat = new Chat
-            {
-                id = result.Data.ChatById.Id,
-                Chatlist = result.Data.ChatById.Chatlist,
-                user_id = result.Data.ChatById.User_id
-        
-            };
-            return chat;
+            return null;
         }
 
 
         public async void AddChat(Chat chat)
         {
-            await graphqlClient.AddChat.ExecuteAsync(chat.id,chat.Chatlist,chat.user_id);
+            
         }
 
     }

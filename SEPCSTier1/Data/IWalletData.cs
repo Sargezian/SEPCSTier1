@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using SEPCSTier1.Models;
 
 namespace SEPCSTier1.Data
 {
@@ -7,6 +8,9 @@ namespace SEPCSTier1.Data
         
         
         Task<long> SumOfPrice(long id);
-        
+        Task<Wallet> UpdateWallet(Wallet wallet);
+
+        Task<Wallet> AddWallet(Wallet wallet);
+
     }
 }

@@ -154,10 +154,12 @@ using SEPCSTier1.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 54 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
+#line 103 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\SignUp.razor"
        
 
     public User newUserAccount = new User();
+    private Payment newPaymentAccount = new Payment();
+    private string errorMessage;
 
     protected async override Task OnInitializedAsync()
     {
@@ -174,9 +176,27 @@ using SEPCSTier1.Models;
         await ProtectedSessionStore.SetAsync("SID", id);
         
 
-        Console.WriteLine("userid: " + id);
-        NavigationManager.NavigateTo("/Payment");
+     
     }
+
+   
+    
+    
+    
+    
+    
+    private async void AddnewPaymentAccount()
+    {
+       
+          
+            Payment payment = await PaymentData.AddPayment(new Payment(newPaymentAccount.name, newPaymentAccount.cardnumber, newPaymentAccount.expirationdate, newPaymentAccount.securitycode));
+             NavigationManager.NavigateTo("/login");
+        
+      
+      
+        
+    }
+
 
 
 

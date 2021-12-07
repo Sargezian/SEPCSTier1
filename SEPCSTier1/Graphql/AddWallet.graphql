@@ -1,7 +1,7 @@
-﻿mutation AddWallet($price: Int!, $payment_id: Long!) {
-    addWallet(price: $price, payment_id: $payment_id) {
+﻿mutation AddWallet($balance: Int!, $user_id: Long!) {
+    addWallet(balance: $balance, user_id: $user_id) {
         id
-        price
-        payment_id
+        balance
+        user_id
     }
 }

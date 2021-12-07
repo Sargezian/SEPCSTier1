@@ -11,7 +11,6 @@
 
 @if (payment != null)
 {
-    
     <table class="table">
         <thead>
         <tr>
@@ -36,10 +35,17 @@
                 @* </button> *@
             </td>
 
+            <td>
+                <button >
+                    <i class="oi oi-pencil" style="color:#1b6ec2"/>
+                </button>
+            </td>
+
         </tr>
 
         </tbody>
     </table>
+
 
     <div class="col">
 
@@ -48,8 +54,8 @@
             <div class="card-body">
                 <h5 class="card-title">Wallet</h5>
                 <p class="card-text">@totalPrice €</p>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter price">
-                <a href="#" class="btn btn-primary">Insert Money</a>
+                <input type="number" class="form-control" @bind-value="_wallet.balance" placeholder="Enter price">
+                <a class="btn btn-primary" @onclick="@(() => UpdateWallet())">Insert Money</a>
             </div>
         </div>
 
@@ -65,31 +71,45 @@
     public long id { get; set; }
     private Payment payment;
     public long totalPrice { get; set; }
+    public long PaymentId { get; set; }
+
+    public Models.Wallet _wallet = new Models.Wallet();
 
 
     protected async override Task OnInitializedAsync()
     {
-        
-            var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
-            id = protectedBrowserStorageResultId.Value;
         try
         {
+            
+            var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
+            id = protectedBrowserStorageResultId.Value;
+
             payment = await PaymentData.GetPaymentByUserId(id);
             totalPrice = await WalletData.SumOfPrice(id);
-
-
+            await ProtectedSessionStore.SetAsync("wi", totalPrice);
+            Console.WriteLine("price " + totalPrice);
+            var result = await ProtectedSessionStore.GetAsync<long>("P");
+            PaymentId = result.Value;
         }
         catch (Exception e)
         {
-            
+            totalPrice = 0;
             throw new Exception("test");
         }
-      
-           
-        
-       
     }
 
-   
+
+    public async void UpdateWallet()
+    {
+        await WalletData.UpdateWallet(new Models.Wallet((int) (_wallet.balance + totalPrice),id));
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+
+        
+    }
+
+
+
+
+
 
 }

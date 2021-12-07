@@ -3,9 +3,20 @@
     public class Wallet
     {
         public long id { get; set; }
+        public int balance { get; set; }
+        
+        public long creditcard_id { get; set; }
+        public long user_id { get; set; }
 
-        public int price { get; set; }
 
-        public long payment_id { get; set; }
+        public Wallet()
+        {
+        }
+
+        public Wallet(int balance, long userId)
+        {
+            this.balance = balance;
+            user_id = userId;
+        }
     }
 }

@@ -1,0 +1,10 @@
+﻿query PaymentByName($name:String!) {
+    paymentByName(name: $name) {
+        id
+        name
+        cardnumber
+        expirationdate
+        securitycode
+       
+    }
+}

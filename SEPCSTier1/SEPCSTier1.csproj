@@ -21,6 +21,7 @@
 
     <ItemGroup>
       <AdditionalFiles Remove="Graphql\AddPayment.graphql" />
+      <AdditionalFiles Remove="Graphql\AddSaleOffer.graphql" />
     </ItemGroup>
 
 </Project>

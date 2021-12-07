@@ -1,17 +1,3 @@
-mutation AddChat(
-    
-    $chatlist: String!
-    $user_id: Long!
 
-) {
-    addChat(
-     
-        chatlist: $chatlist
-        user_id: $user_id
-    ) {
-        chatlist
-        user_id
-    }
-}
 
 

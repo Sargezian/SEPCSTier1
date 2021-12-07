@@ -24,8 +24,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <EditForm Model="@newUserAccount"  OnValidSubmit="@AddUserAccount">
-                   <DataAnnotationsValidator/> <ValidationSummary/>
+                
                     <div class="row mt-2">
                         <h3>Create UserAccount</h3>
                         <div class="col-md-12">
@@ -36,13 +35,63 @@
                         </div>
                     </div>
                    
-                        <div class="row mt-3">
-                        </div>
-                        <p class="actions">
-                            <button class="btn btn-outline-dark" type="submit">Create</button>
-                        </p>
+                    <div class="row mt-3">
+                    </div>
+                    
                    
-                </EditForm>
+               
+                
+                <div class="container-md">
+                    <div class="row">
+                
+                        
+                            <div class="col">
+                
+                                <h1> Payment Information</h1>
+                                <div class="form-group">
+                                    <label for="inputAddress">Name</label>
+                                    <input class="form-control" id="Name" placeholder="Name" @bind="newPaymentAccount.name"/>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label for="inputAddress">CardNumber</label>
+                                    <input class="form-control" id="CardNumber" placeholder="**** **** **** ****" @bind="newPaymentAccount.cardnumber"/>
+                                </div>
+                
+                                
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="inputAddress">Expiration Date</label>
+                                            <input class="form-control" placeholder="**/**" @bind="newPaymentAccount.expirationdate"/>
+                                        </div>
+                                        <div class="col">
+                                            <label for="inputAddress">Security Code</label>
+                                            <input class="form-control" placeholder="***" @bind="newPaymentAccount.securitycode"/>
+                                        </div>
+                
+                                    </div>
+                                    <button type="submit" @onclick="@(() => { AddUserAccount(); AddnewPaymentAccount();  })" class="btn btn-primary">Create Account & Payment</button>
+                                
+                            </div>
+                       
+                
+                         <div style="color:red">@errorMessage</div>
+                
+                
+                    </div>
+                
+                </div>
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             </div>
         </div>
     </div>
@@ -54,6 +103,8 @@
 @code {
 
     public User newUserAccount = new User();
+    private Payment newPaymentAccount = new Payment();
+    private string errorMessage;
 
     protected async override Task OnInitializedAsync()
     {
@@ -70,9 +121,27 @@
         await ProtectedSessionStore.SetAsync("SID", id);
         
 
-        Console.WriteLine("userid: " + id);
-        NavigationManager.NavigateTo("/Payment");
+     
     }
+
+   
+    
+    
+    
+    
+    
+    private async void AddnewPaymentAccount()
+    {
+       
+          
+            Payment payment = await PaymentData.AddPayment(new Payment(newPaymentAccount.name, newPaymentAccount.cardnumber, newPaymentAccount.expirationdate, newPaymentAccount.securitycode));
+             NavigationManager.NavigateTo("/login");
+        
+      
+      
+        
+    }
+
 
 
 }

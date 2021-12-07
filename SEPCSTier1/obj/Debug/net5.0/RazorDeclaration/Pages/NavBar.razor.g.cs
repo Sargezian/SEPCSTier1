@@ -133,7 +133,7 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 114 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\NavBar.razor"
+#line 119 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\NavBar.razor"
        
 
     public string name { get; set; }
@@ -142,16 +142,29 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
     public long count { get; set; }
 
+    public long WalletId { get; set; }
+
     
 
     protected async override Task OnInitializedAsync()
     {
+      
         var protectedBrowserStorageResult = await ProtectedSessionStore.GetAsync<string>("username");
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
         var cartCountById = await ShoppingCartData.GetCartCountById(id);
         name = protectedBrowserStorageResult.Value;
         count = cartCountById;
+        if (name == null)
+        {
+            WalletId = 0;
+        }
+        else
+        {
+              WalletId = await WalletData.SumOfPrice(id);
+        }
+      
+        
     }
 
 
@@ -179,6 +192,7 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IWalletData WalletData { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IShoppingCartData ShoppingCartData { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ProtectedSessionStorage ProtectedSessionStore { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }

@@ -5,8 +5,12 @@ namespace SEPCSTier1.Data
 {
     public interface IPaymentData
     {
-        void AddPayment(Payment payment);
+        Task<Payment> AddPayment(Payment payment);
 
         Task<Payment> GetPaymentByUserId(long id);
+
+        Task<Payment> GetPaymentByName(string name);
+
+        Task<long> GetPaymentId(string name);
     }
 }

@@ -1,0 +1,10 @@
+﻿mutation UpdateWallet ($id:Long!,$balance:Int!) {
+    updatePrice(id: $id, balance: $balance) {
+        id
+        balance
+        user_id
+    }
+    
+    
+    
+}

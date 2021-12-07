@@ -1,7 +1,9 @@
 ﻿
+using System;
 using System.Threading.Tasks;
 using SEPCSTier1.Graphql;
 using SEPCSTier1.Models;
+using StrawberryShake;
 
 namespace SEPCSTier1.Data
 {
@@ -13,9 +15,16 @@ namespace SEPCSTier1.Data
         {
             this.graphqlClient = graphqlClient;
         }
-        public async void AddPayment(Payment payment)
+        public async Task<Payment> AddPayment(Payment payment)
         {
-            await graphqlClient.AddPayments.ExecuteAsync(payment.name, payment.cardnumber, payment.expirationdate,payment.securitycode,payment.user_id);
+            var result = await graphqlClient.AddPayment.ExecuteAsync(payment.name, payment.cardnumber, payment.expirationdate,
+                payment.securitycode);
+            if (result.IsErrorResult())
+            {
+                throw new Exception("something went wrong payment");
+            }
+
+            return payment;
         }
         
         
@@ -36,8 +45,38 @@ namespace SEPCSTier1.Data
             return payment;
         }
 
-            
+        public async Task<long> GetPaymentId(string name)
+        {
+
+            var payment = await GetPaymentByName(name);
+
+            return payment.id;
+
+
         }
+        
+        
+        
+        
+
+        public async Task<Payment> GetPaymentByName(string name)
+        {
+            var result = await graphqlClient.PaymentByName.ExecuteAsync(name);
+
+            var Payment = new Payment
+            {
+                id = result.Data.PaymentByName.Id,
+                name = result.Data.PaymentByName.Name,
+                cardnumber = result.Data.PaymentByName.Cardnumber,
+                expirationdate = result.Data.PaymentByName.Expirationdate,
+                securitycode = result.Data.PaymentByName.Securitycode,
+              
+            };
+
+
+            return Payment;
+        }
+    }
 
     }
     

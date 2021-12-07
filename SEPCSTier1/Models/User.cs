@@ -10,9 +10,9 @@ namespace SEPCSTier1.Models
         public string username { get; set; }
         [Required]
         public string password { get; set; }
-        
+       
         public string firstName { get; set; }
-        
+       
         public string lastName { get; set; }
         
         public int SecurityLevel { get; set; }
