@@ -159,10 +159,12 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
         {
             WalletId = 0;
         }
-        else
+        else if (id != 0)
         {
-              WalletId = await WalletData.SumOfPrice(id);
+            WalletId = await WalletData.SumOfBalance(id);
         }
+
+       
       
         
     }
