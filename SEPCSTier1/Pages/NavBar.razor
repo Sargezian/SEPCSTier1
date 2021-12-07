@@ -141,7 +141,7 @@
         {
             WalletId = 0;
         }
-        else
+        else if (id != 0)
         {
               WalletId = await WalletData.SumOfBalance(id);
         }

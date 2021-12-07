@@ -42,6 +42,7 @@ namespace SEPCSTier1.Data
         public async Task<User> ValidateUser(string userName, string passWord)
         {
            
+            if(userName != null){
                 var result = await graphqlClient.ValidateUser.ExecuteAsync(userName, passWord);
 
                 if (result.IsErrorResult())
@@ -55,8 +56,10 @@ namespace SEPCSTier1.Data
                     username = result.Data.ValidateUser.Username,
                     password = result.Data.ValidateUser.Password
                 };
-                
                 return user;
+            }
+            
+                return null;
         }
 
         public async Task<User> AddUser(User user)
