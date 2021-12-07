@@ -17,7 +17,7 @@ namespace SEPCSTier1.Data
             this.graphqlClient = graphqlClient;
         }
 
-        public async Task<Wallet> UpdateWallet(Wallet wallet)
+        public async Task<Wallet> UpdateWallets(Wallet wallet)
         {
             var result = await graphqlClient.UpdateWallet.ExecuteAsync(wallet.user_id, wallet.balance);
 
@@ -33,7 +33,7 @@ namespace SEPCSTier1.Data
 
         }
 
-        public async Task<long> SumOfPrice(long id)
+        public async Task<long> SumOfBalance(long id)
         {
             try
             {

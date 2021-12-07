@@ -57,7 +57,6 @@ namespace SEPCSTier1.Data
                 };
                 
                 return user;
-                
         }
 
         public async Task<User> AddUser(User user)

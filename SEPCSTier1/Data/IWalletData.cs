@@ -7,8 +7,8 @@ namespace SEPCSTier1.Data
     {
         
         
-        Task<long> SumOfPrice(long id);
-        Task<Wallet> UpdateWallet(Wallet wallet);
+        Task<long> SumOfBalance(long id);
+        Task<Wallet> UpdateWallets(Wallet wallet);
 
         Task<Wallet> AddWallet(Wallet wallet);
 

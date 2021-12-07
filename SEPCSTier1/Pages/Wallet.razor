@@ -85,7 +85,7 @@
             id = protectedBrowserStorageResultId.Value;
 
             payment = await PaymentData.GetPaymentByUserId(id);
-            totalPrice = await WalletData.SumOfPrice(id);
+            totalPrice = await WalletData.SumOfBalance(id);
             await ProtectedSessionStore.SetAsync("wi", totalPrice);
             Console.WriteLine("price " + totalPrice);
             var result = await ProtectedSessionStore.GetAsync<long>("P");
@@ -101,7 +101,7 @@
 
     public async void UpdateWallet()
     {
-        await WalletData.UpdateWallet(new Models.Wallet((int) (_wallet.balance + totalPrice),id));
+        await WalletData.UpdateWallets(new Models.Wallet((int) (_wallet.balance + totalPrice),id));
         NavigationManager.NavigateTo(NavigationManager.Uri, true);
 
         
