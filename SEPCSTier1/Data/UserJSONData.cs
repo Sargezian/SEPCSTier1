@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.WebEncoders.Testing;
 using SEPCSTier1.Graphql;
 using SEPCSTier1.Models;
 using StrawberryShake;
+using StrawberryShake.Extensions;
 
 namespace SEPCSTier1.Data
 {
@@ -35,7 +37,7 @@ namespace SEPCSTier1.Data
                 username = users.Username,
                 password = users.Password
             }).ToList();
-
+                
             return userList;
         }
 

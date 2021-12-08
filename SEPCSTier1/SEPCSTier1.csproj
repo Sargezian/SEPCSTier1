@@ -11,6 +11,7 @@
       <PackageReference Include="Radzen.Blazor" Version="3.12.1" />
       <PackageReference Include="StrawberryShake.CodeGeneration.CSharp.Analyzers" Version="12.3.2" />
       <PackageReference Include="StrawberryShake.Transport.Http" Version="12.4.0-preview.6" />
+      <PackageReference Include="StrawberryShake.Transport.WebSockets" Version="12.4.0-preview.15" />
     </ItemGroup>
 
     <ItemGroup>

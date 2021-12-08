@@ -15,7 +15,8 @@ type Query {
   userById(id: Long!): User
   validateUser(username: String password: String): User
   offers(where: SaleOfferFilterInput order: [SaleOfferSortInput!]): [SaleOffer]
-  offerById(id: Long!): SaleOffer
+  offerByUserId(id: Long!): [SaleOffer]
+  offerBySaleOfferId(id: Long!): SaleOffer
   cartCountById(id: Long!): Long!
   shoppingCartById(id: Long!): [ShowShoppingCart]
   totalPriceById(id: Long!): Long!
@@ -32,6 +33,8 @@ type Mutation {
   addWallet(balance: Int! user_id: Long!): Wallet
   addOrder(buyerId: Long! sale_Id: Long!): Order
   updatePrice(balance: Int! id: Long!): Wallet
+  addSaleOffer(item_id: Long! sale_price: Int! wallet_id: Long!): SaleOffer
+  deleteShoppingCart(user_id: Long! sale_offer_id: Long!): Long!
 }
 
 type Subscription {
@@ -57,7 +60,7 @@ input UserSortInput {
 input ItemsFilterInput {
   and: [ItemsFilterInput!]
   or: [ItemsFilterInput!]
-  id: ComparableInt32OperationFilterInput
+  id: ComparableInt64OperationFilterInput
   weaponname: StringOperationFilterInput
   weaponURL: StringOperationFilterInput
 }
@@ -167,7 +170,7 @@ type Order {
 }
 
 type Items {
-  id: Int!
+  id: Long!
   weaponname: String
   weaponURL: String
 }

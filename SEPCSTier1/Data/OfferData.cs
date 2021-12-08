@@ -34,17 +34,36 @@ namespace SEPCSTier1.Data
         }
 
         
-        public async Task<SaleOffer> GetOfferById(long id)
+        public async Task<IList<SaleOffer>> GetOfferByUserId(long id)
         {
-            var result = await graphqlClient.OfferById.ExecuteAsync(id);
-           
-
+            // var result = await graphqlClient.OfferByUserId.ExecuteAsync(id);
+            //
+            //
+            // SaleOffer itemss = new SaleOffer()
+            // {
+            //     id = result.Data.OfferByUserId.Id,
+            //     sale_price = result.Data.OfferByUserId.Sale_price,
+            //     item_id = result.Data.OfferByUserId.Item_id,
+            //     wallet_id = result.Data.OfferByUserId.Wallet_id
+            //     
+            // };
+            //
+            return null;
+        }
+        
+        
+        
+        public async Task<SaleOffer> GetOfferBySaleOfferId(long id)
+        {
+            var result = await graphqlClient.OfferBySaleOfferId.ExecuteAsync(id);
+            
+            
             SaleOffer itemss = new SaleOffer()
             {
-                id = result.Data.OfferById.Id,
-                sale_price = result.Data.OfferById.Sale_price,
-                item_id = result.Data.OfferById.Item_id,
-                wallet_id = result.Data.OfferById.Wallet_id
+                id = result.Data.OfferBySaleOfferId.Id,
+                sale_price = result.Data.OfferBySaleOfferId.Sale_price,
+                item_id = result.Data.OfferBySaleOfferId.Item_id,
+                wallet_id = result.Data.OfferBySaleOfferId.Wallet_id
                 
             };
             
@@ -54,7 +73,7 @@ namespace SEPCSTier1.Data
         public async void AddSaleOffer(SaleOffer saleOffer)
         {
             var result = await graphqlClient.AddSaleOffer.ExecuteAsync(saleOffer.item_id,
-                saleOffer.sale_price, saleOffer.wallet_id, saleOffer.user_id);
+                saleOffer.sale_price, saleOffer.wallet_id);
 
         }
        

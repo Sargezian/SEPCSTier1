@@ -37,7 +37,8 @@ namespace SEPCSTier1.Data
         {
             try
             {
-             var result = await graphqlClient.GetSumOfPrice.ExecuteAsync(id);
+
+                var result = await graphqlClient.GetSumOfPrice.ExecuteAsync(id);
              if (result.Data == null)
              {
                  throw new Exception("this is an error");

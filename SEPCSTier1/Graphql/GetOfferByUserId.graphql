@@ -1,5 +1,5 @@
-query OfferById($id:Long!){
-    offerById(id:$id){
+query OfferByUserId($id:Long!){
+    offerByUserId(id:$id){
         id,
         item_id,
         sale_price,

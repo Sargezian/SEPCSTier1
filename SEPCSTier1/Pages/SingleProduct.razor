@@ -91,7 +91,7 @@ else
         id = protectedBrowserStorageResultId.Value;
         
         item = await ItemData.GetItemByID(item_id);
-        offer = await IofferData.GetOfferById(offer_id);
+        offer = await IofferData.GetOfferBySaleOfferId(offer_id);
 
         if (offer != null && item != null)
         {

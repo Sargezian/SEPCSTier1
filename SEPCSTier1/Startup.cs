@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.WebSockets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -46,7 +47,8 @@ namespace SEPCSTier1
             services.AddBlazoredToast();
             services
                 .AddGraphqlClient()
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:5001/graphql/"));
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:5001/graphql/"))
+                .ConfigureWebSocketClient(client => client.Uri = new Uri("ws://localhost:5001/graphql/"));
 
 
             services.AddAuthorization(options =>
@@ -62,7 +64,7 @@ namespace SEPCSTier1
                 }));
             });
         }
-        
+
         private void SecurityLevel4(AuthorizationPolicyBuilder a)
         {
             a.RequireAuthenticatedUser().RequireClaim("SecurityLevel4", "4");
@@ -87,6 +89,8 @@ namespace SEPCSTier1
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseWebSockets();
 
             app.UseEndpoints(endpoints =>
             {
