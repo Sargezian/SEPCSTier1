@@ -3,8 +3,10 @@
 @using SEPCSTier1.Data
 @inject IOfferData OfferData
 @using System.Security.Cryptography
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject IItemData IitemData
 @inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
  <!--<AuthorizeView>
     <div class="w-100 d-flex justify-content-center">
         <div class="w-50 border border-light-1 p-3 m-5">
@@ -141,6 +143,7 @@
                                       <label class="labels">WalletID</label><input type="number" class="form-control" placeholder="Password" @bind-value="AddNewSaleOffer.wallet_id">
                                   </div>
                                   
+                                  
                               </div>
                              
                                   <div class="row mt-3">
@@ -171,6 +174,8 @@
     private IList<Itemss> ItemList;
     private IList<Itemss> Items;
     public SaleOffer AddNewSaleOffer = new SaleOffer();
+                public long id { get; set; }
+                
                 
                 
                 
@@ -179,8 +184,11 @@
                 
     protected override async Task OnInitializedAsync()
     {
+        var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
+        id = protectedBrowserStorageResultId.Value;
         Items = await IitemData.GetItems();
         ItemList = Items;
+        
     }
 
     void OnChange(object value, string name)
@@ -234,20 +242,29 @@
         throw new ArgumentNullException(paramName: nameof(itemName), message: "Please select an Item to sell");
     }
 
-    void checkValidPrice()
-    {
-        if (intValue.Equals(0))
-        {
-            throw new ArgumentNullException(paramName: nameof(intValue), message: "Please Pick a Price");
-        }
-    }
+                void checkValidPrice()
+                {
+                    if (intValue.Equals(0))
+                    {
+                        throw new ArgumentNullException(paramName: nameof(intValue), message: "Please Pick a Price");
+                    }
+                }
+
                 private void AddSaleOffers()
                 {
                     //sale id er altid nul, ved sku ikke hvorfor, tror det derfor den ikke blive uploaded til database
-                   OfferData.AddSaleOffer(AddNewSaleOffer);
+                   OfferData.AddSaleOffer(new SaleOffer
+                   {
+                       item_id = AddNewSaleOffer.item_id,
+                       sale_price = AddNewSaleOffer.sale_price,
+                       wallet_id = AddNewSaleOffer.wallet_id,
+                       user_id = id
+                   });
+                    
                     NavigationManager.NavigateTo("/Shop");
                     Console.WriteLine("hej");
-                    Console.WriteLine("Det her er sale id --->" + AddNewSaleOffer.id + "Det her er item id --->" + AddNewSaleOffer.item_id + "Det her er saleprice --->"+ AddNewSaleOffer.sale_price + "Det her er wallet id --->"+ AddNewSaleOffer.wallet_id);
+                    Console.WriteLine("Det her er sale id --->" + AddNewSaleOffer.id + "Det her er item id --->" + AddNewSaleOffer.item_id + "Det her er saleprice --->"+ AddNewSaleOffer.sale_price + "Det her er wallet id --->"+ AddNewSaleOffer.wallet_id + "Det her er userid --->" + 
+                                      id);
                     
                     
                 }

@@ -1,0 +1,22 @@
+mutation AddSaleOffer(
+    $item_id: Long!
+    $sale_price: Int!
+    $wallet_id: Long!
+    $user_id: Long!
+
+
+) {
+    addSaleOffer
+    (
+        item_id: $item_id
+        sale_price: $sale_price
+        wallet_id: $wallet_id
+        user_id: $user_id
+    ) {
+        id
+        item_id
+        sale_price
+        wallet_id
+        user_id
+    }
+}

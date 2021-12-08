@@ -45,6 +45,7 @@ namespace SEPCSTier1.Data
                 sale_price = result.Data.OfferById.Sale_price,
                 item_id = result.Data.OfferById.Item_id,
                 wallet_id = result.Data.OfferById.Wallet_id
+                
             };
             
             return itemss;
@@ -52,8 +53,10 @@ namespace SEPCSTier1.Data
 
         public async void AddSaleOffer(SaleOffer saleOffer)
         {
-           //await graphqlClient.ExecuteAsync(saleOffer.id, saleOffer.item_id,saleOffer.sale_price,saleOffer.wallet_id);
-           
+            var result = await graphqlClient.AddSaleOffer.ExecuteAsync(saleOffer.item_id,
+                saleOffer.sale_price, saleOffer.wallet_id, saleOffer.user_id);
+
         }
+       
     }
 }
