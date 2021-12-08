@@ -1,0 +1,5 @@
+mutation AddOrder($buyerId:Long!,$sale_Id:Long!){
+    addOrder(buyerId:$buyerId,sale_Id: $sale_Id){
+        wallet_buyer_id,sale_id
+    }
+}

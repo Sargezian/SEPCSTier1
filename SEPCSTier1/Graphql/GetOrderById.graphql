@@ -1,0 +1,7 @@
+query GetOrderById($id: Long!) {
+    orderById(id: $id) {
+        id
+        wallet_buyer_id
+        sale_id
+    }
+}

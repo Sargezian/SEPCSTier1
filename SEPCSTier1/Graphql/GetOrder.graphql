@@ -1,0 +1,7 @@
+query GetOrder{
+    order{
+        id
+        wallet_buyer_id
+        sale_id
+    }
+}

@@ -7,8 +7,10 @@
 type Query {
   users(where: UserFilterInput order: [UserSortInput!]): [User]
   items(where: ItemsFilterInput order: [ItemsSortInput!]): [Items]
+  order(where: OrderFilterInput order: [OrderSortInput!]): [Order]
   chat(where: ChatFilterInput order: [ChatSortInput!]): [Chat]
   chatById(id: Long!): Chat
+  orderById(id: Long!): Order
   itemById(id: Long!): Items
   userById(id: Long!): User
   validateUser(username: String password: String): User
@@ -28,6 +30,7 @@ type Mutation {
   deleteUser(id: Long!): Long!
   addPayment(name: String cardnumber: String expirationdate: String securitycode: String): CreditCard
   addWallet(balance: Int! user_id: Long!): Wallet
+  addOrder(buyerId: Long! sale_Id: Long!): Order
   updatePrice(balance: Int! id: Long!): Wallet
 }
 
@@ -63,6 +66,20 @@ input ItemsSortInput {
   id: SortEnumType
   weaponname: SortEnumType
   weaponURL: SortEnumType
+}
+
+input OrderFilterInput {
+  and: [OrderFilterInput!]
+  or: [OrderFilterInput!]
+  id: ComparableInt64OperationFilterInput
+  wallet_buyer_id: ComparableInt64OperationFilterInput
+  sale_id: ComparableInt64OperationFilterInput
+}
+
+input OrderSortInput {
+  id: SortEnumType
+  wallet_buyer_id: SortEnumType
+  sale_id: SortEnumType
 }
 
 input ChatFilterInput {
@@ -143,9 +160,10 @@ input ComparableInt32OperationFilterInput {
   nlte: Int
 }
 
-type Chat {
-  user_id: Long!
-  chatlist: String
+type Order {
+  id: Long!
+  wallet_buyer_id: Long!
+  sale_id: Long!
 }
 
 type Items {
@@ -159,6 +177,11 @@ type User {
   username: String
   password: String
   securitylevel: Long!
+}
+
+type Chat {
+  user_id: Long!
+  chatlist: String
 }
 
 "The `Long` scalar type represents non-fractional signed whole 64-bit numeric values. Long can represent values between -(2^63) and 2^63 - 1."
