@@ -23,6 +23,9 @@ type Query {
   paymentByUserId(id: Long!): CreditCard
   sumOfPriceById(id: Long!): Long!
   paymentByName(name: String): CreditCard
+  allSoldOffer: [SoldOffer]
+  orderBySaleId(id: Long!): Order
+  getSoldOfferById(id: Long!): SoldOffer
 }
 
 type Mutation {
@@ -32,6 +35,7 @@ type Mutation {
   addPayment(name: String cardnumber: String expirationdate: String securitycode: String): CreditCard
   addWallet(balance: Int! user_id: Long!): Wallet
   addOrder(buyerId: Long! sale_Id: Long!): Order
+  addSoldOffer(item_id: Long! order_id: Long! sale_price: Int! seller_wallet_id: Long!): SoldOffer
   updatePrice(balance: Int! id: Long!): Wallet
   addSaleOffer(item_id: Long! sale_price: Int! wallet_id: Long!): SaleOffer
   deleteShoppingCart(user_id: Long! sale_offer_id: Long!): Long!
@@ -210,6 +214,14 @@ type CreditCard {
   cardnumber: String
   expirationdate: String
   securitycode: String
+}
+
+type SoldOffer {
+  id: Long!
+  item_id: Long!
+  order_id: Long!
+  sale_price: Int!
+  seller_wallet_id: Long!
 }
 
 type ShopppingCart {

@@ -7,6 +7,9 @@
 @inject IToastService toastService
 @inject IOrderData orderData
 @inject IWalletData walletData
+@inject IOfferData offerData
+
+@inject ISoldOfferData soldOfferData
 @inject NavigationManager NavigationManager
 @inject ProtectedSessionStorage ProtectedSessionStore
 
@@ -86,25 +89,44 @@
     {
         if (walletBalance >= totalPrice)
         {
-            Order o = new Order
-            {
-                wallet_buyer_id = 3,
-                sale_id = 4
-            };
-            toastService.ShowSuccess("test");
-
             //Update wallet lokalt
             walletBalance = walletBalance - totalPrice;
             //Update wallet db
             await walletData.UpdateWallets(new Models.Wallet((int) (walletBalance),id));
             
-            //Slet saleoffer
-            //Slet Shopping cart
+            foreach (var cart in shoppingCarts)
+            {
+                //Lav ordre pr item
+                Order o = new Order
+                {
+                    //Walletid og userid er ens altid da de bliver lavet sammen - i stort program ændre det her til noget bedre
+                    wallet_buyer_id = id,
+                    sale_id = cart.sale_offer_id
+                };
+                
+                //send ordre
+                orderData.AddOrder(o);
+
+                SoldOffer soldoffer = new SoldOffer()
+                {
+                    item_id = offerData.GetOfferBySaleOfferId(cart.sale_offer_id).Result.item_id,
+                    order_id = orderData.GetOrderBySaleId(cart.sale_offer_id).Id,
+                    sale_price = offerData.GetOfferBySaleOfferId(cart.sale_offer_id).Result.sale_price,
+                    seller_wallet_id = offerData.GetOfferBySaleOfferId(cart.sale_offer_id).Result.wallet_id
+                };
+                
+                Console.WriteLine(""+soldoffer.id +","+soldoffer.item_id+","+ soldoffer.order_id+","+ soldoffer.sale_price+","+ soldoffer.seller_wallet_id);
+                //soldOfferData.AddSoldOffer(soldoffer);
+                
+                
+                //Slet saleoffer
+                
+                
+                //Slet Shopping cart
+            }
             
-            //send ordre
-            orderData.AddOrder(o);
             
-            NavigationManager.NavigateTo(NavigationManager.Uri, true);
+            toastService.ShowSuccess("test");
 
         }
         else

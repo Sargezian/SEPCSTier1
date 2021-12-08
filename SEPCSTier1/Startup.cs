@@ -39,6 +39,7 @@ namespace SEPCSTier1
             services.AddScoped<IOfferData, OfferData>();
             services.AddScoped<IWalletData, WalletData>();
             services.AddScoped<IPaymentData, PaymentData>();
+            services.AddScoped<ISoldOfferData, SoldOfferData>();
             services.AddScoped<IOrderData, OrderData>();
             services.AddScoped<ICart, Cart>();
             services.AddScoped<IShoppingCartData, ShoppingCartData>();

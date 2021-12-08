@@ -1,0 +1,5 @@
+﻿mutation AddSoldOffer($item_id:Long!,$order_id:Long!,$sale_price:Int!,$seller_wallet_id:Long!){
+    addSoldOffer(item_id:$item_id, order_id: $order_id,sale_price: $sale_price,seller_wallet_id: $seller_wallet_id){
+        item_id,order_id,sale_price,seller_wallet_id
+    }
+}
