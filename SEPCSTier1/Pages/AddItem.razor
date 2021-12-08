@@ -7,69 +7,69 @@
 @inject IItemData IitemData
 @inject NavigationManager NavigationManager
 @inject ProtectedSessionStorage ProtectedSessionStore
- <!--<AuthorizeView>
-    <div class="w-100 d-flex justify-content-center">
-        <div class="w-50 border border-light-1 p-3 m-5">
-            <form>
-            <div class="form-group">
-                    <label for="weaponType">Weapon Type</label>
-                    <select class="selectpicker">
-                        <option>Bayonet</option>
-                        <option>Bowie Knife</option>
-                        <option>Butterfly Knife</option>
-                        <option>Classic Knife</option>
-                        <option>Falchion Knife</option>
-                        <option>Flip Knife</option>
-                        <option>Gut Knife</option>
-                        <option>Huntsman Knife</option>
-                        <option>Karambit</option>
-                        <option>M9 Bayonet</option>
-                        <option>Navaja Knife</option>
-                        <option>Nomad Knife</option>
-                        <option>Paracord Knife</option>
-                        <option>Shadow Daggers</option>
-                        <option>Skeleton Knife</option>
-                        <option>Stiletto Knife</option>
-                        <option>Survival Knife</option>
-                        <option>Talon Knife</option>
-                        <option>Ursus Knife</option>
-                        <option>CZ75-Auto</option>
-                        <option>Desert Eagle</option>
-                        <option>Dual Berettas</option>
-                        <option>Five-SeveN</option>
-                        <option>Glock-18</option>
-                        <option>P2000</option>
-                        <option>P250</option>
-                        <option>R8 Revolver</option>
-                        <option>Tec-9</option>
-                        <option>USP-S</option>
-                        <option>MAG-7</option>
-                        <option>Nova</option>
-                        <option>Sawed-Off</option>
-                        <option>XM1014</option>
-                        <option>M249</option>
-                        <option>Negev</option>
-                        <option>MAC-10</option>
-                        <option>MP5-SD</option>
-                        <option>MP7</option>
-                        <option>MP9</option>
-                        <option>P90</option>
-                        <option>PP-Bizon</option>
-                        <option>UMP-45</option>
-                        <option>AK-47</option>
-                        <option>AUG</option>
-                        <option>FAMAS</option>
-                        <option>Galil AR</option>
-                        <option>M4A1-S</option>
-                        <option>M4A4</option>
-                        <option>SG 553</option>
-                        <option>AWP</option>
-                        <option>G3SG1</option>
-                        <option>SCAR-20</option>
-                        <option>SSG 08</option>
-                    </select>
+<!--
+<div class="w-100 d-flex justify-content-center">
+<div class="w-50 border border-light-1 p-3 m-5">
+<form>
+<div class="form-group">
+    <label for="weaponType">Weapon Type</label>
+    <select class="selectpicker">
+        <option>Bayonet</option>
+        <option>Bowie Knife</option>
+        <option>Butterfly Knife</option>
+        <option>Classic Knife</option>
+        <option>Falchion Knife</option>
+        <option>Flip Knife</option>
+        <option>Gut Knife</option>
+        <option>Huntsman Knife</option>
+        <option>Karambit</option>
+        <option>M9 Bayonet</option>
+        <option>Navaja Knife</option>
+        <option>Nomad Knife</option>
+        <option>Paracord Knife</option>
+        <option>Shadow Daggers</option>
+        <option>Skeleton Knife</option>
+        <option>Stiletto Knife</option>
+        <option>Survival Knife</option>
+        <option>Talon Knife</option>
+        <option>Ursus Knife</option>
+        <option>CZ75-Auto</option>
+        <option>Desert Eagle</option>
+        <option>Dual Berettas</option>
+        <option>Five-SeveN</option>
+        <option>Glock-18</option>
+        <option>P2000</option>
+        <option>P250</option>
+        <option>R8 Revolver</option>
+        <option>Tec-9</option>
+        <option>USP-S</option>
+        <option>MAG-7</option>
+        <option>Nova</option>
+        <option>Sawed-Off</option>
+        <option>XM1014</option>
+        <option>M249</option>
+        <option>Negev</option>
+        <option>MAC-10</option>
+        <option>MP5-SD</option>
+        <option>MP7</option>
+        <option>MP9</option>
+        <option>P90</option>
+        <option>PP-Bizon</option>
+        <option>UMP-45</option>
+        <option>AK-47</option>
+        <option>AUG</option>
+        <option>FAMAS</option>
+        <option>Galil AR</option>
+        <option>M4A1-S</option>
+        <option>M4A4</option>
+        <option>SG 553</option>
+        <option>AWP</option>
+        <option>G3SG1</option>
+        <option>SCAR-20</option>
+        <option>SSG 08</option>
+    </select>
 
-                </div>-->
+</div>-->
 @*
 <AuthorizeView> 
 <div class="form-group">             
@@ -116,57 +116,60 @@
 </AuthorizeView> 
 *@
 
-<div class="container rounded bg-white mt-5 mb-5">
-              <div class="row">
-                  <div class="col-md-3 border-right">
-                      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                          <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Welcome</span><span class="text-black-50">To CSGO Trading</span><span> </span>
-                      </div>
-                  </div>
-                  <div class="col-md-5 border-right">
-                      <div class="p-3 py-5">
-                          <div class="d-flex justify-content-between align-items-center mb-3">
-                              <h4 class="text-right">Profile Settings</h4>
-                          </div>
-                          <EditForm Model="@AddNewSaleOffer"  OnValidSubmit="@AddSaleOffers">
-                             <DataAnnotationsValidator/> <ValidationSummary/>
-                              <div class="row mt-2">
-                                  <h3>Create New Sale Offer</h3>
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Welcome</span><span class="text-black-50">To CSGO Trading</span><span> </span>
+                    </div>
+                </div>
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        
+                        <EditForm Model="@AddNewSaleOffer" OnValidSubmit="@AddSaleOffers">
+                            <DataAnnotationsValidator/> <ValidationSummary/>
+                            <div class="row mt-2">
+                                <h3>Create New Sale Offer</h3>
+                                <br>
+                                <div class="col-md-12">
+                                    @if (ItemList != null)
+                                    {
+                                        <RadzenDropDown @bind-Value="pickedItem" Placeholder="Select Weapon" AllowClear="true" TValue="string" Style="width:100%"
+                                                        Data=@(ItemList.Select(c => c.weaponname).Distinct())
+                                                        Change=@(args => OnChange(args, "DropDown"))/>
+                                    }
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="labels">Price</label>
+                                    <input type="number" class="form-control" placeholder="Password" @bind-value="AddNewSaleOffer.sale_price">
+                                </div>
 
-                                  <div class="col-md-12">
-                                      <label class="labels">ItemID</label><input type="number" class="form-control" placeholder="Password" @bind-value="AddNewSaleOffer.item_id">
-                                  </div>
-                                  <div class="col-md-12">
-                                      <label class="labels">Price</label><input type="number" class="form-control" placeholder="Password" @bind-value="AddNewSaleOffer.sale_price">
-                                  </div>
-                                  <div class="col-md-12">
-                                      <label class="labels">WalletID</label><input type="number" class="form-control" placeholder="Password" @bind-value="AddNewSaleOffer.wallet_id">
-                                  </div>
-                                  
-                                  
-                              </div>
-                             
-                                  <div class="row mt-3">
-                                  </div>
-                                  <p class="actions">
-                                      <button class="btn btn-outline-dark" type="submit">Create</button>
-                                  </p>
-                              
-                          </EditForm>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          
-          
-          @layout EmptyLayout  
-            
-            
-            
-            
 
-            @code {
-                
+
+                            </div>
+
+                            <div class="row mt-3">
+                            </div>
+                            <p class="actions">
+                                <button class="btn btn-outline-dark" type="submit">Create</button>
+                            </p>
+                        </EditForm>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+
+
+
+
+@code {
+
     private int intValue;
     private string PickerErrorMessage = "";
     private string PriceErrorMessage = "";
@@ -174,21 +177,16 @@
     private IList<Itemss> ItemList;
     private IList<Itemss> Items;
     public SaleOffer AddNewSaleOffer = new SaleOffer();
-                public long id { get; set; }
-                
-                
-                
-                
-                
-                
-                
+    public long id { get; set; }
+
+
     protected override async Task OnInitializedAsync()
     {
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
+        
         Items = await IitemData.GetItems();
         ItemList = Items;
-        
     }
 
     void OnChange(object value, string name)
@@ -199,36 +197,8 @@
     void Submit()
     {
         Console.WriteLine(pickedItem);
-        PickerErrorMessage = "";
-        PriceErrorMessage = "";
-        //Feedbacket fra selectoren giver en string tilbage, så vi sammenligner her navnet derfra, men listen af itemsene vi får fra Databasen
-        try
-        {
-            Itemss item = findEqualItem(pickedItem);
-            checkValidPrice();
-
-            //READY TO PUSH FROM HERE
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-            if (e.Message.Equals("Please select an Item to sell (Parameter 'itemName')"))
-            {
-                
-                PickerErrorMessage = "Pick an Item to sell";
-            } 
-            if (e.Message.Equals("Please Pick a Price (Parameter 'intValue')"))
-            {
-                
-                PriceErrorMessage = "Please Pick a Price";;
-            }
-            
-        }
-        
     }
-                
-                
-                
+
 
     Itemss findEqualItem(string itemName)
     {
@@ -242,32 +212,43 @@
         throw new ArgumentNullException(paramName: nameof(itemName), message: "Please select an Item to sell");
     }
 
-                void checkValidPrice()
-                {
-                    if (intValue.Equals(0))
-                    {
-                        throw new ArgumentNullException(paramName: nameof(intValue), message: "Please Pick a Price");
-                    }
-                }
 
-                private void AddSaleOffers()
-                {
-                    //sale id er altid nul, ved sku ikke hvorfor, tror det derfor den ikke blive uploaded til database
-                   OfferData.AddSaleOffer(new SaleOffer
-                   {
-                       item_id = AddNewSaleOffer.item_id,
-                       sale_price = AddNewSaleOffer.sale_price,
-                       wallet_id = AddNewSaleOffer.wallet_id,
-                       user_id = id
-                   });
-                    
-                    NavigationManager.NavigateTo("/Shop");
-                    Console.WriteLine("hej");
-                    Console.WriteLine("Det her er sale id --->" + AddNewSaleOffer.id + "Det her er item id --->" + AddNewSaleOffer.item_id + "Det her er saleprice --->"+ AddNewSaleOffer.sale_price + "Det her er wallet id --->"+ AddNewSaleOffer.wallet_id + "Det her er userid --->" + 
-                                      id);
-                    
-                    
-                }
+    private void AddSaleOffers()
+    {
+        PickerErrorMessage = "";
+        PriceErrorMessage = "";
+    //Feedbacket fra selectoren giver en string tilbage, så vi sammenligner her navnet derfra, men listen af itemsene vi får fra Databasen
+        try
+        {
+            Itemss item = findEqualItem(pickedItem);
+            Console.WriteLine(item.id);
 
-    
+
+    //sale id er altid nul, ved sku ikke hvorfor, tror det derfor den ikke blive uploaded til database
+            OfferData.AddSaleOffer(new SaleOffer
+            {
+                item_id = item.id,
+                sale_price = AddNewSaleOffer.sale_price,
+                wallet_id = id,
+                user_id = id
+            });
+
+            NavigationManager.NavigateTo("/Shop");
+            Console.WriteLine("hej");
+            Console.WriteLine("Det her er sale id --->" + AddNewSaleOffer.id + "Det her er item id --->" + AddNewSaleOffer.item_id + "Det her er saleprice --->" + AddNewSaleOffer.sale_price + "Det her er wallet id --->" + AddNewSaleOffer.wallet_id + "Det her er userid --->" +
+                              id);
+
+    //READY TO PUSH FROM HERE
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            if (e.Message.Equals("Please select an Item to sell (Parameter 'itemName')"))
+            {
+                PickerErrorMessage = "Pick an Item to sell";
+            }
+        }
+    }
+
+
 }
