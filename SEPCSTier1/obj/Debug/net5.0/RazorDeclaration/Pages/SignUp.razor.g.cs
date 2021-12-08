@@ -169,14 +169,8 @@ using SEPCSTier1.Models;
 
     private async void AddUserAccount()
     {
-        var addUser = await UserData.AddUser(newUserAccount);
+        await UserData.AddUser(newUserAccount);
         
-        var id = await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).GetId(addUser.username,addUser.password);
-        
-        await ProtectedSessionStore.SetAsync("SID", id);
-        
-
-     
     }
 
    
