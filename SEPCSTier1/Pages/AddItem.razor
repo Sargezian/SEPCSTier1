@@ -122,7 +122,8 @@
                 wallet_id = id
             });
 
-            NavigationManager.NavigateTo("/Shop");
+            NavigationManager.NavigateTo("/Shop",true);
+            NavigationManager.NavigateTo("/",true);
             Console.WriteLine("hej");
             Console.WriteLine("Det her er sale id --->" + AddNewSaleOffer.id + "Det her er item id --->" + AddNewSaleOffer.item_id + "Det her er saleprice --->" + AddNewSaleOffer.sale_price + "Det her er wallet id --->" + AddNewSaleOffer.wallet_id + "Det her er userid --->" +
                               id);

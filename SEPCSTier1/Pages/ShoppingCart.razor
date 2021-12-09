@@ -41,6 +41,12 @@
                             <td class="w-1/3 text-left py-3 px-4">@shoppingCart.weaponname</td>
                             <td class="w-1/3 text-left py-3 px-4">@shoppingCart.sale_price</td>
 
+                            <td>
+                                <button @onclick="@(() => RemoveShoppingCartItem(id,shoppingCart.sale_offer_id))">
+                                    <i class="oi oi-trash" style="color:red"/>
+                                </button>
+                            </td>
+
 
                         </tr>
                     }
@@ -58,7 +64,7 @@
             </div>
 
             <div class="d-flex justify-content-end mt-5">
-            <button type="button" class="w-25 btn mr-5 btn-lg btn-success" @onclick="buyCart">Complete order</button>
+                <button type="button" class="w-25 btn mr-5 btn-lg btn-success" @onclick="buyCart">Complete order</button>
             </div>
 
         </div>
@@ -89,29 +95,29 @@
     {
         if (walletBalance >= totalPrice)
         {
-            //Update wallet lokalt
+    //Update wallet lokalt
             walletBalance = walletBalance - totalPrice;
-            //Update wallet db
-            await walletData.UpdateWallets(new Models.Wallet((int) (walletBalance),id));
-            
+    //Update wallet db
+            await walletData.UpdateWallets(new Models.Wallet((int) (walletBalance), id));
+
             foreach (var cart in shoppingCarts)
             {
-                //Lav ordre pr item
+    //Lav ordre pr item
                 Order o = new Order
                 {
-                    //Walletid og userid er ens altid da de bliver lavet sammen - i stort program ændre det her til noget bedre
+    //Walletid og userid er ens altid da de bliver lavet sammen - i stort program ændre det her til noget bedre
                     wallet_buyer_id = id,
                     sale_id = cart.sale_offer_id
                 };
-                
-                //send ordre
+
+    //send ordre
                 Console.WriteLine("tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
                 var addOrder = await orderData.AddOrder(o);
                 var resultItemId = await offerData.GetOfferBySaleOfferId(cart.sale_offer_id);
                 var orderBySaleId = await orderData.GetOrderBySaleId(cart.sale_offer_id);
                 var offerBySaleOfferId = await offerData.GetOfferBySaleOfferId(cart.sale_offer_id);
-               
-                
+
+
                 SoldOffer soldoffer = new SoldOffer()
                 {
                     item_id = resultItemId.item_id,
@@ -119,20 +125,19 @@
                     sale_price = offerBySaleOfferId.sale_price,
                     seller_wallet_id = offerBySaleOfferId.wallet_id
                 };
-                
-                Console.WriteLine(""+soldoffer.id +","+soldoffer.item_id+","+ soldoffer.order_id+","+ soldoffer.sale_price+","+ soldoffer.seller_wallet_id);
-                await soldOfferData.AddSoldOffer(soldoffer);
-                
-                
-                //Slet saleoffer
-                
-                
-                //Slet Shopping cart
-            }
-            
-            
-            toastService.ShowSuccess("test");
 
+                Console.WriteLine("" + soldoffer.id + "," + soldoffer.item_id + "," + soldoffer.order_id + "," + soldoffer.sale_price + "," + soldoffer.seller_wallet_id);
+                await soldOfferData.AddSoldOffer(soldoffer);
+
+
+    //Slet saleoffer
+
+
+    //Slet Shopping cart
+            }
+
+
+            toastService.ShowSuccess("test");
         }
         else
         {
@@ -140,5 +145,11 @@
         }
     }
 
+
+    private async void RemoveShoppingCartItem(long userId, long saleOfferId)
+    {
+        ShoppingCartData.RemoveShoppingCart(userId,saleOfferId);
+        NavigationManager.NavigateTo(NavigationManager.Uri,true);
+    }
 
 }

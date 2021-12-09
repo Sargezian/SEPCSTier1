@@ -59,5 +59,10 @@ namespace SEPCSTier1.Data
 
             return result.Data.TotalPriceById;
         }
+
+        public async void RemoveShoppingCart(long userId, long saleOfferId)
+        {
+            await graphqlClient.DeleteShoppingCart.ExecuteAsync(userId, saleOfferId);
+        }
     }
 }

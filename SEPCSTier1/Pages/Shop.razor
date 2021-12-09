@@ -98,6 +98,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        
         activeOffers = new List<Product>();
         allItems = new List<Product>();
         Items = await IitemData.GetItems();
@@ -118,6 +119,8 @@
         }
 
          activeOffers = allItems;
+        
+     
     }
 
 

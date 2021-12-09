@@ -1,0 +1,3 @@
+﻿mutation DeleteShoppingCart($user_id: Long!, $sale_offer_id: Long!) {
+    deleteShoppingCart(user_id: $user_id, sale_offer_id: $sale_offer_id)
+}
