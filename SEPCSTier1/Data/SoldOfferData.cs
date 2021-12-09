@@ -34,6 +34,41 @@ namespace SEPCSTier1.Data
             return Itemslist;
         }
 
+        public async Task<IList<SoldOffer>> getSoldOfferByOrderId()
+        {
+            var result = await graphqlClient.GetSoldOffer.ExecuteAsync();
+
+            
+            Itemslist = result.Data.AllSoldOffer.Select(offer => new SoldOffer()
+            {
+                id = offer.Id,
+                sale_price = offer.Sale_price,
+                item_id = offer.Item_id,
+                seller_wallet_id = offer.Seller_wallet_id,
+                order_id = offer.Order_id
+            }).ToList();
+            
+            return Itemslist;
+        }
+        
+        public async Task<IList<SoldOffer>> getSoldOfferBySellerWalletId()
+        {
+            var result = await graphqlClient.GetSoldOffer.ExecuteAsync();
+
+            
+            Itemslist = result.Data.AllSoldOffer.Select(offer => new SoldOffer()
+            {
+                id = offer.Id,
+                sale_price = offer.Sale_price,
+                item_id = offer.Item_id,
+                seller_wallet_id = offer.Seller_wallet_id,
+                order_id = offer.Order_id
+            }).ToList();
+            
+            return Itemslist;
+        }
+        
+        
         
         public async Task<SoldOffer> GetSoldOfferById(long id)
         {

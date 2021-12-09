@@ -1,0 +1,7 @@
+query OrderByWalletId ($id: Long!) {
+    getOrderByWalletBuyerId(id:$id) {
+        id,
+        wallet_buyer_id,
+        sale_id
+    }
+}

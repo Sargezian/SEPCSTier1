@@ -1,0 +1,7 @@
+query SoldOfferBySellerWalletId ($id: Long!) {
+    getSoldOfferBySellerWalletId(id:$id) {
+        id,
+        item_id,order_id,sale_price,seller_wallet_id
+    }
+}
+    
