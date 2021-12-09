@@ -65,9 +65,11 @@ namespace SEPCSTier1.Data
             
             return itemss;
         }
-        public async void AddOrder(Order order)
+        public async Task<Order> AddOrder(Order order)
         {
             await graphqlClient.AddOrder.ExecuteAsync(order.wallet_buyer_id, order.sale_id);
+
+            return order;
         }
     }
 }

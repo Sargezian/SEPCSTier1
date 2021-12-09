@@ -105,18 +105,23 @@
                 };
                 
                 //send ordre
-                orderData.AddOrder(o);
-
+                Console.WriteLine("tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+                var addOrder = await orderData.AddOrder(o);
+                var resultItemId = await offerData.GetOfferBySaleOfferId(cart.sale_offer_id);
+                var orderBySaleId = await orderData.GetOrderBySaleId(cart.sale_offer_id);
+                var offerBySaleOfferId = await offerData.GetOfferBySaleOfferId(cart.sale_offer_id);
+               
+                
                 SoldOffer soldoffer = new SoldOffer()
                 {
-                    item_id = offerData.GetOfferBySaleOfferId(cart.sale_offer_id).Result.item_id,
-                    order_id = orderData.GetOrderBySaleId(cart.sale_offer_id).Id,
-                    sale_price = offerData.GetOfferBySaleOfferId(cart.sale_offer_id).Result.sale_price,
-                    seller_wallet_id = offerData.GetOfferBySaleOfferId(cart.sale_offer_id).Result.wallet_id
+                    item_id = resultItemId.item_id,
+                    order_id = orderBySaleId.id,
+                    sale_price = offerBySaleOfferId.sale_price,
+                    seller_wallet_id = offerBySaleOfferId.wallet_id
                 };
                 
                 Console.WriteLine(""+soldoffer.id +","+soldoffer.item_id+","+ soldoffer.order_id+","+ soldoffer.sale_price+","+ soldoffer.seller_wallet_id);
-                //soldOfferData.AddSoldOffer(soldoffer);
+                await soldOfferData.AddSoldOffer(soldoffer);
                 
                 
                 //Slet saleoffer

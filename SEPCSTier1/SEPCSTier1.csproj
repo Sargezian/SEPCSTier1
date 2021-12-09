@@ -22,7 +22,13 @@
 
     <ItemGroup>
       <AdditionalFiles Remove="Graphql\AddPayment.graphql" />
-      <AdditionalFiles Remove="Graphql\AddSaleOffer.graphql" />
+      <AdditionalFiles Remove="Graphql\Generated\AddSaleOffer.graphql" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <GraphQL Update="Graphql\AddSaleOffer.graphql">
+        <Generator>MSBuild:Compile</Generator>
+      </GraphQL>
     </ItemGroup>
 
 </Project>
