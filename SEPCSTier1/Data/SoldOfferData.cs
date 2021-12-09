@@ -52,9 +52,11 @@ namespace SEPCSTier1.Data
             return itemss;
         }
 
-        public async void AddSoldOffer(SoldOffer saleOffer)
+        public async Task<SoldOffer> AddSoldOffer(SoldOffer saleOffer)
         {
             var result = await graphqlClient.AddSoldOffer.ExecuteAsync(saleOffer.item_id, saleOffer.order_id, saleOffer.sale_price, saleOffer.seller_wallet_id);
+
+            return saleOffer;
         }
        
     }
