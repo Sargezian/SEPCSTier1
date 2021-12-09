@@ -2,55 +2,111 @@
 @page "/shop"
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
+@using Microsoft.Extensions.Primitives
 @inject IItemData IitemData
 @inject IOfferData IofferData
-@inject NavigationManager NavigationManager 
+@inject NavigationManager NavigationManager
 
-
-<table class="table">
-    <tbody>
-    <RadzenDataList WrapItems="true" AllowPaging="true" Data="@activeOffers" TItem="Product">
-        <Template Context="items">
-            <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
-                <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
-                    <div class="col-md-12">
-                        <div class="d-flex justify-content-between">
-                            <p>Skin Name</p>
-                            <p>Skin Price</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p><b>@items.weaponname</b></p>
-                            <p><b>@items.sale_price</b></p>
-                        </div>
-                        
-                        <img src="@items.weaponURL" width="300px"/>
-                                  
-                    </div>
+<div class="col-12 bg-white d-inline-block">
+    <div class="d-flex justify-content-center">
+                <div class="p-2">
+                    <p>Price range</p>
+                    <label for="">Min</label>
+                    <input type="number" id="typeNumber" @bind-value="@minValue"/>
+                    <br>
+                    <label for="">Max</label>
+                    <input type="number" id="typeNumber" @bind-value="@maxValue"/>
+                    
                 </div>
-            </RadzenCard>
-        </Template>
-    </RadzenDataList>
-    </tbody>
-</table>
+        
+        <div class="p-2">
+            <p>Search</p>
+            <RadzenTextBox Placeholder="Search..." @bind-Value="searchItem"/>
+            <!--Change=@(args => OnSearchChange(args, "TextBox with placeholder"))-->
+        </div>
+        <div class="p-2">
+            <button type="button" class="btn btn-primary" @onclick="search">Search</button>
+        </div>
+            </div>
+        </div>
 
+<div>
+    <table class="table">
+        <tbody>
+        <RadzenDataList WrapItems="true" AllowPaging="true" Data="@activeOffers" TItem="Product">
+            <Template Context="items">
+                <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
+                    <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-between">
+                                <p>Skin Name</p>
+                                <p>Skin Price</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>
+                                    <b>@items.weaponname</b>
+                                </p>
+                                <p>
+                                    <b>@items.sale_price</b>
+                                </p>
+                            </div>
+
+                            <img src="@items.weaponURL" width="300px"/>
+
+                        </div>
+                    </div>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+        </tbody>
+    </table>
+</div>
 
 @code {
 
     private IList<Itemss> ItemList;
     private IList<SaleOffer> saleOffers;
     private IList<Product> activeOffers;
-    private IList<Itemss> Items;
+    private IList<Product> allItems;
+    private IList<Itemss> Items; 
+    public string searchItem = "";
+    public int minValue = 0;
+    public int maxValue = 0;
+    
+    
+// SLIDER STUFF
+
+
+
+
+    // DROPDOWN STUFF (String burde være class - katagorier)
+    private IEnumerable<string> customers;
+
+    void OnDropdownChange(object value, string name)
+    {
+    //var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+    //console.Log($"{name} value changed to {str}");
+    }
+
+    // SEARCH STUFF
+    string value;
+
+    void OnSearchChange(string value, string name)
+    {
+     
+    }
 
     protected override async Task OnInitializedAsync()
     {
         activeOffers = new List<Product>();
+        allItems = new List<Product>();
         Items = await IitemData.GetItems();
         saleOffers = await IofferData.GetOffers();
         ItemList = Items;
 
         foreach (var VARIABLE in saleOffers)
         {
-            activeOffers.Add(new Product()
+            allItems.Add(new Product()
             {
                 saleOffer_id = VARIABLE.id,
                 item_id = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).id,
@@ -60,12 +116,47 @@
                 weaponURL = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponURL
             });
         }
+
+         activeOffers = allItems;
     }
-    
+
 
     private void productGoTo(long item_id, long offer_id)
     {
         NavigationManager.NavigateTo($"Product/{offer_id}/{item_id}");
     }
     
+    
+
+    private void search()
+    {
+        Console.WriteLine(minValue);
+        Console.WriteLine(maxValue);
+        if (searchItem == "")
+        {
+            activeOffers = allItems;
+        }
+        else
+        {
+            IList<Product> Items2 = new List<Product>();
+            foreach (Product v in allItems)
+            {
+                if (v.weaponname.ToLower().Contains(searchItem.ToLower()))
+                {
+                    if (v.sale_price > minValue || minValue == 0)
+                    {
+                        if (v.sale_price < maxValue || maxValue == 0)
+                        {
+                            Items2.Add(v); 
+                        }
+                    }
+                    
+                }
+            }
+            activeOffers = Items2;
+        }
+    }
+
+
+
 }
