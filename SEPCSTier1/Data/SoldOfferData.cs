@@ -34,7 +34,7 @@ namespace SEPCSTier1.Data
             return Itemslist;
         }
 
-        public async Task<IList<SoldOffer>> getSoldOfferByOrderId()
+        public async Task<IList<SoldOffer>> getSoldOfferByOrderId(long id)
         {
             var result = await graphqlClient.GetSoldOffer.ExecuteAsync();
 
@@ -51,7 +51,7 @@ namespace SEPCSTier1.Data
             return Itemslist;
         }
         
-        public async Task<IList<SoldOffer>> getSoldOfferBySellerWalletId()
+        public async Task<IList<SoldOffer>> getSoldOfferBySellerWalletId(long id)
         {
             var result = await graphqlClient.GetSoldOffer.ExecuteAsync();
 

@@ -8,9 +8,9 @@ namespace SEPCSTier1.Data
     {
         Task<IList<SoldOffer>> GetSoldOffers();
         
-        Task<List<SoldOffer>> getSoldOfferByOrderId(long id);
+        Task<IList<SoldOffer>> getSoldOfferByOrderId(long id);
         
-        Task<List<SoldOffer>> getSoldOfferBySellerWalletId(long id);
+        Task<IList<SoldOffer>> getSoldOfferBySellerWalletId(long id);
         Task<SoldOffer> GetSoldOfferById(long id);
         Task<SoldOffer> AddSoldOffer(SoldOffer soldOffer);
     }
