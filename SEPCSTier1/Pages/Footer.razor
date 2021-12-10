@@ -1,6 +1,7 @@
 @page "/Footer"
 
 
+@*
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     
@@ -65,7 +66,80 @@
     
   </div>
 </nav>
+*@
 
+<footer class="mainfooter">
+         <div class="footer-middle">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-3 col-sm-6">
+                     <!--Lennart: Her er vores første colmumn. mailto: trigger dig til mail. og tel: trigger dig til opkald. &nbsp; bruges til at lave et tomt felt. -->
+                     <div class="footer-pad">
+                        <h4><img src="images/Logo1.png" alt="">Colour IT</h4>
+                        <ul class="list-unstyled">
+                           <li>Via University College</li>
+                           <li>8700 Horsens</li>
+                           <li>CVR: 12345678</li>
+                           <li>&nbsp;</li>
+                           <li><h5>Kontakt</h5></li>
+                           <li>&nbsp;</li>
+                           <li>
+                              <img src="images/mail.png" alt="mail"> <a href="mailto:ColourIT@Email.com">ColourIT@Email.com</a>
+                           </li>
+                           <li>&nbsp;</li>
+                           <li>
+                              <img src="images/phone-24.png" alt="phone"><a href="tel:123-456-7891">123-456-7891</a>
+                           </li>
+                           <li>&nbsp;</li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                     <!--Lennart: Her er vores colmumn 2, href, bruges til at linke til vores sider-->
+                     <div class="footer-pad">
+                        <h4>Menu</h4>
+                        <br>
+                        <ul class="list-unstyled">
+                           <li><a href="index.html">Hjem</a></li>
+                           <li><a href="Service.html">Service</a></li>
+                           <li><a href="Udviklingsteamet.html">Udviklingsteamet</a></li>
+                           <li><a href="Projekter.html">Projekter</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                     <!--Lennart: Her er vores colmumn 3, her bruges en input funktion, samt en submit knap til mail-->
+                     <div class="footer-pad">
+                        <h4>Nyhedsbrev</h4>
+                        <br>
+                        <p>Tilmeld dig vores nyhedsbrev her!</p>
+                        <input type="text" class="form-control" placeholder="Email...">
+                        <br>
+                        <input type="Submit">
+                        <br>
+                     </div>
+                  </div>
+                  <!--Lennart: Her er vores colmumn 4, hvor vi benytter os af button class, som bliver anvendt vha. bootstrap. -->
+                  <div class="col-md-3">
+                    <br>
+                     <h4>Følg os <strong>HER!</strong></h4>
+                     <!--Abdullahi: Her har vi linket vores sociale medier . -->
+                     <br>
+                           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                           <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+                          <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                          <a href="http://www.youtube.com/" class="fa fa-youtube"></a>
+               </div>
+               </div>
+               <!--Lennart: &copy bruges til at lave et c icon.  -->
+               <div class="row">
+                  <div class="col-md-12 copy">
+                     <p class="text-center">&copy; Copyright 2020 - Colour IT Inc.  All rights reserved.</p>
+                  </div>
+            </div>
+         </div>
+         </div>
+      </footer>
 
 
 @code {
