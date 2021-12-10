@@ -7,8 +7,11 @@
 @inject IOfferData IofferData
 @inject NavigationManager NavigationManager
 
-<div class="col-12 bg-white d-inline-block">
-    <div class="d-flex justify-content-center">
+<div>
+    <table class="table">
+               <h1 style="margin: 25px 0 0 150px; font-size: 50px">Product catalog</h1>
+        <div class="bg-white d-inline-block" style="margin: 15px 150px 0 150px">
+            <div class="d-flex justify-content-center">
                 <div class="p-2">
                     <p>Price range</p>
                     <label for="">Min</label>
@@ -16,24 +19,21 @@
                     <br>
                     <label for="">Max</label>
                     <input type="number" id="typeNumber" @bind-value="@maxValue"/>
-                    
+
                 </div>
-        
-        <div class="p-2">
-            <p>Search</p>
-            <RadzenTextBox Placeholder="Search..." @bind-Value="searchItem"/>
-            <!--Change=@(args => OnSearchChange(args, "TextBox with placeholder"))-->
-        </div>
-        <div class="p-2">
-            <button type="button" class="btn btn-primary" @onclick="search">Search</button>
-        </div>
+
+                <div class="p-2">
+                    <p>Search</p>
+                    <RadzenTextBox Placeholder="Search..." @bind-Value="searchItem"/>
+                    <!--Change=@(args => OnSearchChange(args, "TextBox with placeholder"))-->
+                </div>
+                <div class="p-2">
+                    <button type="button" class="btn btn-primary" @onclick="search">Search</button>
+                </div>
             </div>
         </div>
-
-<div>
-    <table class="table">
         <tbody>
-        <RadzenDataList WrapItems="true" AllowPaging="true" Data="@activeOffers" TItem="Product">
+        <RadzenDataList WrapItems="true" AllowPaging="true" Data="@activeOffers" Style="margin: 15px 150px 0 150px" TItem="Product">
             <Template Context="items">
                 <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
                     <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
@@ -68,15 +68,13 @@
     private IList<SaleOffer> saleOffers;
     private IList<Product> activeOffers;
     private IList<Product> allItems;
-    private IList<Itemss> Items; 
+    private IList<Itemss> Items;
     public string searchItem = "";
     public int minValue = 0;
     public int maxValue = 0;
-    
-    
-// SLIDER STUFF
 
 
+    // SLIDER STUFF
 
 
     // DROPDOWN STUFF (String burde være class - katagorier)
@@ -93,7 +91,6 @@
 
     void OnSearchChange(string value, string name)
     {
-     
     }
 
     protected override async Task OnInitializedAsync()
@@ -117,7 +114,7 @@
             });
         }
 
-         activeOffers = allItems;
+        activeOffers = allItems;
     }
 
 
@@ -125,8 +122,7 @@
     {
         NavigationManager.NavigateTo($"Product/{offer_id}/{item_id}");
     }
-    
-    
+
 
     private void search()
     {
@@ -147,10 +143,9 @@
                     {
                         if (v.sale_price < maxValue || maxValue == 0)
                         {
-                            Items2.Add(v); 
+                            Items2.Add(v);
                         }
                     }
-                    
                 }
             }
             activeOffers = Items2;

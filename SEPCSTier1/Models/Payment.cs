@@ -4,7 +4,7 @@ namespace SEPCSTier1.Models
 {
     public class Payment
     {
-        public int id { get; set; }
+        public long id { get; set; }
         [Required]
         public string name { get; set; }
         [Required]

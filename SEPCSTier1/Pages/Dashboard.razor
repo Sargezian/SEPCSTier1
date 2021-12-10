@@ -1,10 +1,16 @@
 ﻿@page "/dashboard"
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject IItemData IitemData
-@inject IOfferData IofferData
-@inject IWalletData IwalletData 
+@inject IOrderData orderData 
+@inject ISoldOfferData soldOfferData 
+
+@inject IUserData userData
+
 @inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
+
 
 <!-- USER PROFILE PART (LEFT) -->
 <div>
@@ -12,7 +18,7 @@
 </div>
 
 <div class="d-flex">
-    <div class="col-5 my-6">
+    <div class="col-5 my-6" style="margin: 20px 50px 0 50px">
         <div class="">
             <RadzenCard class="m-1">
                 <h3 class="h5">Contact</h3>
@@ -20,7 +26,7 @@
                     <RadzenImage Path="AK47.webp" Class="rounded-circle float-left mr-3" Style="width: 100px; height: 100px;"/>
                     <div>
                         <div>Employee</div>
-                        <b>Bente bent</b>
+                        <b>@id</b>
                         <div class="mt-3">Company</div>
                         <b>+3 reps</b>
                     </div>
@@ -48,42 +54,10 @@
 
     <div>
         <div>
-            <h1>Active buy offers</h1>
+            <h1>My sold products</h1>
             <table class="table">
                 <tbody>
-                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@activeOffers" TItem="Product">
-                    <Template Context="items">
-                        <RadzenCard Style="width:200px; margin-bottom: 20px; height:400px;">
-                            <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
-                                <div class="col-md-12">
-                                    <div class="d-flex justify-content-between">
-                                        <p>Skin Name</p>
-                                        <p>Skin Price</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p>
-                                            <b>@items.weaponname</b>
-                                        </p>
-                                        <p>
-                                            <b>@items.sale_price</b>
-                                        </p>
-                                    </div>
-
-                                    <img src="@items.weaponURL" width="200px"/>
-
-                                </div>
-                            </div>
-                        </RadzenCard>
-                    </Template>
-                </RadzenDataList>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <h1>Active sale offers</h1>
-            <table class="table">
-                <tbody>
-                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@activeOffers" TItem="Product">
+                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@mySoldProducts" TItem="Product">
                     <Template Context="items">
                         <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
                             <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
@@ -118,28 +92,47 @@
 
 @code {
 
-    private IList<Itemss> ItemList;
-    private IList<SaleOffer> saleOffers;
-    private IList<Product> activeOffers;
-    private IList<Product> activeSales;
-    private Models.Wallet userWallet;
-    private IList<Itemss> Items;
-
-    //Get this from somewhere else - logged in as
-    private long userId = 17;
+    private IList<SoldOffer> mysoldOffers; // SALE PART - PRIS OSV
+    private IList<Itemss> mysoldOffersItems; // ITEM PART - BILLEDE OSV
+    private IList<Product> mySoldProducts; //FINAL - ^SAMLET
+    
+    private long id;
+    private User user;
 
     protected override async Task OnInitializedAsync()
     {
+        user = new User();
         
-        //TODO: ÆNDRE TIL ET CALL ISTEDET FOR 3
-        activeOffers = new List<Product>();
-        activeSales = new List<Product>();
-        Items = await IitemData.GetItems();
-        // userWallet = await IwalletData.getWalletById(userId);
-        saleOffers = await IofferData.GetOffers();
-        ItemList = Items;
-
-        foreach (var VARIABLE in saleOffers)
+        
+        
+        var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
+        id = protectedBrowserStorageResultId.Value;
+        
+        
+        mySoldProducts = new List<Product>();
+        if (id != 0)
+        {
+            mysoldOffers = await soldOfferData.getSoldOfferBySellerWalletId(id);
+            user = await userData.GetUserByID(id);
+            Console.WriteLine(mysoldOffers.Count());
+            
+    //DEL DER CRASHER LORETET.. Tror der mangler awaits
+            foreach (var VARIABLE in mysoldOffers)
+            {
+                var itemById = await IitemData.GetItemByID(VARIABLE.item_id);
+                Product i = new Product()
+                {
+                    sale_price = VARIABLE.sale_price,
+                    weaponname = itemById.weaponname,
+                    weaponURL = itemById.weaponURL
+                };
+                
+                mySoldProducts.Add(i);
+            }
+        }
+        
+        
+        /*foreach (var VARIABLE in saleOffers)
         {
             activeSales.Add(new Product()
             {
@@ -150,7 +143,7 @@
                 weaponname = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponname,
                 weaponURL = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponURL
             });
-        }
+        }*/
     }
 
     private void productGoTo(long item_id, long offer_id)

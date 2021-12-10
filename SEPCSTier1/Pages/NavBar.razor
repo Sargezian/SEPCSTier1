@@ -47,47 +47,47 @@
 *@
 
 
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="Shop">CSGO Trading</a>
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark" style="height:100px;">
+    <a class="navbar-brand font-weight-bold" style="font-size: 25px; margin-left: 35px;" href="Shop">CSGO Trading</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-   
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-       
+
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
                 <a class="nav-link" href="Shop">Home <span class="sr-only">(current)</span></a>
             </li>
-                        @if (id != 0)
-                        {
-            <li class="nav-item">
-                <a class="nav-link" href="AddItem">AddItem</a>
-            </li>
-                        }
+            @if (id != 0)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="AddItem">AddItem</a>
+                </li>
+            }
 
-                            @*<li class="nav-item">
+            @*<li class="nav-item">
                 <a class="nav-link" href="Chat">Chat</a>
             </li>*@
-           
-               
-                   <AuthorizeView>
+
+
+            <AuthorizeView>
                 <NotAuthorized>
                     <li class="nav-item">
                         <a class="nav-link " href="Login">Login</a>
                     </li>
                 </NotAuthorized>
-               </AuthorizeView> 
-            
+            </AuthorizeView>
 
-                    <AuthorizeView Policy="SecurityLevel4">
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="Admin">Admin</a>
-                        </li>
-                    </AuthorizeView> 
-            
+            <AuthorizeView Policy="SecurityLevel4">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Admin">Admin</a>
+                </li>
+            </AuthorizeView>
+
             @if (id != 0)
             {
                 <li class="nav-item">
@@ -100,28 +100,26 @@
 
 
             <AuthorizeView>
-            <Authorized>
+                <Authorized>
                     <li class="nav-item">
                         <a class="nav-link " @onclick="PerformLogout"> Logout @name</a>
                     </li>
-  </Authorized>
-                     </AuthorizeView> 
+                </Authorized>
+            </AuthorizeView>
         </ul>
-        
-      
-       
-        
-        <label style="color: white; margin-right: 40px">Wallet: @WalletId € </label>
-        
-       
-        <div @onclick="@(() => NavigateToCart())">
-            
-            <i class="fa" style="color:white;font-size:35px"  >&#xf07a;</i>
-            <span class='badge badge-warning' id='lblCartCount'> @count </span>
-        </div>
-        
-        
-        
+
+
+        @if (id != 0)
+        {
+            <label style="color: white; margin-right: 40px">Wallet: @WalletId € </label>
+            <div style="margin-right: 35px;" @onclick="@(() => NavigateToCart())">
+
+                <i class="fa" style="color:white;font-size:35px">&#xf07a;</i>
+                <span class='badge badge-warning' id='lblCartCount'> @count </span>
+            </div>
+        }
+
+
     </div>
 </nav>
 
@@ -136,11 +134,9 @@
 
     public long WalletId { get; set; }
 
-    
 
     protected async override Task OnInitializedAsync()
     {
-      
         var protectedBrowserStorageResult = await ProtectedSessionStore.GetAsync<string>("username");
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
@@ -155,10 +151,6 @@
         {
             WalletId = await WalletData.SumOfBalance(id);
         }
-
-       
-      
-        
     }
 
 
@@ -178,8 +170,7 @@
 
     public async Task NavigateToCart()
     {
-        NavigationManager.NavigateTo("/Cart",true);
-        
+        NavigationManager.NavigateTo("/Cart", true);
     }
 
 }

@@ -14,5 +14,9 @@ namespace SEPCSTier1.Data
         void AddShoppingCart(ShoppingCarts shoppingCarts);
 
         Task<long> GetTotalPrice(long id);
+        
+        
+        
+        void RemoveShoppingCart(long userId,long saleOfferId);
     }
 }
