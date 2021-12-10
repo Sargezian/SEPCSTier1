@@ -9,26 +9,28 @@
 
 <div>
     <table class="table">
-               <h1 style="margin: 25px 0 0 150px; font-size: 50px">Product catalog</h1>
-        <div class="bg-white d-inline-block" style="margin: 15px 150px 0 150px">
-            <div class="d-flex justify-content-center">
-                <div class="p-2">
-                    <p>Price range</p>
-                    <label for="">Min</label>
-                    <input type="number" id="typeNumber" @bind-value="@minValue"/>
-                    <br>
-                    <label for="">Max</label>
-                    <input type="number" id="typeNumber" @bind-value="@maxValue"/>
+        <h1 style="margin: 25px 0 0 150px; font-size: 50px">Product catalog</h1>
+        <div style="width: 100%; ">
+            <div class="bg-white rounded" style="margin: 15px 160px 0 160px;">
+                <div class="d-flex justify-content-left">
+                    <div class="p-2">
+                        <p>Price range</p>
+                        <label for="">Min</label>
+                        <input type="number" id="typeNumber" @bind-value="@minValue"/>
+                        <br>
+                        <label for="">Max</label>
+                        <input type="number" id="typeNumber" @bind-value="@maxValue"/>
 
-                </div>
+                    </div>
 
-                <div class="p-2">
-                    <p>Search</p>
-                    <RadzenTextBox Placeholder="Search..." @bind-Value="searchItem"/>
-                    <!--Change=@(args => OnSearchChange(args, "TextBox with placeholder"))-->
-                </div>
-                <div class="p-2">
-                    <button type="button" class="btn btn-primary" @onclick="search">Search</button>
+                    <div class="p-2">
+                        <p>Search</p>
+                        <RadzenTextBox Placeholder="Search..." @bind-Value="searchItem"/>
+                        <!--Change=@(args => OnSearchChange(args, "TextBox with placeholder"))-->
+                    </div>
+                    <div class="p-2">
+                        <button type="button" class="btn btn-primary" @onclick="search">Search</button>
+                    </div>
                 </div>
             </div>
         </div>

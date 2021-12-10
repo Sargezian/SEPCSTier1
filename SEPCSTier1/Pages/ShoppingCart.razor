@@ -74,19 +74,22 @@
 
 @code {
 
-    private IList<ShowShoppingCart> shoppingCarts = new List<ShowShoppingCart>();
+    private IList<ShowShoppingCart> shoppingCarts;
     public long id { get; set; }
     public long totalPrice { get; set; }
     public long walletBalance { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        shoppingCarts = new List<ShowShoppingCart>();
+        
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
         if (id != 0)
         {
             shoppingCarts = await ShoppingCartData.GetShoppingCartById(id);
-            totalPrice = await ShoppingCartData.GetTotalPrice(id);
+            if(shoppingCarts.Count > 0)
+                totalPrice = await ShoppingCartData.GetTotalPrice(id);
             walletBalance = await walletData.SumOfBalance(id);
         }
     }
@@ -130,10 +133,11 @@
                 await soldOfferData.AddSoldOffer(soldoffer);
 
 
-    //Slet saleoffer
+                //Slet saleoffer
+                //offerData.
 
-
-    //Slet Shopping cart
+                //Slet Shopping cart
+                ShoppingCartData.RemoveShoppingCart(id, cart.sale_offer_id);
             }
 
 

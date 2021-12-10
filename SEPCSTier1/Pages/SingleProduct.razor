@@ -17,25 +17,18 @@
 }
 else
 {
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin: 20px 0 0 0">
         <div>
             <!-- IMG LEFT -->
             <img src="@product.weaponURL">
         </div>
 
-        <div class="bg-light rounded-lg pl-5 pt-4 w-50">
+        <div class="bg-light rounded-lg pl-5 pt-4 ml-1 w-50">
             <!-- TEXT RIGHT -->
             <h1 class="fw-bold">@product.weaponname</h1>
-            <h3 class="fw-bolder">Pris: @product.sale_price</h3>
+            <h3 class="fw-bolder mt-3" style="font-size: 25px">Pris: @product.sale_price</h3>
 
-            <div class="d-flex">
-                <h3>Overskrift</h3>
-                <p class="fw-normal">Description</p>
-            </div>
-
-            <p class="fw-normal">Description</p>
-
-            <div>
+            <div style="margin-top: 100px">
                 @if (id != 0)
                 {
                     <button type="button" @onclick="@(() => { toastService.ShowInfo("dsds"); addToCart();})" class="btn btn-primary">Læg i kurv</button>
