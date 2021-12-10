@@ -103,27 +103,32 @@
     {
         user = new User();
         
+        
+        
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
-
+        
+        
+        mySoldProducts = new List<Product>();
         if (id != 0)
         {
             mysoldOffers = await soldOfferData.getSoldOfferBySellerWalletId(id);
             user = await userData.GetUserByID(id);
             Console.WriteLine(mysoldOffers.Count());
             
-            /* DEL DER CRASHER LORETET.. Tror der mangler awaits
+    //DEL DER CRASHER LORETET.. Tror der mangler awaits
             foreach (var VARIABLE in mysoldOffers)
             {
+                var itemById = await IitemData.GetItemByID(VARIABLE.item_id);
                 Product i = new Product()
                 {
                     sale_price = VARIABLE.sale_price,
-                    weaponname = IitemData.GetItemByID(VARIABLE.item_id).Result.weaponname,
-                    weaponURL = IitemData.GetItemByID(VARIABLE.item_id).Result.weaponURL
+                    weaponname = itemById.weaponname,
+                    weaponURL = itemById.weaponURL
                 };
                 
                 mySoldProducts.Add(i);
-            }*/
+            }
         }
         
         

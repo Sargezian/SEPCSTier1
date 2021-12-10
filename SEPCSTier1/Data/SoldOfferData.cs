@@ -36,10 +36,10 @@ namespace SEPCSTier1.Data
 
         public async Task<IList<SoldOffer>> getSoldOfferByOrderId(long id)
         {
-            var result = await graphqlClient.GetSoldOffer.ExecuteAsync();
+            var result = await graphqlClient.SoldOfferByOrderId.ExecuteAsync(id);
 
             
-            Itemslist = result.Data.AllSoldOffer.Select(offer => new SoldOffer()
+            Itemslist = result.Data.GetSoldOfferByOrderId.Select(offer => new SoldOffer()
             {
                 id = offer.Id,
                 sale_price = offer.Sale_price,
@@ -53,10 +53,10 @@ namespace SEPCSTier1.Data
         
         public async Task<IList<SoldOffer>> getSoldOfferBySellerWalletId(long id)
         {
-            var result = await graphqlClient.GetSoldOffer.ExecuteAsync();
+            var result = await graphqlClient.SoldOfferBySellerWalletId.ExecuteAsync(id);
 
             
-            Itemslist = result.Data.AllSoldOffer.Select(offer => new SoldOffer()
+            Itemslist = result.Data.GetSoldOfferBySellerWalletId.Select(offer => new SoldOffer()
             {
                 id = offer.Id,
                 sale_price = offer.Sale_price,
