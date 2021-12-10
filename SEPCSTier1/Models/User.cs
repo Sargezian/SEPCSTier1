@@ -15,7 +15,7 @@ namespace SEPCSTier1.Models
        
         public string lastName { get; set; }
         
-        public int SecurityLevel { get; set; }
+        public long SecurityLevel { get; set; }
         
         
         

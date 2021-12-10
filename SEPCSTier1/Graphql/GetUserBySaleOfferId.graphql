@@ -1,0 +1,5 @@
+query GetUserBySaleOfferId($id:Long!){
+    userBySaleOfferId(id:$id){
+        username
+    }
+}

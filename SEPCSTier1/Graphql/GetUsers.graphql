@@ -3,5 +3,6 @@ query GetUsers{
         id
         username
         password
+        securitylevel
     }
 }

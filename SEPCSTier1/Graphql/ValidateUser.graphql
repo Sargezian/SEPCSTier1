@@ -3,5 +3,6 @@ query ValidateUser($username: String!, $password: String!) {
         id
         username
         password
+        securitylevel
     }
 }

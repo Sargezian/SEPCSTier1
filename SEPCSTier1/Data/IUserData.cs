@@ -14,5 +14,11 @@ namespace SEPCSTier1.Data
         Task<User> ValidateUser(string userName, string passWord);
         
         Task<User> GetUserByID(long id);
+
+
+        Task<User> UpdateUser(User user, long id);
+
+
+        Task<User> GetUserBySaleOfferId(long id);
     }
 }

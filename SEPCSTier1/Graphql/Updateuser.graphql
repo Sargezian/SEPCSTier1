@@ -1,0 +1,18 @@
+mutation UpdateUser(
+    $id: Long!
+    $username: String!
+    $password: String!
+    $securitylevel: Long!
+) {
+    updateUser(
+        id: $id
+        username: $username
+        password: $password
+        securitylevel: $securitylevel
+    ) {
+        id
+        username
+        password
+        securitylevel
+    }
+}

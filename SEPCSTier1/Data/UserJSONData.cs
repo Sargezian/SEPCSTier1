@@ -35,7 +35,8 @@ namespace SEPCSTier1.Data
             {
                 id = users.Id,
                 username = users.Username,
-                password = users.Password
+                password = users.Password,
+                SecurityLevel = users.Securitylevel
             }).ToList();
                 
             return userList;
@@ -56,7 +57,9 @@ namespace SEPCSTier1.Data
                 {
                     id = result.Data.ValidateUser.Id,
                     username = result.Data.ValidateUser.Username,
-                    password = result.Data.ValidateUser.Password
+                    password = result.Data.ValidateUser.Password,
+                    SecurityLevel = result.Data.ValidateUser.Securitylevel
+                    
                 };
                 return user;
             }
@@ -73,17 +76,44 @@ namespace SEPCSTier1.Data
         
         public async Task<User> GetUserByID(long Id)
         {
-            /*var result = await graphqlClient.UserById.ExecuteAsync(Id);
+            var result = await graphqlClient.UserById.ExecuteAsync(Id);
            
 
             User user = new User
             {
                 id = result.Data.UserById.Id,
-                username = result.Data.UserById.Username
-                
+                username = result.Data.UserById.Username,
+                password = result.Data.UserById.Password,
+                SecurityLevel = result.Data.UserById.Securitylevel
+
             };
-           */
-            return null;
+           
+            return user;
+        }
+
+
+
+        public async Task<User> GetUserBySaleOfferId(long id)
+        {
+            var result = await graphqlClient.GetUserBySaleOfferId.ExecuteAsync(id);
+
+            User user = new User
+            {
+               username = result.Data.UserBySaleOfferId.Username
+            };
+
+
+            return user;
+        }
+
+
+
+        public async Task<User> UpdateUser(User user,long id)
+        {
+            await graphqlClient.UpdateUser.ExecuteAsync(id,user.username,user.password,user.SecurityLevel);
+            
+            return user;
+
         }
     }
 }

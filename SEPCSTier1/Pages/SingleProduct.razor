@@ -5,6 +5,7 @@
 @inject IItemData ItemData
 @inject IOfferData IofferData
 @inject ICart cart
+@inject IUserData userData
 @inject IShoppingCartData ShoppingCartData
 @inject ProtectedSessionStorage ProtectedSessionStore
 @inject NavigationManager NavigationManager
@@ -56,7 +57,7 @@ else
                     <RadzenImage Path="@product.weaponURL" Class="rounded-circle float-left mr-3" Style="width: 100px; height: 100px;" />
                     <div>
                         <div>Seller</div>
-                        <b>Bente bendt</b>
+                        <b> @name </b>
                         <div class="mt-3">Reps</div>
                         <b>2 plus reps</b>
                     </div>
@@ -77,15 +78,21 @@ else
     public long item_id { get; set; }
     [Parameter]
     public long offer_id { get; set; }
+
+    
     
     public long id { get; set; }
 
     private Itemss item;
     private SaleOffer offer;
     private Product product;
+    private string name = new string("");
 
     protected override async Task OnInitializedAsync()
     {
+        
+        var userBySaleOfferId = await userData.GetUserBySaleOfferId(offer_id);
+        name = userBySaleOfferId.username;
         //Get logged in id
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
@@ -106,6 +113,7 @@ else
             };
         }
 
+       
     }
 
     public void showNoti()

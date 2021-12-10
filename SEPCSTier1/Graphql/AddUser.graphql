@@ -1,1 +1,1 @@
-mutation AddUser($username: String!, $password: String!) {addUser(username: $username, password: $password) {username,password}}
+mutation AddUser($username: String!, $password: String!) {addUser(username: $username, password: $password) {username,password,securitylevel}}

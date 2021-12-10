@@ -13,6 +13,7 @@ type Query {
   orderById(id: Long!): Order
   itemById(id: Long!): Items
   userById(id: Long!): User
+  userBySaleOfferId(id: Long!): User
   validateUser(username: String password: String): User
   offers(where: SaleOfferFilterInput order: [SaleOfferSortInput!]): [SaleOffer]
   offerByUserId(id: Long!): [SaleOffer]
@@ -43,6 +44,7 @@ type Mutation {
   addSaleOffer(item_id: Long! sale_price: Int! wallet_id: Long!): SaleOffer
   deleteShoppingCart(user_id: Long! sale_offer_id: Long!): Long!
   updatePayment(name: String cardnumber: String expirationdate: String securitycode: String id: Long!): CreditCard
+  updateUser(username: String password: String securitylevel: Long! id: Long!): User
 }
 
 type Subscription {
