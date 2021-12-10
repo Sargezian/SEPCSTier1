@@ -1,4 +1,6 @@
-﻿namespace SEPCSTier1.Models
+﻿using System;
+
+namespace SEPCSTier1.Models
 {
     public class SaleOffer
     {
@@ -6,6 +8,7 @@
         public long item_id { get; set; }
         public int sale_price { get; set; }
         public long wallet_id { get; set; }
+        public bool available { get; set; }
         
        
     }

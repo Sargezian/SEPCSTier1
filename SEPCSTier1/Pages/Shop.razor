@@ -102,9 +102,13 @@
         Items = await IitemData.GetItems();
         saleOffers = await IofferData.GetOffers();
         ItemList = Items;
-
+        
+    //Kunne lave API for at gette alle avaliable
         foreach (var VARIABLE in saleOffers)
         {
+            Console.WriteLine(VARIABLE.item_id + ", "+VARIABLE.available);
+            if (VARIABLE.available)
+            {
             allItems.Add(new Product()
             {
                 saleOffer_id = VARIABLE.id,
@@ -114,6 +118,8 @@
                 weaponname = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponname,
                 weaponURL = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponURL
             });
+            }
+
         }
 
         activeOffers = allItems;

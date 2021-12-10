@@ -3,6 +3,7 @@
         id,
         item_id,
         sale_price,
-        wallet_id
+        wallet_id,
+        available
     }
 }
