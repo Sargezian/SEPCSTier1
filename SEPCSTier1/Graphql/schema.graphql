@@ -43,6 +43,7 @@ type Mutation {
   updatePrice(balance: Int! id: Long!): Wallet
   addSaleOffer(item_id: Long! sale_price: Int! wallet_id: Long!): SaleOffer
   deleteShoppingCart(user_id: Long! sale_offer_id: Long!): Long!
+  deleteSaleOffer(id: Long!): Long!
   updatePayment(name: String cardnumber: String expirationdate: String securitycode: String id: Long!): CreditCard
   updateUser(username: String password: String securitylevel: Long! id: Long!): User
 }
@@ -114,6 +115,7 @@ input SaleOfferFilterInput {
   item_id: ComparableInt64OperationFilterInput
   sale_price: ComparableInt32OperationFilterInput
   wallet_id: ComparableInt64OperationFilterInput
+  available: BooleanOperationFilterInput
 }
 
 input SaleOfferSortInput {
@@ -121,6 +123,7 @@ input SaleOfferSortInput {
   item_id: SortEnumType
   sale_price: SortEnumType
   wallet_id: SortEnumType
+  available: SortEnumType
 }
 
 input ComparableInt64OperationFilterInput {
@@ -173,6 +176,11 @@ input ComparableInt32OperationFilterInput {
   nlte: Int
 }
 
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
 type Order {
   id: Long!
   wallet_buyer_id: Long!
@@ -205,6 +213,7 @@ type SaleOffer {
   item_id: Long!
   sale_price: Int!
   wallet_id: Long!
+  available: Boolean!
 }
 
 type ShowShoppingCart {

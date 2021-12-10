@@ -27,7 +27,8 @@ namespace SEPCSTier1.Data
                 id = offer.Id,
                 sale_price = offer.Sale_price,
                 item_id = offer.Item_id,
-                wallet_id = offer.Wallet_id
+                wallet_id = offer.Wallet_id,
+                available = offer.Available
             }).ToList();
             
             return Itemslist;
