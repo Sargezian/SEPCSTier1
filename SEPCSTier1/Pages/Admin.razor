@@ -1,7 +1,6 @@
 @page "/Admin"
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject IUserData UserData
 @inject NavigationManager NavigationManager
 @attribute [Authorize (Policy ="SecurityLevel4")]
@@ -18,7 +17,7 @@
 else if (!usersAccountsToShow.Any())
 {
     <p>
-        <em>No ToDo items exist. Please add some.</em>
+        <em>No user exist. Please add some.</em>
     </p>
 }
 else
@@ -60,19 +59,6 @@ else
         </tbody>
     </table>
 }
-<div style="margin-left: 50px">
-    <h1>Add User Accounts</h1>
-
-    <EditForm Model="newUserAccount" OnValidSubmit="@AddnewUserAccount">
-        <DataAnnotationsValidator/> <ValidationSummary/>
-        <div class="form-group"> Username:<br/> <InputText @bind-Value="newUserAccount.username"/> </div>
-        <div class="form-group"> Password:<br/> <InputText @bind-Value="newUserAccount.password"/> </div>
-        <div class="form-group"> SecurityLevel:<br/> <InputNumber @bind-Value="newUserAccount.SecurityLevel"/> </div>
-        <p class="actions">
-            <button class="btn btn-outline-dark" type="submit">Create</button>
-        </p>
-    </EditForm>
-</div>
 
 @code {
 
