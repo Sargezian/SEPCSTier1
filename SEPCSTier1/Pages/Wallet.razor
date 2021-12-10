@@ -36,9 +36,11 @@
             </td>
 
             <td>
-                <button >
-                    <i class="oi oi-pencil" style="color:#1b6ec2"/>
-                </button>
+                
+                    <button @onclick="@(() => EditPayment(payment.id))">
+                        <i class="oi oi-pencil" style="color:#1b6ec2"/>
+                    </button>
+                
             </td>
 
         </tr>
@@ -80,7 +82,6 @@
     {
         try
         {
-            
             var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
             id = protectedBrowserStorageResultId.Value;
 
@@ -90,6 +91,8 @@
             Console.WriteLine("price " + totalPrice);
             var result = await ProtectedSessionStore.GetAsync<long>("P");
             PaymentId = result.Value;
+
+            Console.WriteLine("payment id:" + payment.id);
         }
         catch (Exception e)
         {
@@ -101,15 +104,14 @@
 
     public async void UpdateWallet()
     {
-        await WalletData.UpdateWallets(new Models.Wallet((int) (_wallet.balance + totalPrice),id));
+        await WalletData.UpdateWallets(new Models.Wallet((int) (_wallet.balance + totalPrice), id));
         NavigationManager.NavigateTo(NavigationManager.Uri, true);
-
-        
     }
 
 
-
-
-
+    private void EditPayment(long Id)
+    {
+        NavigationManager.NavigateTo($"EditPayment/{Id}");
+    }
 
 }

@@ -12,5 +12,7 @@ namespace SEPCSTier1.Data
         Task<Payment> GetPaymentByName(string name);
 
         Task<long> GetPaymentId(string name);
+
+        Task<Payment> UpdatePayment(long id, Payment payment);
     }
 }

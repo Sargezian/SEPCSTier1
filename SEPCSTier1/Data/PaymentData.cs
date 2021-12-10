@@ -76,6 +76,24 @@ namespace SEPCSTier1.Data
 
             return Payment;
         }
+        
+        
+        public async Task<Payment> UpdatePayment(long id,Payment payment)
+        {
+           
+            await graphqlClient.UpdatePayment.ExecuteAsync(id,payment.name,payment.cardnumber,payment.expirationdate,payment.securitycode);
+
+            return payment;
+
+        }
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     }

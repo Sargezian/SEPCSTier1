@@ -1,0 +1,57 @@
+﻿@page "/EditPayment/{Id:long}"
+@using SEPCSTier1.Data
+@using SEPCSTier1.Models
+@attribute [Authorize]
+@inject IPaymentData PaymentData
+@inject NavigationManager NavigationManager
+<h3>Edit Payment with id: @Id</h3>
+
+@if (paymentToEdit == null)
+{
+    <em>Payment not found!</em>
+}
+else
+{
+    <EditForm Model="@paymentToEdit" OnValidSubmit="@Save">
+        <DataAnnotationsValidator/> <ValidationSummary/>
+        <div class="form-group"> Name:<br/> <InputText rows="4" @bind-Value="paymentToEdit.name"/> </div>
+        <div class="form-group"> CardNumber:<br/> <InputText rows="4" @bind-Value="paymentToEdit.cardnumber"/> </div>
+        <div class="form-group"> Expirationdate:<br/> <InputText rows="4" @bind-Value="paymentToEdit.expirationdate"/> </div>
+        <div class="form-group"> Securitycode:<br/> <InputText rows="4" @bind-Value="paymentToEdit.securitycode"/> </div>
+     
+
+        <p class="actions">
+            <button class="btn btn-outline-dark" type="submit">Save</button>
+        </p>
+    </EditForm>
+}
+
+@code {
+
+    [Parameter]
+    public long Id { get; set; }
+
+ 
+
+    private Payment paymentToEdit;
+
+    protected override async Task OnInitializedAsync()
+    {
+        paymentToEdit = await PaymentData.GetPaymentByUserId(Id);
+       
+    }
+
+    private async void Save()
+    {
+        await PaymentData.UpdatePayment(Id, paymentToEdit);
+        NavigationManager.NavigateTo("/Wallet",true);
+    }
+
+
+
+
+
+
+
+
+}

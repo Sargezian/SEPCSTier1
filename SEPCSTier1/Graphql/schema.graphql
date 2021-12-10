@@ -42,6 +42,7 @@ type Mutation {
   updatePrice(balance: Int! id: Long!): Wallet
   addSaleOffer(item_id: Long! sale_price: Int! wallet_id: Long!): SaleOffer
   deleteShoppingCart(user_id: Long! sale_offer_id: Long!): Long!
+  updatePayment(name: String cardnumber: String expirationdate: String securitycode: String id: Long!): CreditCard
 }
 
 type Subscription {
@@ -212,7 +213,7 @@ type ShowShoppingCart {
 }
 
 type CreditCard {
-  id: Int!
+  id: Long!
   name: String
   cardnumber: String
   expirationdate: String

@@ -1,8 +1,50 @@
 /* _content/SEPCSTier1/Pages/Footer.razor.rz.scp.css */
+/* Lennart: sætter baggrundsfarven */
+body[b-8jc3jr7icr] {
+    background-color: #f4f5f6;
+    font-family: sans-serif, Arial, Times New Roman, Verdana, Georgia;
+}
+
+/* Lennart: denne styling bruges til at centrere vores h1,h2,p */
 h1[b-8jc3jr7icr],h2[b-8jc3jr7icr],p[b-8jc3jr7icr] {
     text-align: center;
 }
 
+/* Lennart: Denne styling bruges til at style vores baggrundsfarve i footeren. webkit-linear-gradient, linear-gradient, bruges til hvor gradering skal ske. Dette sker ved en start ved 180 grader, og en blandings farve af grå og sort. colour white, er farven på vores tekst. margin-top: 0, sørger for, at vores footer sidder fast på top elementet ovenover. */
+footer[b-8jc3jr7icr] {
+    background: #25292d;
+    background: -webkit-linear-gradient(180deg, #525c65, #25292d);
+    background: linear-gradient(180deg, #525c65, #25292d);
+    color: white;
+}
+
+/* Lennart: Denne styling sørger for, at links er farven hvid, samt størrelsen på teksten er 14 pixel. */
+footer a[b-8jc3jr7icr] {
+    color: #fff;
+    font-size: 14px;
+}
+
+/* Lennart: Denne styling sørger for, at når cursoren holdes over vores links, så bliver farven sort. Text-decoration bruges til at definere at links ikke skal have nogen decoration  */
+footer a:hover[b-8jc3jr7icr] {
+    color:black;
+    text-decoration: none;
+}
+
+/* Lennart: Denne styling sørger for, tekst størrelsen er 12 px. padding 10 px, betyder at den er padding 10px både op, højre, ned og venstre. Border-top, anvendes til at lave en smal linje på 1px ovenover. Solid betyder en ret linje. #FFFFFF er farven hvid */
+.copy[b-8jc3jr7icr] {
+    font-size: 12px;
+    padding: 10px;
+    border-top: 1px solid #FFFFFF;
+}
+
+/* Lennart: Denne styling sørger for, øverst padding er 32px, og tekst farven er hvid */
+.footer-middle[b-8jc3jr7icr] {
+    padding-top: 32px;
+    color: white;
+
+}
+
+/* Abdullahi: Denne styling sørger for de sociale medier iconet */
 .fa[b-8jc3jr7icr] {
     box-sizing: inherit;
     padding: 20px;
@@ -20,7 +62,9 @@ h1[b-8jc3jr7icr],h2[b-8jc3jr7icr],p[b-8jc3jr7icr] {
     width: 100%;
 }
 
+mainfooter[b-8jc3jr7icr]{
 
+}
 
 /* _content/SEPCSTier1/Pages/Login.razor.rz.scp.css */
 html[b-7ebgorw8db] {

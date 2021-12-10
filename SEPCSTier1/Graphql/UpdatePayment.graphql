@@ -1,0 +1,21 @@
+mutation UpdatePayment(
+    $id: Long!
+    $name: String!
+    $cardnumber: String!
+    $expirationdate: String!
+    $securitycode: String!
+) {
+    updatePayment(
+        id: $id
+        name: $name
+        cardnumber: $cardnumber
+        expirationdate: $expirationdate
+        securitycode: $securitycode
+    ) {
+        id
+        name
+        cardnumber
+        expirationdate
+        securitycode
+    }
+}
