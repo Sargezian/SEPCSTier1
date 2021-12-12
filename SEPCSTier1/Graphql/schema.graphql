@@ -28,7 +28,7 @@ type Query {
   orderBySaleId(id: Long!): Order
   getSoldOfferById(id: Long!): SoldOffer
   getOrderByWalletBuyerId(id: Long!): [Order]
-  getSoldOfferByOrderId(id: Long!): [SoldOffer]
+  getSoldOfferByOrderId(id: Long!): SoldOffer
   getSoldOfferBySellerWalletId(id: Long!): [SoldOffer]
 }
 

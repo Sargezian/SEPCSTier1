@@ -154,27 +154,24 @@
 
             foreach (var VARIABLE in myBoughtOrders)
             {
-                var soldofferbyid = await soldOfferData.GetSoldOfferById(VARIABLE.sale_id);
-                myBoughtSoldOrders.Add(soldofferbyid);
-            }
-
-            foreach (var VARIABLE in myBoughtSoldOrders)
-            {
-                var itemById = await IitemData.GetItemByID(VARIABLE.item_id);
+                var soldofferbyid = await soldOfferData.getSoldOfferByOrderId(VARIABLE.id);
+                var boughtitemById = await IitemData.GetItemByID(soldofferbyid.item_id);
+                Console.WriteLine("orderid: "+VARIABLE.id+", soldid: "+soldofferbyid.id);
                 Product i = new Product()
                 {
-                    sale_price = VARIABLE.sale_price,
-                    weaponname = itemById.weaponname,
-                    weaponURL = itemById.weaponURL
+                    sale_price = soldofferbyid.sale_price,
+                    weaponname = boughtitemById.weaponname,
+                    weaponURL = boughtitemById.weaponURL
                 };
                 
                 myBoughtProducts.Add(i);
+                Console.WriteLine("soldid: "+VARIABLE.id+", itemid: "+boughtitemById.id +", item: "+boughtitemById.weaponname);
+
             }
             
             //Sold
             mysoldOffers = await soldOfferData.getSoldOfferBySellerWalletId(id);
             user = await userData.GetUserByID(id);
-            Console.WriteLine(mysoldOffers.Count());
             
             foreach (var VARIABLE in mysoldOffers)
             {
