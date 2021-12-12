@@ -6,15 +6,17 @@ namespace SEPCSTier1.Models
     {
         
         public long id { get; set; }
-        [Required]
-        public string username { get; set; }
-        [Required]
-        public string password { get; set; }
-       
-        public string firstName { get; set; }
-       
-        public string lastName { get; set; }
         
+        [Required]
+        [StringLength(30, ErrorMessage = "Username too long (30 character limit).")]
+        public string username { get; set; }
+        
+        [Required]
+        [StringLength(30, ErrorMessage = "Password too long (30 character limit).")]
+        public string password { get; set; }
+        
+        [Required]
+        [Range(1, 10, ErrorMessage = "SecurityLevel invalid (1-10)")]
         public long SecurityLevel { get; set; }
         
         
