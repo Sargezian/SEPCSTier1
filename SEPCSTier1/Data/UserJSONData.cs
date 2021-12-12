@@ -22,7 +22,7 @@ namespace SEPCSTier1.Data
         }
 
 
-        public async void RemoveAccount(long UserId)
+        public async Task RemoveAccount(long UserId)
         {
             await graphqlClient.DeleteUser.ExecuteAsync(UserId);
         }

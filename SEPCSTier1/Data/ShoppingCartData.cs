@@ -46,7 +46,7 @@ namespace SEPCSTier1.Data
         }
 
 
-        public async void AddShoppingCart(ShoppingCarts shoppingCarts)
+        public async Task AddShoppingCart(ShoppingCarts shoppingCarts)
         {
             await graphqlClient.AddShoppingCart.ExecuteAsync(shoppingCarts.saleOfferId, shoppingCarts.userId);
         }
@@ -60,7 +60,7 @@ namespace SEPCSTier1.Data
             return result.Data.TotalPriceById;
         }
 
-        public async void RemoveShoppingCart(long userId, long saleOfferId)
+        public async Task RemoveShoppingCart(long userId, long saleOfferId)
         {
             await graphqlClient.DeleteShoppingCart.ExecuteAsync(userId, saleOfferId);
         }

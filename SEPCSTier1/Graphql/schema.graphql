@@ -33,7 +33,7 @@ type Query {
 }
 
 type Mutation {
-  addUser(username: String password: String): User
+  addUser(username: String! password: String!): User
   addShoppingCart(saleOfferId: Long! userId: Long!): ShopppingCart
   deleteUser(id: Long!): Long!
   addPayment(name: String cardnumber: String expirationdate: String securitycode: String): CreditCard
@@ -46,6 +46,7 @@ type Mutation {
   deleteSaleOffer(id: Long!): Long!
   updatePayment(name: String cardnumber: String expirationdate: String securitycode: String id: Long!): CreditCard
   updateUser(username: String password: String securitylevel: Long! id: Long!): User
+  updateSaleOfferToFalse(id: Long!): Long!
 }
 
 type Subscription {
@@ -195,8 +196,8 @@ type Items {
 
 type User {
   id: Long!
-  username: String
-  password: String
+  username: String!
+  password: String!
   securitylevel: Long!
 }
 

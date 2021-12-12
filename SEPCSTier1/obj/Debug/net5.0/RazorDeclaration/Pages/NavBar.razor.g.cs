@@ -133,7 +133,7 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 129 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\NavBar.razor"
+#line 127 "C:\Users\abdul\RiderProjects\SEPCSTier1\SEPCSTier1\Pages\NavBar.razor"
        
 
     public string name { get; set; }
@@ -144,11 +144,9 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
     public long WalletId { get; set; }
 
-    
 
     protected async override Task OnInitializedAsync()
     {
-      
         var protectedBrowserStorageResult = await ProtectedSessionStore.GetAsync<string>("username");
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
@@ -163,10 +161,6 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
         {
             WalletId = await WalletData.SumOfBalance(id);
         }
-
-       
-      
-        
     }
 
 
@@ -186,8 +180,7 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
     public async Task NavigateToCart()
     {
-        NavigationManager.NavigateTo("/Cart",true);
-        
+        NavigationManager.NavigateTo("/Cart", true);
     }
 
 

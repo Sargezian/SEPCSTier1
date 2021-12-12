@@ -77,6 +77,12 @@ namespace SEPCSTier1.Data
                 saleOffer.sale_price, saleOffer.wallet_id);
 
         }
+
+
+        public async Task UpdateSaleOfferToFalse(long id)
+        {
+            await graphqlClient.UpdateSaleOfferToFalse.ExecuteAsync(id);
+        }
        
     }
 }

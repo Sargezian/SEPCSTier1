@@ -15,9 +15,11 @@ namespace SEPCSTier1.Data
         Task<SaleOffer> GetOfferBySaleOfferId(long id);
         
         Task AddSaleOffer(SaleOffer saleOffer);
-        
-        
-        
-        
+
+        Task UpdateSaleOfferToFalse(long id);
+
+
+
+
     }
 }

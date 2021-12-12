@@ -134,14 +134,15 @@
 
 
                 //Slet saleoffer
-                
+
+              await offerData.UpdateSaleOfferToFalse(cart.sale_offer_id);
 
                 //Slet Shopping cart
-                ShoppingCartData.RemoveShoppingCart(id, cart.sale_offer_id);
+               await ShoppingCartData.RemoveShoppingCart(id, cart.sale_offer_id);
             }
 
-
-            toastService.ShowSuccess("test");
+              NavigationManager.NavigateTo(NavigationManager.Uri,true);
+            
         }
         else
         {
@@ -152,7 +153,7 @@
 
     private async void RemoveShoppingCartItem(long userId, long saleOfferId)
     {
-        ShoppingCartData.RemoveShoppingCart(userId,saleOfferId);
+        await ShoppingCartData.RemoveShoppingCart(userId,saleOfferId);
         NavigationManager.NavigateTo(NavigationManager.Uri,true);
     }
 

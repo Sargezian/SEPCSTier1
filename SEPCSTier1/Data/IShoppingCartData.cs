@@ -11,12 +11,12 @@ namespace SEPCSTier1.Data
         Task<IList<ShowShoppingCart>> GetShoppingCartById(long id);
 
 
-        void AddShoppingCart(ShoppingCarts shoppingCarts);
+        Task AddShoppingCart(ShoppingCarts shoppingCarts);
 
         Task<long> GetTotalPrice(long id);
         
         
         
-        void RemoveShoppingCart(long userId,long saleOfferId);
+        Task RemoveShoppingCart(long userId,long saleOfferId);
     }
 }

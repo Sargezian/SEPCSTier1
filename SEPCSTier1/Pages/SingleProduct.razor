@@ -123,7 +123,7 @@ else
             userId = id
         };
 
-        ShoppingCartData.AddShoppingCart(ShoppingCart);
+      await  ShoppingCartData.AddShoppingCart(ShoppingCart);
         NavigationManager.NavigateTo("/Cart",true);
         
         
