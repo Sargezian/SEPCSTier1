@@ -36,12 +36,12 @@ namespace SEPCSTier1.Data
             return OrderList;
         }
         
-        public async Task<IList<Order>> getOrderByWalletBuyerId()
+        public async Task<IList<Order>> getOrderByWalletBuyerId(long id)
         {
-            var result = await graphqlClient.GetOrder.ExecuteAsync();
+            var result = await graphqlClient.OrderByWalletId.ExecuteAsync(id);
 
             
-            OrderList = result.Data.Order.Select(offer => new Order()
+            OrderList = result.Data.GetOrderByWalletBuyerId.Select(offer => new Order()
             {
                 id = offer.Id,
                 wallet_buyer_id = offer.Wallet_buyer_id,

@@ -85,6 +85,38 @@
                 </tbody>
             </table>
         </div>
+        <div>
+                    <h1>My bought products</h1>
+                    <table class="table">
+                        <tbody>
+                        <RadzenDataList WrapItems="true" AllowPaging="true" Data="@myBoughtProducts" TItem="Product">
+                            <Template Context="items">
+                                <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
+                                    <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
+                                        <div class="col-md-12">
+                                            <div class="d-flex justify-content-between">
+                                                <p>Skin Name</p>
+                                                <p>Skin Price</p>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <p>
+                                                    <b>@items.weaponname</b>
+                                                </p>
+                                                <p>
+                                                    <b>@items.sale_price</b>
+                                                </p>
+                                            </div>
+        
+                                            <img src="@items.weaponURL" width="300px"/>
+        
+                                        </div>
+                                    </div>
+                                </RadzenCard>
+                            </Template>
+                        </RadzenDataList>
+                        </tbody>
+                    </table>
+                </div>
     </div>
 </div>
 
@@ -95,6 +127,10 @@
     private IList<SoldOffer> mysoldOffers; // SALE PART - PRIS OSV
     private IList<Itemss> mysoldOffersItems; // ITEM PART - BILLEDE OSV
     private IList<Product> mySoldProducts; //FINAL - ^SAMLET
+
+    private IList<Order> myBoughtOrders;
+    private IList<SoldOffer> myBoughtSoldOrders;
+    private IList<Product> myBoughtProducts; //FINAL
     
     private long id;
     private User user;
@@ -102,7 +138,8 @@
     protected override async Task OnInitializedAsync()
     {
         user = new User();
-        
+        myBoughtSoldOrders = new List<SoldOffer>();
+        myBoughtProducts = new List<Product>();
         
         
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
@@ -112,11 +149,33 @@
         mySoldProducts = new List<Product>();
         if (id != 0)
         {
+            //Bought
+            myBoughtOrders = await orderData.getOrderByWalletBuyerId(id);
+
+            foreach (var VARIABLE in myBoughtOrders)
+            {
+                var soldofferbyid = await soldOfferData.GetSoldOfferById(VARIABLE.sale_id);
+                myBoughtSoldOrders.Add(soldofferbyid);
+            }
+
+            foreach (var VARIABLE in myBoughtSoldOrders)
+            {
+                var itemById = await IitemData.GetItemByID(VARIABLE.item_id);
+                Product i = new Product()
+                {
+                    sale_price = VARIABLE.sale_price,
+                    weaponname = itemById.weaponname,
+                    weaponURL = itemById.weaponURL
+                };
+                
+                myBoughtProducts.Add(i);
+            }
+            
+            //Sold
             mysoldOffers = await soldOfferData.getSoldOfferBySellerWalletId(id);
             user = await userData.GetUserByID(id);
             Console.WriteLine(mysoldOffers.Count());
             
-    //DEL DER CRASHER LORETET.. Tror der mangler awaits
             foreach (var VARIABLE in mysoldOffers)
             {
                 var itemById = await IitemData.GetItemByID(VARIABLE.item_id);
