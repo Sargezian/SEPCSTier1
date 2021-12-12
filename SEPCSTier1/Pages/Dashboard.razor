@@ -129,7 +129,6 @@
     private IList<Product> mySoldProducts; //FINAL - ^SAMLET
 
     private IList<Order> myBoughtOrders;
-    private IList<SoldOffer> myBoughtSoldOrders;
     private IList<Product> myBoughtProducts; //FINAL
     
     private long id;
@@ -138,13 +137,10 @@
     protected override async Task OnInitializedAsync()
     {
         user = new User();
-        myBoughtSoldOrders = new List<SoldOffer>();
         myBoughtProducts = new List<Product>();
-        
         
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
-        
         
         mySoldProducts = new List<Product>();
         if (id != 0)
@@ -156,7 +152,6 @@
             {
                 var soldofferbyid = await soldOfferData.getSoldOfferByOrderId(VARIABLE.id);
                 var boughtitemById = await IitemData.GetItemByID(soldofferbyid.item_id);
-                Console.WriteLine("orderid: "+VARIABLE.id+", soldid: "+soldofferbyid.id);
                 Product i = new Product()
                 {
                     sale_price = soldofferbyid.sale_price,
@@ -165,7 +160,6 @@
                 };
                 
                 myBoughtProducts.Add(i);
-                Console.WriteLine("soldid: "+VARIABLE.id+", itemid: "+boughtitemById.id +", item: "+boughtitemById.weaponname);
 
             }
             
@@ -186,20 +180,6 @@
                 mySoldProducts.Add(i);
             }
         }
-        
-        
-        /*foreach (var VARIABLE in saleOffers)
-        {
-            activeSales.Add(new Product()
-            {
-                saleOffer_id = VARIABLE.id,
-                item_id = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).id,
-                sale_price = VARIABLE.sale_price,
-                wallet_id = userWallet.id,
-                weaponname = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponname,
-                weaponURL = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponURL
-            });
-        }*/
     }
 
     private void productGoTo(long item_id, long offer_id)
