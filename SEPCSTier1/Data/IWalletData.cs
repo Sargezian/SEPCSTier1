@@ -11,6 +11,7 @@ namespace SEPCSTier1.Data
         Task<Wallet> UpdateWallets(Wallet wallet);
 
         Task<Wallet> AddWallet(Wallet wallet);
+        Task<Wallet> getWalletById(long id);
 
     }
 }

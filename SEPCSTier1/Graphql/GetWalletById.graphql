@@ -1,0 +1,8 @@
+﻿query getWalletById($id:Long!){
+    walletById(id:$id){
+        id,
+        balance,
+        creditcard_id,
+        user_id
+    }
+}

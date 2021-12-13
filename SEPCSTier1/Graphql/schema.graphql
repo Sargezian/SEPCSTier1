@@ -25,11 +25,11 @@ type Query {
   sumOfPriceById(id: Long!): Long!
   paymentByName(name: String): CreditCard
   allSoldOffer: [SoldOffer]
+  walletById(id: Long!): Wallet
   orderBySaleId(id: Long!): Order
   getSoldOfferById(id: Long!): SoldOffer
   getOrderByWalletBuyerId(id: Long!): [Order]
   boughtItems(id: Long!): [OrderByBuyer]
-  getSoldOfferByOrderId(id: Long!): [SoldOffer]
   getSoldOfferBySellerWalletId(id: Long!): [SoldOffer]
   soldItemsById(id: Long!): [SoldOfferBySeller]
   itemsById(id: Long!): [SaleOfferWallet]
@@ -243,6 +243,13 @@ type SoldOffer {
   seller_wallet_id: Long!
 }
 
+type Wallet {
+  id: Long!
+  balance: Int!
+  creditcard_id: Long!
+  user_id: Long!
+}
+
 type OrderByBuyer {
   order_id: Long!
   weaponname: String
@@ -267,11 +274,4 @@ type SaleOfferWallet {
 type ShopppingCart {
   saleOfferId: Long!
   userId: Long!
-}
-
-type Wallet {
-  id: Long!
-  balance: Int!
-  creditcard_id: Long!
-  user_id: Long!
 }

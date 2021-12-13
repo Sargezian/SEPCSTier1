@@ -113,14 +113,21 @@
                     sale_id = cart.sale_offer_id
                 };
 
-    //send ordre
+                
+    //get diverse nødvendige ting
                 Console.WriteLine("tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
                 var addOrder = await orderData.AddOrder(o);
                 var resultItemId = await offerData.GetOfferBySaleOfferId(cart.sale_offer_id);
                 var orderBySaleId = await orderData.GetOrderBySaleId(cart.sale_offer_id);
                 var offerBySaleOfferId = await offerData.GetOfferBySaleOfferId(cart.sale_offer_id);
 
+                //update penge til sælger wallet - Kunne lave en addmoney api call
+                var sellerwallet = await walletData.getWalletById(resultItemId.wallet_id);
+                sellerwallet.balance += (int) cart.sale_price;
 
+                walletData.UpdateWallets(sellerwallet);
+                
+                //Send ordre
                 SoldOffer soldoffer = new SoldOffer()
                 {
                     item_id = resultItemId.item_id,

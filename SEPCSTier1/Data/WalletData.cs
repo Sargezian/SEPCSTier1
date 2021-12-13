@@ -67,5 +67,21 @@ namespace SEPCSTier1.Data
             
             
         }
+
+        public async Task<Wallet> getWalletById(long id)
+        {
+            var result = await graphqlClient.GetWalletById.ExecuteAsync(id);
+           
+
+            Wallet itemss = new Wallet()
+            {
+                id = result.Data.WalletById.Id,
+                balance = result.Data.WalletById.Balance,
+                user_id = result.Data.WalletById.User_id,
+                creditcard_id = result.Data.WalletById.Creditcard_id
+            };
+            
+            return itemss;
+        }
     }
 }

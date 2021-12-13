@@ -35,9 +35,10 @@ namespace SEPCSTier1.Data
             return Itemslist;
         }
 
+        //TODO: FJERN?
         public async Task<SoldOffer> getSoldOfferByOrderId(long id)
         {
-            var result = await graphqlClient.SoldOfferByOrderId.ExecuteAsync(id);
+            //var result = await graphqlClient.SoldOfferByOrderId.ExecuteAsync(id);
             
             SoldOffer itemss = new SoldOffer()
             {
