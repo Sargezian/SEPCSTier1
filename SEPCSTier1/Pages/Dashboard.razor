@@ -27,10 +27,10 @@
                 <div class="d-flex flex-row">
                     <RadzenImage Path="AK47.webp" Class="rounded-circle float-left mr-3" Style="width: 100px; height: 100px;"/>
                     <div>
-                        <div>Employee</div>
+                        <div>Shop username</div>
+                        <b>@user.username</b>
+                        <div class="mt-3">Shop id</div>
                         <b>@id</b>
-                        <div class="mt-3">Company</div>
-                        <b>+3 reps</b>
                     </div>
                 </div>
             </RadzenCard>
@@ -38,16 +38,16 @@
                 <h3 class="h5">Your shop information</h3>
                 <div class="row">
                     <div class="col-md-4">
-                        <div>Completeted trades</div>
-                        <b>5</b>
-                        <div class="mt-3">Rejected trades</div>
-                        <b>0</b>
+                        <div>Bought offers</div>
+                        <b>@myBoughtProducts.Count</b>
+                        <div class="mt-3">Money earned</div>
+                        <b>@soldPrice</b>
                     </div>
                     <div class="col-md-8">
-                        <div>Views</div>
-                        <b>?</b>
-                        <div class="mt-3">?</div>
-                        <b>?</b>
+                        <div>Sold offers</div>
+                        <b>@mySoldProducts.Count</b>
+                        <div class="mt-3">Money spent</div>
+                        <b>@boughtPrice</b>
                     </div>
                 </div>
             </RadzenCard>
@@ -164,22 +164,32 @@
 
     private IList<SoldOfferBySeller> mySoldProducts; //FINAL - ^SAMLET
 
-
     private IList<OrderByBuyer> myBoughtProducts; //FINAL
 
     private IList<SaleOfferWallet> PostedProducts; //FINAL
 
     private long id;
     private User user;
-
+    private int boughtPrice;
+    private int soldPrice;
+    
     protected override async Task OnInitializedAsync()
     {
+        mySoldProducts = new List<SoldOfferBySeller>();
+        myBoughtProducts = new List<OrderByBuyer>();
+        PostedProducts = new List<SaleOfferWallet>();
+        boughtPrice = 0;
+        soldPrice = 0;
+        user = new User();
+        
+        
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
 
 
         if (id != 0)
         {
+            user = await userData.GetUserByID(id);
     //Bought
 
             myBoughtProducts = await orderData.GetBoughtItems(id);
@@ -191,6 +201,16 @@
     // posted items
 
             PostedProducts = await OfferData.GetItemsById(id);
+
+            foreach (var VARIABLE in myBoughtProducts)
+            {
+                boughtPrice += VARIABLE.sale_price;
+            }
+
+            foreach (var VARIABLE in mySoldProducts)
+            {
+                soldPrice += VARIABLE.sale_price;
+            }
         }
     }
 
