@@ -28,8 +28,11 @@ type Query {
   orderBySaleId(id: Long!): Order
   getSoldOfferById(id: Long!): SoldOffer
   getOrderByWalletBuyerId(id: Long!): [Order]
-  getSoldOfferByOrderId(id: Long!): SoldOffer
+  boughtItems(id: Long!): [OrderByBuyer]
+  getSoldOfferByOrderId(id: Long!): [SoldOffer]
   getSoldOfferBySellerWalletId(id: Long!): [SoldOffer]
+  soldItemsById(id: Long!): [SoldOfferBySeller]
+  itemsById(id: Long!): [SaleOfferWallet]
 }
 
 type Mutation {
@@ -238,6 +241,27 @@ type SoldOffer {
   order_id: Long!
   sale_price: Int!
   seller_wallet_id: Long!
+}
+
+type OrderByBuyer {
+  order_id: Long!
+  weaponname: String
+  weaponURL: String
+  sale_price: Int!
+}
+
+type SoldOfferBySeller {
+  sold_offer_id: Long!
+  weaponname: String
+  weaponURL: String
+  sale_price: Int!
+}
+
+type SaleOfferWallet {
+  sale_offer_id: Long!
+  weaponname: String
+  weaponURL: String
+  sale_price: Int!
 }
 
 type ShopppingCart {

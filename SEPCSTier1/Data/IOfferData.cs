@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using SEP3_tier2.Models;
 using SEPCSTier1.Models;
 
 namespace SEPCSTier1.Data
@@ -17,6 +18,8 @@ namespace SEPCSTier1.Data
         Task AddSaleOffer(SaleOffer saleOffer);
 
         Task UpdateSaleOfferToFalse(long id);
+        
+        Task<IList<SaleOfferWallet>> GetItemsById(long id);
 
 
 

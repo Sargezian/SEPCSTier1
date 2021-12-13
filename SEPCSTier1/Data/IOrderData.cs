@@ -12,6 +12,8 @@ namespace SEPCSTier1.Data
         Task<Order> GetOrderBySaleId(long id);
         Task<IList<Order>> getOrderByWalletBuyerId(long id);
         Task<Order> AddOrder(Order order);
+        
+        Task<IList<OrderByBuyer>> GetBoughtItems(long id);
 
     }
 }

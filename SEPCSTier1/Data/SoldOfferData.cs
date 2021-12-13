@@ -10,6 +10,7 @@ namespace SEPCSTier1.Data
     {
         private GraphqlClient graphqlClient;
         private List<SoldOffer> Itemslist = new List<SoldOffer>();
+        private List<SoldOfferBySeller> SellerList = new List<SoldOfferBySeller>();
 
         public SoldOfferData(GraphqlClient graphqlClient)
         {
@@ -40,11 +41,11 @@ namespace SEPCSTier1.Data
             
             SoldOffer itemss = new SoldOffer()
             {
-                id = result.Data.GetSoldOfferByOrderId.Id,
-                sale_price = result.Data.GetSoldOfferByOrderId.Sale_price,
-                item_id = result.Data.GetSoldOfferByOrderId.Item_id,
-                seller_wallet_id = result.Data.GetSoldOfferByOrderId.Seller_wallet_id,
-                order_id = result.Data.GetSoldOfferByOrderId.Order_id
+                 //id = result.Data.GetSoldOfferByOrderId.,
+                // sale_price = result.Data.GetSoldOfferByOrderId.Sale_price,
+                // item_id = result.Data.GetSoldOfferByOrderId.Item_id,
+                // seller_wallet_id = result.Data.GetSoldOfferByOrderId.Seller_wallet_id,
+                // order_id = result.Data.GetSoldOfferByOrderId.Order_id
             };
             
             return itemss;
@@ -92,6 +93,31 @@ namespace SEPCSTier1.Data
 
             return saleOffer;
         }
+        
+        
+        public async Task<IList<SoldOfferBySeller>> GetSoldOfferBySeller(long id)
+        {
+            var result = await graphqlClient.GetSoldItemById.ExecuteAsync(id);
+
+            SellerList = result.Data.SoldItemsById.Select(item => new SoldOfferBySeller
+            {
+                sold_offer_id = item.Sold_offer_id,
+                weaponname = item.Weaponname,
+                weaponURL = item.WeaponURL,
+                sale_price = item.Sale_price
+                
+                
+            }).ToList();
+
+
+            return SellerList;
+        }
+        
+        
+        
+        
+        
+        
        
     }
 }

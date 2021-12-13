@@ -14,6 +14,7 @@ namespace SEPCSTier1.Data
     {
         private GraphqlClient graphqlClient;
         private List<Order> OrderList = new List<Order>();
+        private IList<OrderByBuyer> orderByBuyersList = new List<OrderByBuyer>();
 
         public OrderData(GraphqlClient graphqlClient)
         {
@@ -89,6 +90,24 @@ namespace SEPCSTier1.Data
             await graphqlClient.AddOrder.ExecuteAsync(order.wallet_buyer_id, order.sale_id);
 
             return order;
+        }
+
+        public async Task<IList<OrderByBuyer>> GetBoughtItems(long id)
+        {
+            var result = await graphqlClient.GetBoughtItems.ExecuteAsync(id);
+
+            orderByBuyersList = result.Data.BoughtItems.Select(item => new OrderByBuyer()
+            {
+                order_id= item.Order_id,
+                weaponname = item.Weaponname,
+                weaponURL = item.WeaponURL,
+                sale_price = item.Sale_price
+                
+                
+            }).ToList();
+
+
+            return orderByBuyersList;
         }
     }
 }

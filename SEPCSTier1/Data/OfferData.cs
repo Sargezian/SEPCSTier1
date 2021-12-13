@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SEP3_tier2.Models;
 using SEPCSTier1.Graphql;
 using SEPCSTier1.Models;
 
@@ -10,6 +11,7 @@ namespace SEPCSTier1.Data
     {
         private GraphqlClient graphqlClient;
         private List<SaleOffer> Itemslist = new List<SaleOffer>();
+        private IList<SaleOfferWallet> saleOfferWalletList = new List<SaleOfferWallet>();
 
         public OfferData(GraphqlClient graphqlClient)
         {
@@ -83,6 +85,23 @@ namespace SEPCSTier1.Data
         {
             await graphqlClient.UpdateSaleOfferToFalse.ExecuteAsync(id);
         }
-       
+
+        public async Task<IList<SaleOfferWallet>> GetItemsById(long id)
+        {
+            var result = await graphqlClient.GetItemsById.ExecuteAsync(id);
+
+            saleOfferWalletList = result.Data.ItemsById.Select(item => new SaleOfferWallet()
+            {
+                sale_offer_id= item.Sale_offer_id,
+                weaponname = item.Weaponname,
+                weaponURL = item.WeaponURL,
+                sale_price = item.Sale_price
+                
+                
+            }).ToList();
+
+
+            return saleOfferWalletList;
+        }
     }
 }

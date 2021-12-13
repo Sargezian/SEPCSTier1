@@ -2,9 +2,11 @@
 @using SEPCSTier1.Models
 @using SEPCSTier1.Data
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using SEP3_tier2.Models
 @inject IItemData IitemData
-@inject IOrderData orderData 
-@inject ISoldOfferData soldOfferData 
+@inject IOrderData orderData
+@inject ISoldOfferData soldOfferData
+@inject IOfferData OfferData
 
 @inject IUserData userData
 
@@ -57,10 +59,10 @@
             <h1>My sold products</h1>
             <table class="table">
                 <tbody>
-                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@mySoldProducts" TItem="Product">
+                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@mySoldProducts" TItem="SoldOfferBySeller">
                     <Template Context="items">
                         <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
-                            <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
                                         <p>Skin Name</p>
@@ -86,37 +88,72 @@
             </table>
         </div>
         <div>
-                    <h1>My bought products</h1>
-                    <table class="table">
-                        <tbody>
-                        <RadzenDataList WrapItems="true" AllowPaging="true" Data="@myBoughtProducts" TItem="Product">
-                            <Template Context="items">
-                                <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
-                                    <div class="row" @onclick="@(() => productGoTo(items.item_id, items.saleOffer_id))">
-                                        <div class="col-md-12">
-                                            <div class="d-flex justify-content-between">
-                                                <p>Skin Name</p>
-                                                <p>Skin Price</p>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <p>
-                                                    <b>@items.weaponname</b>
-                                                </p>
-                                                <p>
-                                                    <b>@items.sale_price</b>
-                                                </p>
-                                            </div>
-        
-                                            <img src="@items.weaponURL" width="300px"/>
-        
-                                        </div>
+            <h1>My bought products</h1>
+            <table class="table">
+                <tbody>
+                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@myBoughtProducts" TItem="OrderByBuyer">
+                    <Template Context="items">
+                        <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Skin Name</p>
+                                        <p>Skin Price</p>
                                     </div>
-                                </RadzenCard>
-                            </Template>
-                        </RadzenDataList>
-                        </tbody>
-                    </table>
-                </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <b>@items.weaponname</b>
+                                        </p>
+                                        <p>
+                                            <b>@items.sale_price</b>
+                                        </p>
+                                    </div>
+
+                                    <img src="@items.weaponURL" width="300px"/>
+
+                                </div>
+                            </div>
+                        </RadzenCard>
+                    </Template>
+                </RadzenDataList>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <h1>My Posted products</h1>
+            <table class="table">
+                <tbody>
+                <RadzenDataList WrapItems="true" AllowPaging="true" Data="@PostedProducts" TItem="SaleOfferWallet">
+                    <Template Context="items">
+                        <RadzenCard Style="width:300px; margin-bottom: 20px; height:400px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Skin Name</p>
+                                        <p>Skin Price</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <b>@items.weaponname</b>
+                                        </p>
+                                        <p>
+                                            <b>@items.sale_price</b>
+                                        </p>
+                                    </div>
+
+                                    <img src="@items.weaponURL" width="300px"/>
+
+                                </div>
+                            </div>
+                        </RadzenCard>
+                    </Template>
+                </RadzenDataList>
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
 </div>
 
@@ -124,67 +161,37 @@
 
 @code {
 
-    private IList<SoldOffer> mysoldOffers; // SALE PART - PRIS OSV
-    private IList<Itemss> mysoldOffersItems; // ITEM PART - BILLEDE OSV
-    private IList<Product> mySoldProducts; //FINAL - ^SAMLET
 
-    private IList<Order> myBoughtOrders;
-    private IList<Product> myBoughtProducts; //FINAL
-    
+    private IList<SoldOfferBySeller> mySoldProducts; //FINAL - ^SAMLET
+
+
+    private IList<OrderByBuyer> myBoughtProducts; //FINAL
+
+    private IList<SaleOfferWallet> PostedProducts; //FINAL
+
     private long id;
     private User user;
 
     protected override async Task OnInitializedAsync()
     {
-        user = new User();
-        myBoughtProducts = new List<Product>();
-        
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
-        
-        mySoldProducts = new List<Product>();
+
+
         if (id != 0)
         {
-            //Bought
-            myBoughtOrders = await orderData.getOrderByWalletBuyerId(id);
+    //Bought
 
-            foreach (var VARIABLE in myBoughtOrders)
-            {
-                var soldofferbyid = await soldOfferData.getSoldOfferByOrderId(VARIABLE.id);
-                var boughtitemById = await IitemData.GetItemByID(soldofferbyid.item_id);
-                Product i = new Product()
-                {
-                    sale_price = soldofferbyid.sale_price,
-                    weaponname = boughtitemById.weaponname,
-                    weaponURL = boughtitemById.weaponURL
-                };
-                
-                myBoughtProducts.Add(i);
+            myBoughtProducts = await orderData.GetBoughtItems(id);
 
-            }
-            
-            //Sold
-            mysoldOffers = await soldOfferData.getSoldOfferBySellerWalletId(id);
-            user = await userData.GetUserByID(id);
-            
-            foreach (var VARIABLE in mysoldOffers)
-            {
-                var itemById = await IitemData.GetItemByID(VARIABLE.item_id);
-                Product i = new Product()
-                {
-                    sale_price = VARIABLE.sale_price,
-                    weaponname = itemById.weaponname,
-                    weaponURL = itemById.weaponURL
-                };
-                
-                mySoldProducts.Add(i);
-            }
+    //Sold
+            mySoldProducts = await soldOfferData.GetSoldOfferBySeller(id);
+
+
+    // posted items
+
+            PostedProducts = await OfferData.GetItemsById(id);
         }
-    }
-
-    private void productGoTo(long item_id, long offer_id)
-    {
-        NavigationManager.NavigateTo($"Product/{offer_id}/{item_id}");
     }
 
 }

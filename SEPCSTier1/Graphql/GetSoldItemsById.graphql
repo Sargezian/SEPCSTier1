@@ -1,0 +1,8 @@
+query GetSoldItemById($id:Long!) {
+    soldItemsById(id: $id) {
+        sold_offer_id
+        weaponname
+        weaponURL
+        sale_price
+    }
+}
