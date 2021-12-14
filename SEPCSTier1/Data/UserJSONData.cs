@@ -70,7 +70,8 @@ namespace SEPCSTier1.Data
         public async Task<User> AddUser(User user)
         {
            var result = await graphqlClient.AddUser.ExecuteAsync(user.username, user.password);
-
+           
+           
            return user;
         }
         

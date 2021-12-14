@@ -163,13 +163,150 @@ using SEPCSTier1.Models;
 
     protected async override Task OnInitializedAsync()
     {
-        
+        errorMessage = "";
        
+    }
+
+
+    public bool validateUsername()
+    {
+        if (newUserAccount.username == null)
+        {
+            errorMessage = "username can not be empty";
+            return false;
+        }
+
+        if (newUserAccount.username.Length< 4)
+        {
+            errorMessage = "Username must contain more than 3 characters";
+            return false;
+        }
+
+        if (newUserAccount.username.Length > 14)
+        {
+            errorMessage = "Username must contain less than 15 characters";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
+    public bool validatePassword()
+    {
+        if (newUserAccount.password == null)
+        {
+            errorMessage = "Password cannot be empty";
+            return false;
+        }
+        if (newUserAccount.password.Length < 8)
+        {
+            errorMessage = "Password length must be 8 or more";
+            return false;
+        }
+
+        if (newUserAccount.password.Length > 14)
+        {
+            errorMessage = "password lenght must be 14 or less";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
+    public bool validatePayment()
+    {
+        if (newPaymentAccount.name == null )
+        {
+            errorMessage = "CardholderName cannot be empty";
+            return false;
+        }
+        
+        if (newPaymentAccount.name.Length < 4 )
+        {
+            errorMessage = "CardholderName cannot be less than 4";
+            return false;
+        }
+        
+        if (newPaymentAccount.name.Length > 12 )
+        {
+            errorMessage = "CardholderName cannot be more than 12";
+            return false;
+        }
+
+
+        if (newPaymentAccount.cardnumber == null ) {
+            errorMessage = "CardNumber cannot be empty";
+            return false;
+        }
+
+        if (newPaymentAccount.cardnumber.Length < 16 ) {
+            errorMessage = "CardNumber must contain 16 characters";
+            return false;
+        }
+
+
+        if (newPaymentAccount.cardnumber.Length > 16  ) {
+            errorMessage = "CardNumber must contain 16 characters";
+            return false;
+        }
+
+        if (string.IsNullOrEmpty(newPaymentAccount.expirationdate)) {
+            errorMessage = "ExpirationDate cannot be empty";
+            return false;
+        }
+
+
+        if (newPaymentAccount.securitycode == null) {
+            errorMessage = "CVV must contain more than 0 characters";
+            return false;
+        }
+
+
+        if (newPaymentAccount.securitycode.Length > 3 || newPaymentAccount.securitycode.Length < 3 ){
+            errorMessage = "CVV must contain  3 characters";
+            return false;
+        }
+
+        else {
+
+            return true;
+
+        }
+
+      
+    }
+
+
+    public bool validateSignUp()
+    {
+
+        if (validateUsername() && validatePassword() && validatePayment())
+        {
+            errorMessage = "successfully";
+            return true;
+        }
+        else
+        {
+           
+            return false;
+        }
+        
+        
     }
 
     private async void AddUserAccount()
     {
-        await UserData.AddUser(newUserAccount);
+        if (validateSignUp())
+        {
+              await UserData.AddUser(newUserAccount);
+        }
+      
         
     }
 
@@ -181,10 +318,13 @@ using SEPCSTier1.Models;
     
     private async void AddnewPaymentAccount()
     {
-       
-          
+        if (validateSignUp())
+        {
             Payment payment = await PaymentData.AddPayment(new Payment(newPaymentAccount.name, newPaymentAccount.cardnumber, newPaymentAccount.expirationdate, newPaymentAccount.securitycode));
-             NavigationManager.NavigateTo("/login");
+            NavigationManager.NavigateTo("/login");
+        }
+          
+           
         
       
       
