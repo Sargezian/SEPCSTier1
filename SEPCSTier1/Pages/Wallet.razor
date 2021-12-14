@@ -60,7 +60,7 @@
                 <a class="btn btn-primary" @onclick="@(() => UpdateWallet())">Insert Money</a>
             </div>
         </div>
-
+   <div style="color:red">@errorMessage</div>
     </div>
 }
 
@@ -74,6 +74,7 @@
     private Payment payment;
     public long totalPrice { get; set; }
     public long PaymentId { get; set; }
+    private string errorMessage;
 
     public Models.Wallet _wallet = new Models.Wallet();
 
@@ -84,7 +85,7 @@
         {
             var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
             id = protectedBrowserStorageResultId.Value;
-
+            errorMessage = "";
             payment = await PaymentData.GetPaymentByUserId(id);
             totalPrice = await WalletData.SumOfBalance(id);
             await ProtectedSessionStore.SetAsync("wi", totalPrice);
@@ -101,11 +102,28 @@
         }
     }
 
+    public bool validatewallet()
+    {
+        if (_wallet.balance == 0)
+        {
+            errorMessage = "value must be more than 0";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
 
     public async void UpdateWallet()
     {
-        await WalletData.UpdateWallets(new Models.Wallet((int) (_wallet.balance + totalPrice), id));
-        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+        if (validatewallet())
+        {
+             await WalletData.UpdateWallets(new Models.Wallet((int) (_wallet.balance + totalPrice), id));
+            NavigationManager.NavigateTo(NavigationManager.Uri, true);
+        }
+       
     }
 
 

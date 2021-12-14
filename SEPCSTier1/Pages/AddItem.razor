@@ -48,7 +48,7 @@
                             </p>
                         </EditForm>
 
-
+                          <div style="color:red">@errorMessage</div>
                     </div>
                 </div>
             </div>
@@ -71,6 +71,7 @@
     private IList<Itemss> Items;
     public SaleOffer AddNewSaleOffer = new SaleOffer();
     public long id { get; set; }
+    private string errorMessage;
 
 
     protected override async Task OnInitializedAsync()
@@ -80,6 +81,8 @@
         
         Items = await IitemData.GetItems();
         ItemList = Items;
+
+        errorMessage = "";
     }
 
     void OnChange(object value, string name)
@@ -102,6 +105,19 @@
         throw new ArgumentNullException(paramName: nameof(itemName), message: "Please select an Item to sell");
     }
 
+    public bool validateAddItem()
+    {
+        if (pickedItem == null)
+        {
+            errorMessage = "You Need To Pick An Item";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
 
     private void AddSaleOffers()
     {
@@ -110,6 +126,10 @@
     //Feedbacket fra selectoren giver en string tilbage, så vi sammenligner her navnet derfra, men listen af itemsene vi får fra Databasen
         try
         {
+            if (validateAddItem())
+            {
+                
+           
             Itemss item = findEqualItem(pickedItem);
             Console.WriteLine(item.id);
 
@@ -130,7 +150,7 @@
                               id);
 
     //READY TO PUSH FROM HERE
-        }
+        } }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);

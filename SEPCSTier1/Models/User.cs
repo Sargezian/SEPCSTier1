@@ -12,7 +12,7 @@ namespace SEPCSTier1.Models
         public string username { get; set; }
 
         [Required]
-        [MinLength(8,ErrorMessage = "password must be more then 4 characters")]
+        [MinLength(8,ErrorMessage = "password must be more then 8 characters")]
         [MaxLength(14,ErrorMessage = "password can not be more then 16 characters")]
 
         public string password { get; set; }

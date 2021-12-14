@@ -34,6 +34,7 @@
                 </div>
             </div>
         </div>
+        <div style="color:red">@errorMessage</div>
         <tbody>
         <RadzenDataList WrapItems="true" AllowPaging="true" Data="@activeOffers" Style="margin: 15px 150px 0 150px" TItem="Product">
             <Template Context="items">
@@ -74,6 +75,7 @@
     public string searchItem = "";
     public int minValue = 0;
     public int maxValue = 0;
+    private string errorMessage;
 
 
     // SLIDER STUFF
@@ -102,24 +104,24 @@
         Items = await IitemData.GetItems();
         saleOffers = await IofferData.GetOffers();
         ItemList = Items;
-        
+        errorMessage = "";
+
     //Kunne lave API for at gette alle avaliable
         foreach (var VARIABLE in saleOffers)
         {
-            Console.WriteLine(VARIABLE.item_id + ", "+VARIABLE.available);
+            Console.WriteLine(VARIABLE.item_id + ", " + VARIABLE.available);
             if (VARIABLE.available)
             {
-            allItems.Add(new Product()
-            {
-                saleOffer_id = VARIABLE.id,
-                item_id = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).id,
-                sale_price = VARIABLE.sale_price,
-                wallet_id = VARIABLE.wallet_id,
-                weaponname = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponname,
-                weaponURL = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponURL
-            });
+                allItems.Add(new Product()
+                {
+                    saleOffer_id = VARIABLE.id,
+                    item_id = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).id,
+                    sale_price = VARIABLE.sale_price,
+                    wallet_id = VARIABLE.wallet_id,
+                    weaponname = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponname,
+                    weaponURL = ItemList.FirstOrDefault(o => o.id.Equals(VARIABLE.item_id)).weaponURL
+                });
             }
-
         }
 
         activeOffers = allItems;
@@ -131,33 +133,52 @@
         NavigationManager.NavigateTo($"Product/{offer_id}/{item_id}");
     }
 
-
+    
     private void search()
     {
         Console.WriteLine(minValue);
         Console.WriteLine(maxValue);
-        if (searchItem == "")
-        {
-            activeOffers = allItems;
-        }
-        else
-        {
-            IList<Product> Items2 = new List<Product>();
-            foreach (Product v in allItems)
+        
+            if (searchItem == "")
             {
-                if (v.weaponname.ToLower().Contains(searchItem.ToLower()))
+                activeOffers = allItems;
+                errorMessage = "";
+            
+            }
+            else
+            {
+                IList
+                    <Product> Items2 = new List
+                        <Product>();
+                foreach (Product v in allItems)
                 {
-                    if (v.sale_price > minValue || minValue == 0)
+                    if (v.weaponname.ToLower().Contains(searchItem.ToLower()))
                     {
-                        if (v.sale_price < maxValue || maxValue == 0)
+                        if (v.sale_price > minValue || minValue == 0)
                         {
-                            Items2.Add(v);
+                            if (v.sale_price < maxValue || maxValue == 0)
+                            {
+                                Items2.Add(v);
+                            }
                         }
+                       
                     }
                 }
+                activeOffers = Items2;
+                if (Items2.Count == 0)
+                {
+                    errorMessage = "No skin was found please try again";
+                    
+                }
+                else
+                {
+                    errorMessage = "";
+                }
+               
+
+
             }
-            activeOffers = Items2;
-        }
+        
     }
 
 
