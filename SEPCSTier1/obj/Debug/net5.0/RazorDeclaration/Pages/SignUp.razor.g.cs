@@ -304,7 +304,7 @@ using SEPCSTier1.Models;
     {
         if (validateSignUp())
         {
-              await UserData.AddUser(newUserAccount);
+               UserData.AddUser(newUserAccount);
         }
       
         

@@ -25,21 +25,22 @@ type Query {
   sumOfPriceById(id: Long!): Long!
   paymentByName(name: String): CreditCard
   allSoldOffer: [SoldOffer]
-  walletById(id: Long!): Wallet
   orderBySaleId(id: Long!): Order
   getSoldOfferById(id: Long!): SoldOffer
   getOrderByWalletBuyerId(id: Long!): [Order]
   boughtItems(id: Long!): [OrderByBuyer]
+  getSoldOfferByOrderId(id: Long!): [SoldOffer]
   getSoldOfferBySellerWalletId(id: Long!): [SoldOffer]
   soldItemsById(id: Long!): [SoldOfferBySeller]
   itemsById(id: Long!): [SaleOfferWallet]
+  walletById(id: Long!): Wallet
 }
 
 type Mutation {
   addUser(username: String! password: String!): User
   addShoppingCart(saleOfferId: Long! userId: Long!): ShopppingCart
   deleteUser(id: Long!): Long!
-  addPayment(name: String cardnumber: String expirationdate: String securitycode: String): CreditCard
+  addPayment(name: String! cardnumber: String! expirationdate: String! securitycode: String!): CreditCard
   addWallet(balance: Int! user_id: Long!): Wallet
   addOrder(buyerId: Long! sale_Id: Long!): Order
   addSoldOffer(item_id: Long! order_id: Long! sale_price: Int! seller_wallet_id: Long!): SoldOffer
@@ -199,8 +200,8 @@ type Items {
 
 type User {
   id: Long!
-  username: String!
-  password: String!
+  username: String
+  password: String
   securitylevel: Long!
 }
 
@@ -243,13 +244,6 @@ type SoldOffer {
   seller_wallet_id: Long!
 }
 
-type Wallet {
-  id: Long!
-  balance: Int!
-  creditcard_id: Long!
-  user_id: Long!
-}
-
 type OrderByBuyer {
   order_id: Long!
   weaponname: String
@@ -269,6 +263,13 @@ type SaleOfferWallet {
   weaponname: String
   weaponURL: String
   sale_price: Int!
+}
+
+type Wallet {
+  id: Long!
+  balance: Int!
+  creditcard_id: Long!
+  user_id: Long!
 }
 
 type ShopppingCart {

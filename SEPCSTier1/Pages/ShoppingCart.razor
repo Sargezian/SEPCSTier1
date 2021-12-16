@@ -125,7 +125,7 @@
                 var sellerwallet = await walletData.getWalletById(resultItemId.wallet_id);
                 sellerwallet.balance += (int) cart.sale_price;
 
-                walletData.UpdateWallets(sellerwallet);
+                await walletData.UpdateWallets(sellerwallet);
                 
                 //Send ordre
                 SoldOffer soldoffer = new SoldOffer()
