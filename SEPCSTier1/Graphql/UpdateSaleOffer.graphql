@@ -1,0 +1,5 @@
+mutation UpdateSaleOffer($id:Long!,$sale_price:Int!,$available:Boolean!){
+    updateSaleOffer(id:$id,sale_price:$sale_price,available:$available){
+        id,item_id,sale_price,wallet_id,available
+    }
+}

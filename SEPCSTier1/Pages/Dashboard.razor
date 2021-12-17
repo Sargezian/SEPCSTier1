@@ -19,7 +19,7 @@
     <h1>Your profile</h1>
 </div>
 
-   <div style="color:red">@errorMessage</div>
+<div style="color:red">@errorMessage</div>
 
 <div class="d-flex">
     <div class="col-5 my-6" style="margin: 20px 50px 0 50px">
@@ -134,6 +134,8 @@
                                     <div class="d-flex justify-content-between">
                                         <p>Skin Name</p>
                                         <p>Skin Price</p>
+                                        <p>Delete</p>
+                                        <p>update</p>
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <p>
@@ -142,9 +144,29 @@
                                         <p>
                                             <b>@items.sale_price</b>
                                         </p>
+
+                                        <p>
+                                            <b>
+                                                <button @onclick="@(() => RemoveSaleOffer(items.sale_offer_id))">
+                                                    <i class="oi oi-trash" style="color:red"/>
+                                                </button>
+                                            </b>
+                                        </p>
+
+
+                                        <p>
+                                            <b>
+                                                <button @onclick="@(() => EditSaleOffer(items.sale_offer_id))">
+                                                    <i class="oi oi-pencil" style="color:red"/>
+                                                </button>
+                                            </b>
+                                        </p>
+
+
                                     </div>
 
                                     <img src="@items.weaponURL" width="300px"/>
+
 
                                 </div>
                             </div>
@@ -175,7 +197,7 @@
     private int boughtPrice;
     private int soldPrice;
     private string errorMessage;
-    
+
     protected override async Task OnInitializedAsync()
     {
         mySoldProducts = new List<SoldOfferBySeller>();
@@ -185,7 +207,7 @@
         soldPrice = 0;
         user = new User();
         errorMessage = "";
-        
+
         var protectedBrowserStorageResultId = await ProtectedSessionStore.GetAsync<long>("id");
         id = protectedBrowserStorageResultId.Value;
 
@@ -219,6 +241,18 @@
         {
             errorMessage = "no item was found";
         }
+    }
+
+    private async void RemoveSaleOffer(long id)
+    {
+        await OfferData.DeleteSaleOffer(id);
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+
+    private void EditSaleOffer(long id)
+    {
+        
+        NavigationManager.NavigateTo($"EditSale/{id}");
     }
 
 }

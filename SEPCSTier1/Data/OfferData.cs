@@ -103,5 +103,27 @@ namespace SEPCSTier1.Data
 
             return saleOfferWalletList;
         }
+
+        public async Task DeleteSaleOffer(long id)
+        {
+            await graphqlClient.DeleteSaleOffer.ExecuteAsync(id);
+        }
+
+        public async Task<SaleOffer> UpdateSaleOffer(SaleOffer saleOffer)
+        {
+            var result = await graphqlClient.UpdateSaleOffer.ExecuteAsync(saleOffer.id,saleOffer.sale_price,saleOffer.available);
+
+            var SaleOffer = new SaleOffer
+            {
+                id = result.Data.UpdateSaleOffer.Id,
+                item_id = result.Data.UpdateSaleOffer.Item_id,
+                sale_price = result.Data.UpdateSaleOffer.Sale_price,
+                available = result.Data.UpdateSaleOffer.Available
+               
+                
+            };
+
+            return SaleOffer;
+        }
     }
 }

@@ -21,6 +21,10 @@ namespace SEPCSTier1.Data
         
         Task<IList<SaleOfferWallet>> GetItemsById(long id);
 
+        Task DeleteSaleOffer(long id);
+
+        Task<SaleOffer> UpdateSaleOffer(SaleOffer saleOffer);
+
 
 
 

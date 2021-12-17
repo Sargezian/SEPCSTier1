@@ -1,0 +1,72 @@
+﻿@page "/EditSale/{id:long}"
+@using SEPCSTier1.Data
+@using SEPCSTier1.Models
+<h3>EditSale</h3>
+@inject IOfferData OfferData
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+
+<h3>Edit SaleOffer with id: @id</h3>
+
+@if (saleToEdit == null)
+{
+    <em>SaleOffer not found!</em>
+}
+else
+{
+    <EditForm Model="@saleToEdit" OnValidSubmit="@Save">
+        <DataAnnotationsValidator/> <ValidationSummary/>
+        
+        <div class="form-group"> Sale price:<br/> <InputNumber rows="4" @bind-Value="saleToEdit.sale_price"/> </div>
+        
+        <p class="actions">
+            <button class="btn btn-outline-dark" type="submit">Save</button>
+        </p>
+    </EditForm>
+}
+
+@code {
+
+    [Parameter]
+    public long id { get; set; }
+
+
+    private SaleOffer saleToEdit;
+    private string errorMessage;
+  
+    protected override async Task OnInitializedAsync()
+    {
+        saleToEdit = await OfferData.GetOfferBySaleOfferId(id);
+        errorMessage = "";
+    }
+
+    public bool validateprice()
+    {
+
+        if (saleToEdit.sale_price == 0)
+        {
+            errorMessage = "value must be more than 0";
+            return false;
+        }
+        return true;
+    }
+    
+
+    private async void Save()
+    {
+        if (validateprice())
+        {
+              await OfferData.UpdateSaleOffer(saleToEdit);
+            NavigationManager.NavigateTo("/dashboard", true);
+        }
+      
+    }
+
+
+
+
+
+
+
+
+}

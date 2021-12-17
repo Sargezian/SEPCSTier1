@@ -51,6 +51,7 @@ type Mutation {
   updatePayment(name: String cardnumber: String expirationdate: String securitycode: String id: Long!): CreditCard
   updateUser(username: String password: String securitylevel: Long! id: Long!): User
   updateSaleOfferToFalse(id: Long!): Long!
+  updateSaleOffer(sale_price: Int! available: Boolean! id: Long!): SaleOffer
 }
 
 type Subscription {

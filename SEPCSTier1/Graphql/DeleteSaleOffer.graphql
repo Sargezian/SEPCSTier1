@@ -1,0 +1,4 @@
+mutation DeleteSaleOffer($id:Long!){
+    deleteSaleOffer(id:$id)
+
+}
