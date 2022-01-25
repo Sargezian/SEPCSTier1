@@ -1,7 +1,7 @@
 # CSGO-TRADING 
 3-Tier distributed CSGO Trading system built with Blazor, C# ASP.NET Core + REST + GraphQL + Java Spring + Hot Chocolate + Strawberry Shake + Graph.ArgumentValidator + Blazoned.Toast
 
-# 3-Tie Application
+# 3-Tier Application
 
 - Tier-1
 https://github.com/Lennart1997/SEPCSTier1
